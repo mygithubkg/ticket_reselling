@@ -1,9 +1,12 @@
 .slider-container {
     position: relative;
     width: 90%;
-    height: 400px;
-    margin: auto;
+    height: 44vh;
+    margin: 30px auto;
     overflow: hidden;
+    border-radius: 127px;
+    border-color: #008FDB;
+    border-style: solid;
 }
 
 .slider-image {

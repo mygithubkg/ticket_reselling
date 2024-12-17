@@ -1,10 +1,11 @@
 import React from "react";
+import "./EventBoxes.css"
 
-function Eventbox(){
+function Eventbox(props){
     return (
         <div>
-            <button>
-                <img src='https://grammarpartyblog.com/wp-content/uploads/2013/01/ok_hand.jpg' alt="image" />
+            <button className="button" >
+                <img src={props.img_id} alt="image"  className="image"/>
             </button>
         </div>
     );
