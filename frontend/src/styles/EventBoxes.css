@@ -1,0 +1,22 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+}
+
+.button{
+    height: 25vh;
+    width:21vw;
+    margin: 0 20px 0 0;
+    border-radius: 44px;
+    border-color: #008FDB;
+    border-style: solid;
+}
+
+
+
+.image{
+    width: 100%; /* Make the image span the container's width */
+    height: 100%; /* Make the image span the container's height */
+    object-fit:contain; /* Ensures the image fills the container without distortion */
+}
