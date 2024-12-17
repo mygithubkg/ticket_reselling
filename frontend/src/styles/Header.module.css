@@ -6,57 +6,69 @@
 
 .header {
    height: 9vh;
-   
     display: flex;
 
-    justify-content: space-evenly;
+    justify-content: space-between;
 
     align-content: center;
     
     margin:0 0 15px 0;
 
-    
 }
 
+
+.logoLink{
+    text-decoration: none;
+    color: inherit;
+    margin-top: 2%;
+}
 #logo{
+    text-decoration: none;
     font-family: "Baloo Paaji 2", sans-serif;
     color: #008FDB;
     display: flex;
     align-items: center;
     align-content: center;
     justify-content: center;
-
-
-
 }
+
+
+
 .header_space1, .header_space2, .header_space3{
     display: flex;
     flex-direction: row ;
     align-content: center;
-
-    
 }
+
+
 .header_space3{display: flex;
     align-items: center;
     align-content: center;
     justify-content: center;
 
 }
-.header_space2 p,.header_space3 p{
+.header_space2 p,.header_space3 span{
     display: flex;
     align-items: center;
     align-content: center;
     justify-content: center;
     padding: 0 2vh;
-    
-   
-  font-family: "Inter", sans-serif;
- 
-  
-  
+    font-family: "Inter", sans-serif;  
     font-size: 20px;
 }
 
+
+
+.header_space3 span button{
+    text-decoration: underline;
+    font-size: 20px;
+    border: 0;
+    background-color: white;
+}
+
+.header_space3 span button:hover{
+    cursor: pointer;
+}
 .sell_button{
   
     font-size: 20px;

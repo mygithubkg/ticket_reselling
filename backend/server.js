@@ -3,8 +3,11 @@ import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
 import bcrypt, { hash } from "bcrypt";
+import path from "path";
+import { fileURLToPath } from "url";
 
-
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 // Declaring Const 
 const app = express();
 const port = 5000;
@@ -25,13 +28,17 @@ db.connect();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
-
+app.use(express.static(path.join(__dirname,"build")));
 
 
 // Normal get request
 
-app.get("/", (req, res) => {
-  res.render("home.ejs");
+app.get("/SignIn", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 app.get("/login", (req, res) => {

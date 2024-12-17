@@ -1,6 +1,8 @@
 import React from 'react'
 import Eventbox from './Eventbox';
 import "../styles/EventBoxes.css";
+
+
 export default function EventBoxes(props) {
   console.log(props.data)
     return (

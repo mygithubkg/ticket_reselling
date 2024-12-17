@@ -1,35 +1,25 @@
 import '../styles/App.css';
 import Header from '../Components/Header';
-import Carousel from '../Components/Carousel';
-import Eventbox from '../Components/Eventbox';
-import SubHeading from '../Components/Subheading';
-import Footer from '../Components/Footer';
-import list from '../data';
-import EventBoxes from '../Components/EventBoxes';
-
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import SignIn from './SignIn';
+import HomePage from '../Components/HomePage'; // Extract the home page content to a separate component
+import Register from './Register';
+import RegisterPage from '../Components/Registerpage';
 
 function App() {
   return (
-    <div className="App">
-      {/* Header */}
-      <Header />
-
-      {/*slider */}
-      <Carousel />
-
-
-      {/* Trending Events */}
-      <SubHeading info = "Trending Events" />
-      <EventBoxes data = {list}/>
-
-      {/*Popular Artist*/}
-      <SubHeading info = "Popular Artist" />
-      <EventBoxes data = {list}/>
-
-      {/* Footer */}
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/SignIn" element={<SignIn />} />
+          <Route path="/Register" element={<Register />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
 export default App;
+

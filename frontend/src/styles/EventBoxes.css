@@ -1,12 +1,12 @@
 .container{
     display: flex;
     flex-direction: row;
-    overflow-x: scroll;
+    /* overflow-x: scroll; */
 }
 
 .button{
     height: 25vh;
-    width:21vw;
+    width: 21vw;
     margin: 0 20px 0 0;
     border-radius: 44px;
     border-color: #008FDB;

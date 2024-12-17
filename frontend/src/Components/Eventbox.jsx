@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/EventBoxes.css"
 
-function Eventbox(props){
+function Eventbox(props) {
     return (
         <div>
             <button className="button" >
