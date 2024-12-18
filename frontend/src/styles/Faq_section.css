@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+.Faq_placement > h2 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+}
+
+.Faq_placement {
+    position: absolute;
+    right: 20px;
+    top: 80px;
+    width: 20%; 
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow-y: auto; 
+    max-height: 80vh; 
+    font-family: "Baloo Paaji 2", sans-serif;
+}
+
+
+.Faq_question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.Faq_question h3 {
+    margin: 0;
+    font-size: 15px;
+    color: #008fdb;
+}
+
+.toogle-icon {
+    font-size: 20px;
+    font-weight: bold;
+    color: #008fdb;
+    transition: transform 0.3s;
+}
+
+.Faq_question:hover {
+    background-color: #f0f9ff;
+    border-radius: 4px;
+}
+
+.Faq_answer {
+    margin-left: 10px;
+    padding: 10px;
+    font-size: 16px;
+    color: #555;
+    border-left: 3px solid #008fdb;
+}
