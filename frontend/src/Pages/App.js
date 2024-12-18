@@ -7,6 +7,8 @@ import Register from './Register';
 import RegisterPage from '../Components/Registerpage';
 import Explore from './Explore';
 import AddEvent from './Addevent';
+import AddEventstep2 from './Addeventstep2';
+import AddEventstep3 from './Addeventstep3';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/Register" element={<Register />} />
           <Route path="/Explore" element={<Explore />} />
           <Route path='/Addevent' element={<AddEvent />} />
+          <Route path="/addevent_2" element={<AddEventstep2 />} />
+          <Route path="/addevent_3" element={<AddEventstep3 />} />
         </Routes>
       </div>
     </BrowserRouter>

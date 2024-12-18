@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+.categorycontainer2 {
+    height: 80vh;
+    width: 65%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    background-color: #f1f1f1;
+    font-family: "Baloo Paaji 2", sans-serif;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 40px;
+    margin-left: 20px;
+}
+
+.categorycontainer2 > h1 {
+    font-size: 2.4rem;
+    color: #2a3d7b;
+    text-align: left;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.typess {
+    margin-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+#texting, #text1{
+    font-size: 1rem;
+    padding: 12px;
+    border: none;
+    width: 95%;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    border-bottom: 2px solid #d3d3d3;
+    transition: all 0.3s ease;
+    resize: none;
+}
+
+
+#text:focus{
+    background-color: #e6f7ff;
+    border-bottom: 2px solid #3a8fd3;
+    outline: none;
+}
+
+#next {
+    font-size: 1.2rem;
+    width: 98%;
+    padding: 12px;
+    background-color: #3a8fd3;
+    color: white;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#next:hover {
+    background-color: #276bb1;
+}
+
+#next:active {
+    background-color: #205c8c;
+}

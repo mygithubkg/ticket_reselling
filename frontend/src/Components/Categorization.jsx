@@ -23,7 +23,7 @@ function Category(){
                 </div>
                 <div className="typess">
                     <label htmlFor="Event Location">Event Location</label>
-                    <input id="Location" type="text" name="location"/>
+                    <input id="Location" type="text" name="location" placeholder="Enter Location"/>
                 </div>
                 <div className="typess">
                     <label htmlFor="Ticket Type">Ticket Type</label>
