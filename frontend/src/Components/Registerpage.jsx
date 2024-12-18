@@ -9,7 +9,7 @@ function RegisterPage() {
         <h1>Register</h1>
         <div>
         <div className="form-group"> 
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Email/Username</label>
           <input type="email" name="username" />
         </div>
         <div className="form-group">

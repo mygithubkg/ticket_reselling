@@ -5,6 +5,7 @@ import SignIn from './SignIn';
 import HomePage from '../Components/HomePage'; // Extract the home page content to a separate component
 import Register from './Register';
 import RegisterPage from '../Components/Registerpage';
+import Explore from './Explore';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/SignIn" element={<SignIn />} />
           <Route path="/Register" element={<Register />} />
+          <Route path="/Explore" element={<Explore />} />
         </Routes>
       </div>
     </BrowserRouter>

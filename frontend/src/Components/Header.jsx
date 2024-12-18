@@ -17,7 +17,7 @@ function Header(){
 
             </div>
             <div className={styles.header_space2}>
-                <p>Explore</p>
+                <Link to='/Explore' className={styles.logoLink1}><p>Explore</p></Link>
                 <p>How it works!</p>
                 <p>Contact Us</p>
             </div>
