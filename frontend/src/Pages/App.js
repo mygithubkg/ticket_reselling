@@ -6,6 +6,7 @@ import HomePage from '../Components/HomePage'; // Extract the home page content 
 import Register from './Register';
 import RegisterPage from '../Components/Registerpage';
 import Explore from './Explore';
+import AddEvent from './Addevent';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/SignIn" element={<SignIn />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Explore" element={<Explore />} />
+          <Route path='/Addevent' element={<AddEvent />} />
         </Routes>
       </div>
     </BrowserRouter>
