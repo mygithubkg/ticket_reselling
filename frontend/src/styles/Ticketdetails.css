@@ -42,7 +42,7 @@
     border-radius: 6px;
     border-bottom: 2px solid #d3d3d3;
     transition: all 0.3s ease;
-    resize: none;
+    resize: none    ;
 }
 
 #quantity:focus, #information:focus, #selling_price:focus, #face_value:focus, #transfer:focus, #moreinfo:hover{
