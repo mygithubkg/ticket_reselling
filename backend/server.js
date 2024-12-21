@@ -42,10 +42,10 @@ app.get('*', (req, res) => {
 app.post("/register", (req, res)=> {
   const email = req.body.username;
   const password = req.body.password;
-  console.log(email);
-  console.log(password);
+  // console.log(email);
+  // console.log(password);
   bcrypt.hash(password,saltrounds, async (err,hash)=> {
-    console.log(hash);
+    // console.log(hash);
     if (err){
         console.log(err);
         res.status(500).json({success: false, message: `Found ${err}`});
@@ -79,6 +79,7 @@ app.post("/register", (req, res)=> {
 app.post("/login", async (req, res) => {
   const email = req.body.username;
   const password = req.body.password;
+  // console.log(req.body);
   try {
     const check_user = await db.query("SELECT password FROM users WHERE username = ($1)",[email]);
     if (check_user.rows.length == 0){
@@ -88,16 +89,19 @@ app.post("/login", async (req, res) => {
         const hashh = check_user.rows[0].password;
         bcrypt.compare(password,hashh, (err,result) =>{
             if (result){
-                res.status(200).json({success:true, message:"User Signned In"});
+              console.log("user signed in")
+              res.status(200).json({success:true, message:"User Signned In"});
             }
             else{
-                res.status(200).json({success:false, message:"Incorrect Password"});
+              console.log("incorrect Password")
+              res.status(200).json({success:false, message:"Incorrect Password"});
             }
         })
         }
     }
     catch(err){
-        res.status(500).json({success:false, message:"Technical Error"});
+      console.log(err);
+      res.status(500).json({success:false, message:"Technical Error"});
     }
 });
 
