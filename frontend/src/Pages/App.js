@@ -9,13 +9,15 @@ import Explore from './Explore';
 import AddEvent from './Addevent';
 import AddEventstep2 from './Addeventstep2';
 import AddEventstep3 from './Addeventstep3';
-
+import HowItWorks from "./HowItWorks"
+import Footer from '../Components/Footer';
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
         <Header />
-        <Routes>
+        <div className="Routes">
+        <Routes >
           <Route path="/" element={<HomePage />} />
           <Route path="/SignIn" element={<SignIn />} />
           <Route path="/Register" element={<Register />} />
@@ -23,7 +25,12 @@ function App() {
           <Route path='/Addevent' element={<AddEvent />} />
           <Route path="/addevent_2" element={<AddEventstep2 />} />
           <Route path="/addevent_3" element={<AddEventstep3 />} />
+          <Route path="/HowItworks" element={<HowItWorks />} />
         </Routes>
+        </div>
+        <Footer/>
+        
+        
       </div>
     </BrowserRouter>
   );

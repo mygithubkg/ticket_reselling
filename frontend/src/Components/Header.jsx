@@ -22,7 +22,7 @@ function Header(){
                 <p>Contact Us</p>
             </div>
             <div className={styles.header_space3}>
-                <Link to='/Addevent' className={styles.sell_button}>sell</Link>
+                <Link to='/Addevent' className={styles.sell_button}>Sell</Link>
                 <span>
                 <button onClick={handleSignInClick}>Sign In/Register</button>
                 </span>

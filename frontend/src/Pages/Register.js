@@ -5,7 +5,7 @@ function Register(){
     return (
         <div>
             <RegisterPage />
-            <Footer />
+            
         </div>
     );
 }

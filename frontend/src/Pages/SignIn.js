@@ -6,7 +6,7 @@ function SignIn(){
     return (
         <div>
             <LoginPage />
-            <Footer />
+           
         </div>
     );
 }
