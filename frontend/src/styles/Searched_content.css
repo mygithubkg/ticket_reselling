@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+/* Container for all cards */
+.card-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 20px; /* Space between cards */
+    padding: 20px;
+  }
+  
+  /* Individual card styling */
+  .card {
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 10px;
+    text-align: center;
+    background-color: #fff;
+
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Image inside the card */
+  .image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+  }
+  
+  /* Text inside the card */
+  .name {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 5px;
+    font-family: "Inter", sans-serif;
+   
+  }
+  
+  .price {
+    color: #007b5e;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    font-family: "Inter", sans-serif;
+  }
+  
+  .details {
+    color: #666;
+    font-size: 0.9em;
+    font-family: "Inter", sans-serif;
+    
+  }
+
+.Result{
+    font-family: "Inter", sans-serif;
+    font-size: 1.5em
+}
+  

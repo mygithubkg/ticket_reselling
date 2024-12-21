@@ -9,7 +9,7 @@ function AddEvent(){
         <div>
             <Category />
             <Faq  faqData ={faqDat} />
-            <Footer />
+            
         </div>
     );
 }
