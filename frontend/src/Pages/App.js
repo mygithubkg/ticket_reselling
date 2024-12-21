@@ -19,12 +19,15 @@ import PreviousListing from '../Components/profile/Previous Listing';
 import Manage from '../Components/profile/Manage';
 import Ratings from '../Components/profile/Ratings';
 
+import HowItWorks from "./HowItWorks"
+import Footer from '../Components/Footer';
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
         <Header />
-        <Routes>
+        <div className="Routes">
+        <Routes >
           <Route path="/" element={<HomePage />} />
           <Route path="/SignIn" element={<SignIn />} />
           <Route path="/Register" element={<Register />} />
@@ -41,7 +44,12 @@ function App() {
           <Route path='/profile/previouslisting' element={<PreviousListing /> } />
           <Route path='/profile/manage' element={<Manage /> } />
           <Route path='/profile/ratings' element={<Ratings /> } />
+          <Route path="/HowItworks" element={<HowItWorks />} />
         </Routes>
+        </div>
+        <Footer/>
+        
+        
       </div>
     </BrowserRouter>
   );

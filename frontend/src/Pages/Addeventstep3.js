@@ -9,7 +9,7 @@ function AddEventstep3(){
         <div>
             <TicketDetails />
             <Faq  faqData ={faqDat} />
-            <Footer />
+            
         </div>
     );
 }
