@@ -86,3 +86,4 @@ const faqDat = [
 export default list;
 
 export {faqDat};
+
