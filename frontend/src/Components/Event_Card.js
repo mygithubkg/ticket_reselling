@@ -6,10 +6,10 @@ export default function Event_card({item}) {
   return (
     <div>
        <div className="card">
-                  <img className="image" src={item.image} alt={item.name} />
-                  <p className="name">{item.name}</p>
-                  <p className="price">₹{item.price}</p>
-                  <p className="details">{item.details}</p>
+                  <img className="image" src={item.photo} alt={item.name} />
+                  <p className="name">{item.eventName}</p>
+                  <p className="price">₹{item.sellingPrice}</p>
+                  <p className="details">{item.eventDescription}</p>
                 </div>
     </div>
     

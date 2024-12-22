@@ -43,7 +43,7 @@ function App() {
           <Route path="/addevent_3" element={<AddEventstep3 />} />
           <Route path="/HowItWorks" element={<HowItWorks/>} />
           <Route path ="/Seller1" element= {<Seller1/>}/>
-          <Route path="/Event/:id" element={<Event_Page tickets={tickets} />} />
+          <Route path="/Event/:id" element={<Event_Page />} />
           <Route path ="/ContactUs" element= {<ContactUs/>}/>
           
         </Routes>
