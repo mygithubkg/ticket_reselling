@@ -22,7 +22,9 @@ function Header(){
                 <p><Link to="/ContactUs" className={styles.link}>Contact Us</Link></p>
             </div>
             <div className={styles.header_space3}>
+                <div>
                 <Link to='/Seller1' className={styles.sell_button}>Sell</Link>
+                </div>
                 <span>
                 <button onClick={handleSignInClick}>Sign In/Register</button>
                 </span>
