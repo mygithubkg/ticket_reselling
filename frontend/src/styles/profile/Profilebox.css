@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+.profile_container{
+    width: 26%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5%;
+    border-radius: 10%;
+    justify-content: center;
+    margin-top: 0.5%;
+}
+
+.profile_container Link{
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-family: "Baloo Paaji 2", sans-serif;
+    margin-left: 0%;
+    color: #333;
+    background-color: #f4f7fc;
+    padding: 4%;
+    text-decoration: wavy;
+}
+.profile_container button{
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-family: "Baloo Paaji 2", sans-serif;
+    margin-left: 0%;
+    color: #333;
+    background-color: #f4f7fc;
+    padding: 4%;
+    text-decoration: wavy;
+}
+
+.profile:hover {
+    background-color: #2e95da;
+    cursor: pointer;
+}
+
+.profile:active {
+  background-color: #2e95da;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}

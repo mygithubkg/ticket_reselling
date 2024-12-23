@@ -21,7 +21,9 @@
     margin-bottom: 20px;  
     text-align: center;     
 }
-
+.form_signin p{
+    color: red;
+}
 .form_signin {
     width: 100%;
     height: 60vh;
