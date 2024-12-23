@@ -22,13 +22,13 @@ function LoginPage() {
     // console.log(result);
     if (result.success){
       navigate('/');
+      alert("User Logged In ")
     }
     else{
       if (response.status === 200){
         alert(result.message);
       }
       else{
-        navigate('/Register');
         alert(result.message);
       }
     }
