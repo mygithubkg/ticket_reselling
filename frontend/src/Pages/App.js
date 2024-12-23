@@ -9,6 +9,16 @@ import Explore from './Explore';
 import AddEvent from './Addevent';
 import AddEventstep2 from './Addeventstep2';
 import AddEventstep3 from './Addeventstep3';
+import Profile from '../Components/profile/Profile';
+import CurrentListing from "../Components/profile/CurrentListing";
+import Dashboard from '../Components/profile/Dashboard';
+import Orders from '../Components/profile/Orders';
+import Wallet from '../Components/profile/Wallet';
+import Recent from '../Components/profile/RecentEvents';
+import PreviousListing from '../Components/profile/Previous Listing';
+import Manage from '../Components/profile/Manage';
+import Ratings from '../Components/profile/Ratings';
+
 import HowItWorks from "./HowItWorks"
 import Footer from '../Components/Footer';
 import Seller1 from "./Seller1"
@@ -45,7 +55,16 @@ function App() {
           <Route path ="/Seller1" element= {<Seller1/>}/>
           <Route path="/Event/:id" element={<Event_Page />} />
           <Route path ="/ContactUs" element= {<ContactUs/>}/>
-          
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/dashboard" element={<Dashboard />} />
+          <Route path='/profile/orders' element={<Orders />} />
+          <Route path='/profile/wallet' element={<Wallet />} />
+          <Route path='/profile/recentevents' element={<Recent /> } />
+          <Route path='/profile/currentlisting' element={<CurrentListing /> } /> 
+          <Route path='/profile/previouslisting' element={<PreviousListing /> } />
+          <Route path='/profile/manage' element={<Manage /> } />
+          <Route path='/profile/ratings' element={<Ratings /> } />
+          <Route path="/HowItworks" element={<HowItWorks />} />
         </Routes>
         </div>
         <Footer/>

@@ -27,6 +27,7 @@ function Header(){
                 </div>
                 <span>
                 <button onClick={handleSignInClick}>Sign In/Register</button>
+                <Link to='/profile'><p>Profile</p></Link>
                 </span>
             </div>
         </div>
