@@ -10,6 +10,7 @@ import session from "express-session";
 import passport from "passport";
 import { Strategy } from "passport-local";
 
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 env.config();
@@ -42,7 +43,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: {
-    secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+    secure: process.env.NODE_ENV ==='production',
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000, // 1 day
   },
@@ -89,6 +90,7 @@ app.post("/register", (req, res)=> {
             else{
               try{
                 const result = await db.query("INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *",[email,hash]);
+                await db.query("INSERT INTO details (username) VALUES ($1)",[email]);
                 const user = result.rows[0];
                 req.login(user, (err)=> {
                   console.log(err);
@@ -135,6 +137,51 @@ app.post("/login", (req, res, next) => {
     });
   })(req, res, next);
 });
+
+// Saving user details
+
+app.post('/save',async (req,res)=>{
+  const full_name = req.body.full_name;
+  const want_to = req.body.want_to;
+  const phone_number = req.body.phone_number;
+  const gender = req.body.gender;
+  const age = req.body.age;
+  const bio = req.body.bio;
+  const username = req.body.username;
+  console.log(req.body);
+  try{
+    await db.query('UPDATE details SET full_name = $1, want_to = $2, phone_number = $3, gender = $4, age = $5, bio = $6 WHERE username = $7',[full_name,want_to,phone_number,gender,age,bio,username
+    ]);
+    console.log("done");
+    res.json({success:true});
+  }catch(err){
+    console.log(err);
+    res.json({success:false, message: err});
+  }
+  
+})
+
+
+app.post('/usersinfo', async (req, res) => {
+  if (!req.isAuthenticated()) {
+      return res.status(401).json({ success: false, message: "User not authenticated" });
+  }
+  try {
+      const info = await db.query('SELECT * FROM details WHERE username = $1', [req.user.username]);
+      if (info.rows.length > 0) {
+          return res.status(200).json(info.rows[0]);
+      } else {
+          return res.status(404).json({ success: false, message: "User details not found" });
+      }
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+
+
+
 
 
 passport.use(new Strategy(
