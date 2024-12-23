@@ -3,10 +3,11 @@ import "../styles/EventBoxes.css"
 
 function Eventbox(props) {
     return (
-        <div>
-            <button className="button" >
+        <div className="button">
+               <div className=" image">
                 <img src={props.img_id} alt="image"  className="image"/>
-            </button>
+                </div>
+            
         </div>
     );
 }

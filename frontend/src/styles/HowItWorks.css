@@ -1,0 +1,94 @@
+.how-it-works {
+    font-family: "Inter", sans-serif;
+    margin: 20px;
+    padding: 20px;
+    color: #333;
+  }
+  
+  .how-it-works-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .how-it-works-header h1 {
+    font-size: 2.5rem;
+    color: #008FDB;
+  }
+  
+  .how-it-works-header p {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .process-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .process-card {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .process-card h2 {
+    color: #008FDB;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+  
+  .process-card ol {
+    margin-left: 20px;
+  }
+  
+  .process-card ol li {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+  }
+  
+  .process-card p {
+    margin-top: 10px;
+    color: #666;
+  }
+  
+  .cta-section {
+    text-align: center;
+    margin-top: 40px;
+  }
+  
+  .cta-section h2 {
+    font-size: 2rem;
+    color: #008FDB;
+  }
+  
+  .cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .cta-button {
+    background-color: #008FDB;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cta-button:hover {
+    background-color: #005f8d;
+  }
+  

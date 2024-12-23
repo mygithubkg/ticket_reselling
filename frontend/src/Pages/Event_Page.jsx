@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { tickets } from "../data";
 import "../styles/Event_Page.css"; // Optional: Add styles if needed
+import {Link} from "react-router-dom"
 
 export default function Event_Page() {
   const params = useParams();
@@ -32,7 +33,10 @@ export default function Event_Page() {
 
 
           </div>
-          <button className='Interested'>Intersted</button>
+          <div className='buttons'>
+         <button className='Interested'> <Link className="sell" to="/addevent_3">Sell</Link></button>
+          <button className='Interested'>Buy</button>
+          </div>
           < div className='Seller Details'>
             <h2>Seller Details</h2>
             <p>Name:</p>

@@ -1,6 +1,7 @@
 import React from 'react'
 import Eventbox from './Eventbox';
 import "../styles/EventBoxes.css";
+import Event_Card from "./Event_Card";
 
 
 export default function EventBoxes(props) {
@@ -8,7 +9,7 @@ export default function EventBoxes(props) {
     return (
     <div className='container'>
       {props.data.map((x) => {
-        return <Eventbox img_id={x} />;
+        return <Event_Card item={x}/>;
       })}
     </div>
   )
