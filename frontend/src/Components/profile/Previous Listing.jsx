@@ -13,7 +13,6 @@ function PreviousListing(){
                     <p className="main-description">All your InActive Listings</p>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 }

@@ -12,7 +12,6 @@ function Dashboard(){
                     <p className="main-description">Nothing Here</p>
                 </div>
             </div>
-            <Footer />
         </div>
         
 

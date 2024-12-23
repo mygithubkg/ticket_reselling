@@ -13,7 +13,6 @@ function Wallet(){
                     <p className="main-description">No Wallet Transaction till now</p>
                 </div>
             </div>
-            <Footer />
         </div>
     );                      
 }

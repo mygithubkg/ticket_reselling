@@ -5,7 +5,7 @@ import "../styles/Search_Box.css"
 
 
 
-export default function Search_Box({search,setSearch}) {
+export default function SearchBox({search,setSearch}) {
 
     function handelchange(e) {
         setSearch(e.target.value)

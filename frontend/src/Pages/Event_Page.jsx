@@ -20,7 +20,7 @@ export default function Event_Page() {
       <h1>{event.eventName}</h1>
       <p className='Intro-line'> {event.eventDescription}</p>
       <div className='Upper_section'>
-        <img className="align-centre event-photo" src={event.photo} alt={event.eventName} className="event-photo" />
+        <img className="align-centre event-photo event-photo" src={event.photo} alt={event.eventName}/>
         <div className='Upper_details '>
           <div className='Pricing-Detials'>
           <h1 className='Price'> <strong> ₹{event.sellingPrice} </strong></h1>

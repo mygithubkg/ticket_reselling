@@ -12,7 +12,6 @@ function Ratings(){
                     <p className="main-description">See All your ratings here</p>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 }

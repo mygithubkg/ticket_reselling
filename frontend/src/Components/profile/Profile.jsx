@@ -13,7 +13,6 @@ function Profile(){
                     <p className="main-description">Your Profile Details</p>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 }

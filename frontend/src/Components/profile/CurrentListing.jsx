@@ -12,7 +12,6 @@ function CurrentListing(){
                     <p className="main-description">All your Active Listings</p>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 }
