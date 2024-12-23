@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+.container-main {
+    width: 70vw; /* Restrict the width for better readability */
+    margin: 40px 40px 0 0; /* Center the content */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px; /* Space between sections */
+  }
+  
+  .add_event{
+    font-family: "Inter", sans-serif; 
+    font-size: 1rem;
+    background-color:#008fdb;
+    color: white;
+    border-radius: 30px;
+    padding: 10px;
+    margin: 10px 0 30px 0 ;
+    border-color: white;
+  }
+  .search-container{
+
+    width: 70%;
+  }
+  /* Features Section */
+  .features-container {
+    width: 70%; /* Stretch to container width */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  /* Aligning Feature Boxes */
+  .feature-box {
+    width: calc(50% - 10px); /* Two boxes in one row */
+    background-color: white;
+    border: 3px solid #008fdb;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .feature-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+
+  .faq-container {
+    margin-top: 30px;
+    width: 90%; 
+    display: flex;
+    justify-content: center;
+  }
+  
+
+  @media screen and (max-width: 768px) {
+    .container-main {
+      width: 90vw; 
+    }
+  
+    .feature-box {
+      width: 100%; /* Single box per row */
+    }
+  
+    .faq-container {
+      width: 100%; /* Ensure FAQ fits */
+    }
+}

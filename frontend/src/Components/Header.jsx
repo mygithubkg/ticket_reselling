@@ -18,11 +18,13 @@ function Header(){
             </div>
             <div className={styles.header_space2}>
                 <Link to='/Explore' className={styles.logoLink1}><p>Explore</p></Link>
-                <p>How it works!</p>
-                <p>Contact Us</p>
+                <p><Link to="/HowItWorks" className={styles.link}>How it works!</Link></p>
+                <p><Link to="/ContactUs" className={styles.link}>Contact Us</Link></p>
             </div>
             <div className={styles.header_space3}>
-                <Link to='/Addevent' className={styles.sell_button}>Sell</Link>
+                <div>
+                <Link to='/Seller1' className={styles.sell_button}>Sell</Link>
+                </div>
                 <span>
                 <button onClick={handleSignInClick}>Sign In/Register</button>
                 <Link to='/profile'><p>Profile</p></Link>

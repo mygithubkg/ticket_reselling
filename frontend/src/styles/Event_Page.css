@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+body {
+  font-family: "Inter", sans-serif; ;
+  margin: 0;
+  padding: 0;
+}
+
+.event-page {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.align-centre{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  justify-items: ;
+}
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  color: #008FDB;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.Intro-line {
+  font-size: 16px;
+  color:black;
+  margin-bottom:40px;
+}
+
+
+.event-photo {
+  display: block;
+  width: 300px;
+  height: auto;
+  margin: 0 auto 20px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+
+.Interested {
+  display: block;
+  margin: 20px;
+
+  background-color: #008FDB;
+  color: #ffffff;
+  border: none;
+  border-radius: 15px;
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  width: 90% ;
+}
+
+.Interested:hover {
+  background-color: #006bbd;
+}
+
+
+.details-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.Upper_details,
+.Event-Deatils,
+.Ticket-Detials {
+  flex-grow: 1;
+  flex-basis: calc(50% - 20px);
+  padding: 10px;
+  border: 3px solid #008FDB;
+  border-radius: 8px;
+  background-color: white;
+}
+
+ p {
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+strong {
+  color: #333;
+}
+
+
+@media (max-width: 768px) {
+  .details-container {
+    flex-direction: column;
+  }
+
+  .Pricing-Detials,
+  .Event-Deatils,
+  .Ticket-Detials {
+    flex-basis: 100%;
+  }
+
+  .event-photo {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+.Upper_section{
+  display: grid;
+  grid-template-columns: 0.6fr auto;
+}
+.Upper_details{
+  display: flex;
+  flex-direction: column;
+  margin: 0 85px 20px 85px;
+  justify-items: left;
+}
+
+.Price{
+  font-size: 35px;
+  margin-bottom: 2px;
+  
+ 
+  
+}
+h2{
+  line-height: 1.6;
+  
+}
+
+#sp{
+  
+  margin-top: 0px !important;
+}

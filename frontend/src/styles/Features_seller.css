@@ -1,0 +1,25 @@
+.Container {
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px; /* Space between the boxes */
+    justify-content:center ;
+ }
+ 
+ .Box {
+    width: calc(45% - 10px); /* Two boxes per row with some space in between */
+    height: 20vh ;
+    background-color: white; /* White background color for the boxes */
+    color: #008fdb; /* Text color */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    border: 2px solid grey; /* Set border color to grey with thickness 3px */
+    text-align: center;
+    box-sizing: border-box; /* Include padding in width calculation */
+ }
+ 
+ .Box p {
+    margin: 0;
+    font-size: 1.2em;
+ }
+ 
