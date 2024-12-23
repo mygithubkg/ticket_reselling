@@ -38,11 +38,10 @@ function RegisterPage() {
     const formData = new FormData(e.target);
     const username = formData.get('username');
     const password = pass;
-    
     e.preventDefault(); 
     validatePass(pass); 
     validateConPass(pass, conpass);
-    if (!err.pass && !err.conpass) {
+    if ((!err.pass && !err.conpass) && (pass === conpass)) {
       const response = await fetch('/register', 
         {
           method: 'POST',

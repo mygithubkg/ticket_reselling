@@ -19,7 +19,7 @@ export default function Seller1() {
           <div className="search-container">
             <SearchBox search={search} setSearch={setSearch} />
             <div>
-              <Link to='/Addevent'><button className='add_event'>+Add Event</button></Link>
+              <Link to='/listing'><button className='add_event'>+Add Event</button></Link>
             </div>
 
             <Searchedcontent condition={true} search={search} setSearch={setSearch} />

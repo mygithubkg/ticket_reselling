@@ -1,5 +1,7 @@
 import React from "react";
-import "../styles/Eventdetail.css";
+import "../../styles/Eventdetail.css";
+import Faq from "../Faq_section";
+import { faqDat } from "../../data";
 
 function EventDetails(){
     return (
@@ -18,6 +20,9 @@ function EventDetails(){
                         <input type="submit" id="next" value="Next Page"/>
                     </div>
             </form>
+            <div>
+                <Faq faqData={faqDat}/>
+            </div>
         </div>
     );
 };

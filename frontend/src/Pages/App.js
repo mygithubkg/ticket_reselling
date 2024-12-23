@@ -24,6 +24,10 @@ import Footer from '../Components/Footer';
 import Seller1 from "./Seller1"
 import ContactUs from './ContactUs'
 import Event_Page from"./Event_Page"
+import Progress from '../Components/listing/Listing';
+import Category from '../Components/listing/Categorization';
+import EventDetails from '../Components/listing/Eventdetails';
+import TicketDetails from '../Components/listing/Ticketdetails';
 
 
 const tickets = [
@@ -65,6 +69,10 @@ function App() {
           <Route path='/profile/manage' element={<Manage /> } />
           <Route path='/profile/ratings' element={<Ratings /> } />
           <Route path="/HowItworks" element={<HowItWorks />} />
+          <Route path='/listing' element={<Progress />} />
+          <Route path='/listing/step1_eventdetails' element={<Category />} />
+          <Route path='/listing/step2_eventdetails' element={<EventDetails />} />
+          <Route path='/listing/step3_ticketdetails' element={<TicketDetails />} />
         </Routes>
         </div>
         <Footer/>

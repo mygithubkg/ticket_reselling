@@ -1,0 +1,40 @@
+/* Container */
+.progress-container {
+    font-family: Arial, sans-serif;
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Header */
+  .progress-header {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Steps Container */
+  .steps-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    margin: 0 auto;
+  }
+  
+  /* Basic Step Style */
+  .step.basic-step {
+    font-size: 18px;
+    color: #555;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #e6f7ff;
+    border: 1px solid #91d5ff;
+    width: 100%;
+    text-align: left;
+  }
+  

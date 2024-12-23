@@ -1,7 +1,35 @@
-import React from "react";
-import "../styles/Categorization.css";
+import React, { useState } from "react";
+import "../../styles/Categorization.css";
+import Faq from "../Faq_section";
+import { faqDat } from "../../data";
 
 function Category(){
+
+    // const [currval, setval] = useState("");
+
+    // const [eventDetails, setEventDetails] = useState({
+    //         event: "",
+    //         age: "",
+    //         email: "",
+    //         role: "Buyer",
+    //         gender: "Male",
+    //         phoneNumber: "",
+    //         otherDetails: "",
+    //     });
+
+    // const handlestep1 = async () => {
+    //     try {
+    //         const response = await fetch('/listing/step1',{
+    //             method: 'POST',
+    //             headers: { 'Content-Type': 'application/json' },
+    //             body: JSON.stringify({username, password}),
+    //         })
+    //     }
+    // }
+
+
+
+
     return(
         <div>
             <form className="categorycontainer" action='/addevent_2'>
@@ -33,9 +61,12 @@ function Category(){
                     </select>
                 </div>
                 <div className="typess">
-                    <input type="submit" id="next" value="Next Page"/>
+                    <input onClick={handlestep1} type="submit" id="next" value="Submit Step 1"/>
                 </div>
             </form>
+            <div>
+                <Faq faqData={faqDat}/>
+            </div>
         </div>
     );
 }

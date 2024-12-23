@@ -102,7 +102,7 @@ const tickets = [
       transferability: true,
       ticketFormat: "E-Ticket",
       faceValue: 5000,
-      sellingPrice: 4500,
+      sellingPrice: 4500, 
     },
     {
       id: 2,
