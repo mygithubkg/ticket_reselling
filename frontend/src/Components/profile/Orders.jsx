@@ -12,7 +12,6 @@ function Orders(){
                     <p className="main-description">All your Recent Orders</p>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 }

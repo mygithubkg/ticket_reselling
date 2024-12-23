@@ -3,9 +3,13 @@ import Carousel from '../Components/Carousel';
 import SubHeading from '../Components/Subheading';
 import EventBoxes from '../Components/EventBoxes';
 import Footer from '../Components/Footer';
+
 import { tickets } from "../data";
-import Search_Box from './Search_Box'
-import Searched_content from './Searched_content'
+
+import list from '../data';
+import Search_Box from './SearchBox'
+import Searched_content from './Searchedcontent'
+
 
 
 function HomePage() {

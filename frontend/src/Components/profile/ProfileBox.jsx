@@ -8,15 +8,15 @@ function ProfileBox(){
     const handleProfile = ()=>{
         Navigate('/profile')
     }
-    const handleDashboard = ()=>{
-        Navigate('/profile/dashboard')
-    }
+    // const handleDashboard = ()=>{
+    //     Navigate('/profile/dashboard')
+    // }
     const handleOrders = ()=>{
         Navigate('/profile/orders')
     }
-    const handleWallet = ()=>{
-        Navigate('/profile/wallet')
-    }
+    // const handleWallet = ()=>{
+    //     Navigate('/profile/wallet')
+    // }
     const handleRecentEvents = ()=>{
         Navigate('/profile/recentevents')
     }
@@ -36,13 +36,13 @@ function ProfileBox(){
         
         <div className="profile_container">
             <button className="profile" onClick={handleProfile}>Profile</button>
-            <button className="profile" onClick={handleDashboard}>Dashboard</button>
+            <button onClick={handleRatings}className="profile">Your Ratings</button>
+            {/* <button className="profile" onClick={handleDashboard}>Dashboard</button> */}
             <button className="profile" onClick={handleOrders}>Orders</button>
-            <button className="profile" onClick={handleWallet}>Wallet</button>
+            {/* <button className="profile" onClick={handleWallet}>Wallet</button> */}
             <button className="profile" onClick={handleRecentEvents}>Recent Events</button>
             <button className="profile" onClick={handleCurrentListing}>Current Listing</button>
             <button className="profile" onClick={handlePreviousListing}>Previous Listing</button>
-            <button onClick={handleRatings}className="profile">Your Ratings</button>
             <button className="profile" onClick={handleManage}>Manage Account</button>
         </div>
     );

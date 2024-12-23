@@ -13,7 +13,6 @@ function Recent(){
                     <p className="main-description">Your Recent Searches</p>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 }
