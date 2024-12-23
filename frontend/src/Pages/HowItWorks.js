@@ -1,8 +1,17 @@
 import React from "react";
 import "../styles/HowItWorks.css";
+import { useNavigate } from "react-router-dom";
 
 const HowItWorks = () => {
+  const navigate = useNavigate();
+  const handlebuy = ()=>{
+    navigate('/Explore');
+  }
+  const handlesell = ()=>{
+    navigate('/Seller1');
+  }
   return (
+
     <div className="how-it-works">
       <header className="how-it-works-header">
         <h1>How It Works</h1>
@@ -53,8 +62,8 @@ const HowItWorks = () => {
           Join thousands of users who buy and sell tickets seamlessly on our platform.
         </p>
         <div className="cta-buttons">
-          <button className="cta-button">Start Buying</button>
-          <button className="cta-button">Start Selling</button>
+          <button className="cta-button" onClick={handlebuy}>Start Buying</button>
+          <button className="cta-button" onClick={handlesell}>Start Selling</button>
         </div>
       </footer>
     </div>

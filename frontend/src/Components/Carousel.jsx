@@ -20,7 +20,7 @@ function Carousel() {
         const interval_id = setInterval(() => {
             console.log("Calling next_state");
             next_state();
-        }, 5000);
+        }, 4000);
 
         return () => {
             console.log("Cleaning up interval");
