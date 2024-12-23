@@ -9,8 +9,11 @@ function Profile(){
             <div className="commoncontainer">
                 <ProfileBox />
                 <div className="contain">
-                    <h1 className="main-heading">Details</h1>
-                    <p className="main-description">Your Profile Details</p>
+                    <div>
+                        <h1 className="main-heading">Details</h1>
+                        <p className="main-description">Your Profile Details</p>
+                    </div>
+                    
                 </div>
             </div>
         </div>

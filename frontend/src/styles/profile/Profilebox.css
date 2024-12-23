@@ -4,28 +4,17 @@
 
 .profile_container{
     width: 26%;
-    height: 80vh;
+    height: 78vh;
     display: flex;
     flex-direction: column;
-    margin-bottom: 5%;
     border-radius: 10%;
     justify-content: center;
-    margin-top: 0.5%;
+    text-decoration: none;
+    font-family: "Baloo Paaji 2", sans-serif;
+    color: #333;
+    padding: 1%;
 }
 
-.profile_container Link{
-    width: 100%;
-    text-decoration: none;
-    color: inherit;
-    text-decoration: none;
-    font-size: 1.5rem;
-    font-family: "Baloo Paaji 2", sans-serif;
-    margin-left: 0%;
-    color: #333;
-    background-color: #f4f7fc;
-    padding: 4%;
-    text-decoration: wavy;
-}
 .profile_container button{
     text-decoration: none;
     font-size: 1.5rem;
@@ -33,12 +22,13 @@
     margin-left: 0%;
     color: #333;
     background-color: #f4f7fc;
-    padding: 4%;
+    padding: 6%;
     text-decoration: wavy;
 }
 
 .profile:hover {
     background-color: #2e95da;
+    transition: 0.2s ease-in-out;
     cursor: pointer;
 }
 
