@@ -11,19 +11,25 @@ function Header(){
     const [user,setuser] = useState(false);
 
     const handleuser = async ()=> {
-        const response = await fetch('/verify',{
-            method:'GET',
-            credentials: 'include',
-        })
-
-        const result = await response.json();
-
-        if (result.success){
-            setuser(true);
+        try {
+            const response = await fetch('/verify',{
+                method:'GET',
+                credentials: 'include',
+            })
+    
+            const result = await response.json();
+    
+            if (result.success){
+                setuser(true);
+            }
+            else{
+                setuser(false);
+            }
         }
-        else{
-            setuser(false);
+        catch(err){
+            console.log(err);
         }
+        
     }
 
     useEffect (() => {
