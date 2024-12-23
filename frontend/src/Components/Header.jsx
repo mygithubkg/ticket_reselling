@@ -1,4 +1,6 @@
+
 import React, { useEffect, useState } from "react";
+
 import styles from "../styles/Header.module.css"
 import {useNavigate, Link} from "react-router-dom";
 
@@ -7,6 +9,13 @@ function Header(){
     const handleSignInClick = () => {
             navigate('/SignIn'); // Navigate to login page
     };
+
+
+  let [show,setshow] = useState(false)
+  const handlemenu=()=>{
+      setshow(!show)
+
+  }
 
     const [user,setuser] = useState(false);
 
@@ -68,6 +77,7 @@ function Header(){
                 : <button onClick={handleSignInClick}>Sign In/Register</button> 
                 }                   
                 </span>
+              
             </div>
         </div>
         </>

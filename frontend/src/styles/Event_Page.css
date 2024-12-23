@@ -48,7 +48,10 @@ h1 {
   object-fit: cover;
 }
 
-
+.buttons{
+  display: flex
+  
+}
 .Interested {
   display: block;
   margin: 20px;
@@ -61,6 +64,11 @@ h1 {
   font-size: 20px;
   cursor: pointer;
   width: 90% ;
+  text-decoration: none;
+}
+.sell{
+  text-decoration: none;
+  color: #ffffff;
 }
 
 .Interested:hover {

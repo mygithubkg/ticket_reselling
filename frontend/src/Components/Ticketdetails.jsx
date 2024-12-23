@@ -31,7 +31,7 @@ function TicketDetails(){
                         <input type="number" id="selling_price" name="selling_price" placeholder="1000/-"/>
                     </div>
                     <div className="typess">
-                        <input type="submit" id="submit" value="Add Event"/>
+                        <input type="submit" id="submit" value="Add Listing"/>
                     </div>
             </form>
         </div>

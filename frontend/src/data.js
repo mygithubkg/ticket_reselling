@@ -90,7 +90,7 @@ export {faqDat};
 const tickets = [
     {
       id: 1,
-      photo: "https://via.placeholder.com/400",
+      photo: "https://www.shutterstock.com/image-photo/blue-hole-white-paper-coming-600nw-660624601.jpg",
       eventType: "Concert",
       eventDateTime: "24th Dec, 2024, 7:00 PM",
       eventLocation: "Mumbai, India",
@@ -106,7 +106,7 @@ const tickets = [
     },
     {
       id: 2,
-      photo: "https://via.placeholder.com/400",
+      photo: "https://www.shutterstock.com/image-photo/blue-hole-white-paper-coming-600nw-660624601.jpg",
       eventType: "Sports",
       eventDateTime: "30th Jan, 2025, 5:30 PM",
       eventLocation: "Chinnaswamy Stadium, Bengaluru, India",
@@ -122,7 +122,7 @@ const tickets = [
     },
     {
       id: 3,
-      photo: "https://via.placeholder.com/400",
+      photo: "https://www.shutterstock.com/image-photo/blue-hole-white-paper-coming-600nw-660624601.jpg",
       eventType: "Theatre",
       eventDateTime: "15th Feb, 2025, 6:00 PM",
       eventLocation: "Prithvi Theatre, Mumbai, India",
@@ -138,7 +138,7 @@ const tickets = [
     },
     {
       id: 4,
-      photo: "https://via.placeholder.com/400",
+      photo: "https://www.shutterstock.com/image-photo/blue-hole-white-paper-coming-600nw-660624601.jpg",
       eventType: "Stand-Up Comedy",
       eventDateTime: "10th March, 2025, 8:00 PM",
       eventLocation: "Auditorium, Delhi University, India",
@@ -154,7 +154,7 @@ const tickets = [
     },
     {
       id: 5,
-      photo: "https://via.placeholder.com/400",
+      photo: "https://www.shutterstock.com/image-photo/blue-hole-white-paper-coming-600nw-660624601.jpg",
       eventType: "Exhibition",
       eventDateTime: "20th March, 2025, 10:00 AM - 6:00 PM",
       eventLocation: "India Habitat Centre, New Delhi, India",

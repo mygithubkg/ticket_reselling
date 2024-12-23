@@ -67,13 +67,14 @@
 .header_space3 span{
     margin-top: 2%;
 }
+
    
 
 
 
 .header_space3 span button{
     text-decoration: underline;
-    font-size: 20px;
+    font-size: 1.3vw;
     border: 0;
     background-color: white;
 }
@@ -84,7 +85,7 @@
 .sell_button{
   
    
-    font-size: 20px;
+    font-size: 1.3vw;
     background-color: #008FDB;
     padding:  5px 21px;
     height: 50%;
