@@ -2,10 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import "../styles/Carousel.css"; // Ensure this file exists and is properly configured
 
 const Trademyticket_images = [
-    'https://media-hosting.imagekit.io//2ee7fd4da96c43c1/Screenshot%202024-12-23%20200749.png?Expires=1735137488&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=d5DhG0avOH6AQtPAb752tyhQ1mvwcQYHEk02SHFX-WMEXQ0PNkMq6RfcR67WgLYAlobhllAWPTKxgTC~q0JAmMlTboL1MRkrjJ2cNVB~jXEloxr3sVwLdKjIp7BgdJLFZ~vAjzOesUDJOKB6laPpU6hLTySEY~vJm996JYlZt-ecoGMa8NeTUEmteTPAkLutis6j-lDFW-66NPRNN-82Et48a~kLR6u6EtAYpJInUDBLcECj5Gvc4~xbBlYBkhbkBh68r4Gq6VZgQGbqPQLbk1BPjiLbJNqLzJnZBM1-wHoJGD~AwWbcfclCjiojcj4plvkRG2jRNyEisGunEaDgcQ__',
-    'https://via.placeholder.com/600x300?text=Image+2',
-    'https://media-hosting.imagekit.io//2ee7fd4da96c43c1/Screenshot%202024-12-23%20200749.png?Expires=1735137488&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=d5DhG0avOH6AQtPAb752tyhQ1mvwcQYHEk02SHFX-WMEXQ0PNkMq6RfcR67WgLYAlobhllAWPTKxgTC~q0JAmMlTboL1MRkrjJ2cNVB~jXEloxr3sVwLdKjIp7BgdJLFZ~vAjzOesUDJOKB6laPpU6hLTySEY~vJm996JYlZt-ecoGMa8NeTUEmteTPAkLutis6j-lDFW-66NPRNN-82Et48a~kLR6u6EtAYpJInUDBLcECj5Gvc4~xbBlYBkhbkBh68r4Gq6VZgQGbqPQLbk1BPjiLbJNqLzJnZBM1-wHoJGD~AwWbcfclCjiojcj4plvkRG2jRNyEisGunEaDgcQ__',
-    'https://via.placeholder.com/600x300?text=Image+4',
+    'https://media-hosting.imagekit.io//4c445833cbef4510/pixelcut-export.png?Expires=1735323671&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=psyj~~jlj4u~Swioali9h-V90Gvim6Ia1-30aVaeqbRVdprGC8o6K8e4oNgiyXRTheQi6Gfw2U880rG-GtPLGJf8gxLMEEtrvDaQW9Hnyhi4iLS9ELJTw6Y8OVNuCF-v7GoKset-ZEhLgdD5HTeu58ycM9XpMrpQkf1cl7bHPQEoWrEOO~giEvXyn63emmbPnxeBNZNbK0gAyLWSM3C~z7q1R2sZ8jg3YKKkVDlIWN45xle5JqRfYFt0GjBwyMlYINFtJaaCW7oFKVTzWvtYGySwxwOkA0WwOYzMBJMj6vwdV--N7hqvf4tTZq9wt3yvHhu5mruaaCkm0Qyitc3WYQ__',
+
 ];
 
 function Carousel() {

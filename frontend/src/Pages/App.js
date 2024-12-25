@@ -38,6 +38,9 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        <div className='gradient'>
+          
+        </div>
         <div className='Header'>
         <Header />
         </div>

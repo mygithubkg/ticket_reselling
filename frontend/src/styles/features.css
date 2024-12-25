@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+.box-container {
+    margin-top: 5vh;
+    display: flex;
+    gap: 80px;
+    flex-direction: row;
+}
+
+.box1 {
+    width: 25vw;
+    
+    height: 240px;
+    background-color: white;
+    border-radius: 80px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 10px  #008FDB, -10px 10px  #008FDB;
+}
+.statement1 span{
+    color: #DB5500;
+}
+
+.statement1{
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    z-index: 11;
+    font-size: 2.5vw;
+    font-family: "Baloo Paaji 2", sans-serif;
+}
+
+.statement2 span{
+    color:#008FDB;
+}
+
+.statement2{
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    z-index: 11;
+    font-size: 2.5vw;
+    font-family: "Baloo Paaji 2", sans-serif;
+}
+
+.box2 {
+    width: 25vw;
+    
+    height: 240px;
+    background-color: white;
+    border-radius: 80px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 10px #DB5500 , -10px 10px  #DB5500;}
