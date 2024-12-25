@@ -2,41 +2,59 @@ import React, { useState } from "react";
 import "../../styles/Categorization.css";
 import Faq from "../Faq_section";
 import { faqDat } from "../../data";
+import { useNavigate } from "react-router-dom";
 
 function Category(){
 
-    // const [currval, setval] = useState("");
+    const navigate = useNavigate();
+    const [userDetails, setUserDetails] = useState({
+        event_type : "",
+        event_date : "",
+        event_time : "",
+        event_location : "",
+        event_name : "",
+        event_bio : "",
+    })
 
-    // const [eventDetails, setEventDetails] = useState({
-    //         event: "",
-    //         age: "",
-    //         email: "",
-    //         role: "Buyer",
-    //         gender: "Male",
-    //         phoneNumber: "",
-    //         otherDetails: "",
-    //     });
+    const handleChange = (e)=>{
+        const {name,value} = e.target;
+        setUserDetails((prevDetails) => ({
+            ...prevDetails,
+            [name]: value
+        }));
+    }
 
-    // const handlestep1 = async () => {
-    //     try {
-    //         const response = await fetch('/listing/step1',{
-    //             method: 'POST',
-    //             headers: { 'Content-Type': 'application/json' },
-    //             body: JSON.stringify({username, password}),
-    //         })
-    //     }
-    // }
+    const handlesubmit = async (e)=>{
+        e.preventDefault();
+        const event_type = userDetails.event_type;
+        const event_bio = userDetails.event_bio;
+        const event_date = userDetails.event_date;
+        const event_location = userDetails.event_location;
+        const event_time = userDetails.event_time;
+        const event_name = userDetails.event_name;
+        console.log(event_time);
+        const response = await fetch('/listing1',{
+            method : 'POST',
+            headers : { 'Content-Type': 'application/json' },
+            body : JSON.stringify({event_bio, event_date, event_location, event_name, event_time, event_type })
+        })
 
+        const result = await response.json();
 
-
-
+        if (result.success){
+            alert("Submitted");
+            navigate('/listing');
+        }else{
+            alert(result.message);
+        }
+    }
     return(
         <div>
-            <form className="categorycontainer" action='/addevent_2'>
+            <form className="categorycontainer" onSubmit={handlesubmit}>
                 <h1>Categorization</h1>
                 <div className="typess">
                     <label htmlFor="Event Type">Event Type</label>
-                    <select id="Event_Type" name="Event_type">
+                    <select id="Event_Type" name="event_type" value={userDetails.event_type} onChange={handleChange}>
                         <option value="Concerts" name="concert">Concerts</option>
                         <option value="sports" name="sports">Sports Events</option>
                         <option value="festivals" name="festivals">Festivals</option>
@@ -45,23 +63,24 @@ function Category(){
                 </div>
                 <div className="typess">
                     <label htmlFor="Event Date">Event Date</label>
-                    <input type="date" id="date" name="date" />
+                    <input type="date" id="date" name="event_date" value={userDetails.event_date} onChange={handleChange} />
                     <label htmlFor="Event Date">Event Time</label>
-                    <input type="time" id="time" name="time" />
+                    <input type="time" id="time" name="event_time" value={userDetails.event_time} onChange={handleChange}/>
                 </div>
                 <div className="typess">
                     <label htmlFor="Event Location">Event Location</label>
-                    <input id="Location" type="text" name="location" placeholder="Enter Location"/>
+                    <input id="Location" type="text" name="event_location" value={userDetails.event_location} onChange={handleChange} placeholder="Enter Location"/>
                 </div>
                 <div className="typess">
-                    <label htmlFor="Ticket Type">Ticket Type</label>
-                    <select id="Ticket_Type" name="Ticket_type">
-                        <option value="VIP" name="vip">VIP Tickets</option>
-                        <option value="E-Tickets" name="eticket">E-Tickets</option>
-                    </select>
+                    <label htmlFor="Event Name">Event Name</label>
+                    <input type="text" id="texting" name="event_name" value={userDetails.event_name} onChange={handleChange} placeholder="Enter Event Name" />
                 </div>
                 <div className="typess">
-                    <input onClick={handlestep1} type="submit" id="next" value="Submit Step 1"/>
+                    <label htmlFor="Event Description">Event Description</label>
+                    <textarea id="text1" name="event_bio" value={userDetails.event_bio} onChange={handleChange} placeholder="Enter Description"/>
+                </div>
+                <div className="typess">
+                    <input  type="submit" id="next" value="Submit Step 1"/>
                 </div>
             </form>
             <div>
