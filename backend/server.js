@@ -72,7 +72,7 @@ app.get('*', (req, res) => {
 
 app.post("/register", (req, res)=> {
   const email = req.body.username;
-  const password = req.body.password;
+  const password = req.body.password; 
   // console.log(email);
   // console.log(password);
   bcrypt.hash(password,saltrounds, async (err,hash)=> {
@@ -107,6 +107,71 @@ app.post("/register", (req, res)=> {
     }
   });
 });
+
+
+app.post('/listing1', async (req,res)=>{
+  console.log(req.body);
+  if (!req.isAuthenticated()){
+    return res.status(500).json({ success: false, message: "Technical error" });
+  }
+  else{
+    try{
+      const data = await db.query("SELECT username FROM users WHERE username = $1",[req.user.username]);
+      if (data.rows.length >=1 ){
+        console.log(`data :`,data.rows[0].username);
+        console.log(req.user.username)
+        if (data.rows[0].username === req.user.username){
+          await db.query("INSERT INTO events (username, event_type, event_date, event_time, event_name, event_location, event_bio) VALUES ($1, $2,$3,$4,$5,$6,$7)",[req.user.username, req.body.event_type, req.body.event_date, req.body.event_time, req.body.event_name, req.body.event_location, req.body.event_bio]);
+          res.status(200).json({success:true, message:"Event Details Added!!"});
+        }else{
+          res.status(500).json({success:false, message:"Problem adding Event Details"});
+        }
+      }else{
+        res.status(500).json({success:false, message:"User not Authorized"});
+      }
+    }catch(err){
+      console.log(err);
+    }
+  }
+})
+
+app.post('/listing2', async (req,res)=>{
+  console.log(req.body);
+  if (!req.isAuthenticated()){
+    return res.status(500).json({ success: false, message: "Technical error" });
+  }
+  else{
+    try{
+      const data = await db.query("SELECT username FROM users WHERE username = $1",[req.user.username]);
+      if (data.rows.length >=1 ){
+        console.log(`data :`,data.rows[0].username);
+        console.log(req.user.username)
+        if (data.rows[0].username === req.user.username){
+          await db.query("INSERT INTO tickets (username, ticket_type, selling_price, face_value, transferability, ticket_format, quantity) VALUES ($1, $2,$3,$4,$5,$6,$7)",[req.user.username, req.body.ticket_type, req.body.selling_price, req.body.face_value, req.body.transferability, req.body.ticket_format, req.body.quantity]);
+          res.status(200).json({success:true, message:"Event Details Added!!"});
+        }else{
+          res.status(500).json({success:false, message:"Problem adding Event Details"});
+        }
+      }else{
+        res.status(500).json({success:false, message:"User not Authorized"});
+      }
+    }catch(err){
+      console.log(err);
+    }
+  }
+})
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Sending Post request
