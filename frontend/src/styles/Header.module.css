@@ -12,15 +12,21 @@
 
     align-content: center;
     
-    margin:0 0 15px 0;
+    margin:10px 0 75px 0;
+    border-radius: 67px;
+
+    background-color: white;
 
 }
 
-
+.my{
+    color: #DB5500;
+}
 .logoLink{
     text-decoration: none;
     color: inherit;
     margin-top: 2%;
+    padding-left: 20px;
 }
 .logoLink1 {
     text-decoration: none;
@@ -61,7 +67,7 @@
     justify-content: center;
     padding: 0 2vh;
     font-family: "Inter", sans-serif;  
-    font-size: 20px;
+    font-size: 1.2vw;
 }
   
 .header_space3 span{
@@ -73,20 +79,23 @@
 
 
 .header_space3 span button{
-    text-decoration: underline;
-    font-size: 1.3vw;
+    text-decoration: none;
+    font-size: 1.2vw;
     border: 0;
-    background-color: white;
+    background-color:white ;
+   
 }
 
 .header_space3 span button:hover{
     cursor: pointer;
+    color: #DB5500;
+    
 }
 .sell_button{
   
    
-    font-size: 1.3vw;
-    background-color: #008FDB;
+    font-size: 1.2vw;
+    background-color: #DB5500;
     padding:  5px 21px;
     height: 50%;
     border-radius: 31px;
@@ -98,3 +107,27 @@
     color: black;
 }
 
+.header_space2 p:hover,.link:hover{
+    color: #DB5500;
+   
+}
+
+.header_space1{
+    transition: transform 0.3s ease;
+}
+
+.header_space1:hover{
+    transform:scale(1.05);
+}
+
+.sell_button:hover{
+    background-color: #ab4200;
+}
+
+.divider{
+   margin-left: 9px;
+    width: 1.5px;
+    height: 45px;
+    background-color: #ccc;
+
+}

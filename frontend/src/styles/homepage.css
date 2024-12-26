@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+.statement{
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    z-index: 11;
+    font-size: 2.5vw;
+    font-family: "Baloo Paaji 2", sans-serif;
+    font-weight: bolder;}
+
+
+
+    
+
+
+
+
+.statement span{
+        color: #DB5500;
+    }
+
+
+

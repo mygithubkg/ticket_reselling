@@ -18,10 +18,11 @@
     width: 100%;
     padding: 12px 15px;
     font-size: 1rem;
-    border: 3px solid #008FDB;
+    
+   
     border-radius: 29px;
     outline: none;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    /* transition: border-color 0.3s ease, box-shadow 0.3s ease; */
   }
   
   .Search-box::placeholder {
