@@ -32,22 +32,42 @@
 .logo_button{
     
     color:#008FDB ;
-    font-size:50px;
+    font-size:4vw;
     font-family: "Baloo Paaji 2", sans-serif; 
     /* not giving the same look as logo */
     font-weight: bolder;
+    transition: transform 0.3s ease;
 
 }
 .footer_links p{
-    margin: 15px 0;
-    text-decoration: underline;
-    font-size: 20px;
+    margin: 8px 0;
+  
+    
+    font-size: 1.5em;
     font-family: "Inter", sans-serif;
+    color:white;
+    padding: 10px;
 }
 .footer_links Link{
     text-decoration: none;
 }
 
-   
+.footer_links p:hover{
+    color:#DB5500 ;
 
+}
+
+.logo_button:hover{transform: scale(1.05);
+    
+
+}
+   
+#link{
+   text-decoration:none
+   
+}
+
+.my{
+    color: #DB5500;
+}
 

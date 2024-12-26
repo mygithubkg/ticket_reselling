@@ -38,7 +38,7 @@ function HomePage() {
         </div>
         <Searched_content condition={true} search={search} setSearch={setSearch} />
       </div>
-      <div className='statement'>Buy and Sell Tickets&nbsp;  <span> Effortlessly!</span></div>
+      <div className='statement'>Buy and Sell Tickets&nbsp;<span> Effortlessly!</span></div>
       
       <Features/>
       

@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-/* Container for all cards */
+
 .card-container {
     display: grid;
     grid-template-columns: 0.25fr 0.25fr 0.25fr 0.25fr;
-    gap: 20px; /* Space between cards */
+    gap: 20px; 
     padding: 20px;
     
   }
   
-  /* Individual card styling */
+  
   .card {
   
     border: 1px solid #ddd;
@@ -62,4 +62,13 @@
     font-family: "Inter", sans-serif;
     font-size: 1.5em
 }
+
+@media screen and (max-width:700px){
+  .card-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
   
+}

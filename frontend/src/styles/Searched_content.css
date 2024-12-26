@@ -58,7 +58,17 @@
   }
 
 .Result{
-    font-family: "Inter", sans-serif;
-    font-size: 1.5em
+    margin-top: 70px;
+  font-family: "Inter", sans-serif;
+    font-size: 1.5rem
 }
   
+@media screen and (max-width:700px) {
+
+  .card-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+}
