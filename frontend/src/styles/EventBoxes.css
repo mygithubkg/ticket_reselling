@@ -1,10 +1,8 @@
 .container{
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    overflow:hidden
-    
-
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 20px; /* Space between cards */
+    padding: 20px;
 }
 
 .button{
@@ -21,4 +19,18 @@
 .image{
      /* Make the image span the container's height */
     object-fit:contain; /* Ensures the image fills the container without distortion */
+}
+
+@media screen and (max-width:700px) {
+    .container{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 20px;
+        overflow:hidden
+        
+    
+    }
+    
+    
 }

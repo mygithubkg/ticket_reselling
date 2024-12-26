@@ -5,8 +5,10 @@
 .box-container {
     margin-top: 5vh;
     display: flex;
-    gap: 80px;
+    gap: 70px;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .box1 {
@@ -27,7 +29,7 @@
     display: flex;
     justify-content: center;
     z-index: 11;
-    font-size: 2.5vw;
+    font-size: 2rem;
     font-family: "Baloo Paaji 2", sans-serif;
 }
 
@@ -40,7 +42,7 @@
     display: flex;
     justify-content: center;
     z-index: 11;
-    font-size: 2.5vw;
+    font-size: 2rem;
     font-family: "Baloo Paaji 2", sans-serif;
 }
 
