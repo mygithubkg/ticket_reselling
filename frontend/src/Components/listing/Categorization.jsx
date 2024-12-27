@@ -3,6 +3,7 @@ import "../../styles/Categorization.css";
 import Faq from "../Faq_section";
 import { faqDat } from "../../data";
 import { useNavigate } from "react-router-dom";
+import ProgressBar from "../ProgressBar"
 
 function Category(){
 
@@ -43,15 +44,18 @@ function Category(){
 
         if (result.success){
             alert("Submitted");
-            navigate('/listing');
+            navigate('/listing/step2_eventdetails');
         }else{
             alert(result.message);
         }
     }
+    let currentStep= 0
     return(
         <div>
+             <ProgressBar currentStep={currentStep}/>
+           
             <form className="categorycontainer" onSubmit={handlesubmit}>
-                <h1>Categorization</h1>
+                <h1 id="h1">Categorization</h1>
                 <div className="typess">
                     <label htmlFor="Event Type">Event Type</label>
                     <select id="Event_Type" name="event_type" value={userDetails.event_type} onChange={handleChange}>

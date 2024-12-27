@@ -3,6 +3,8 @@ import "../../styles/Ticketdetails.css";
 import Faq from "../Faq_section";
 import { faqDat } from "../../data";
 import { useNavigate } from "react-router-dom";
+import ProgressBar from "../ProgressBar"
+
 
 function TicketDetails(){
     const navigate = useNavigate();
@@ -46,11 +48,12 @@ function TicketDetails(){
             alert(result.message);
         }
     }
-
+    let currentStep= 2
     return (
         <div>
+            <ProgressBar currentStep={currentStep}/>
             <form className="categorycontainer3" onSubmit={handlesubmit}>
-                <h1>Ticket Details</h1>
+                <h1 id="h1">Ticket Details</h1>
                     <div className="typess">
                         <label htmlFor="Ticket Type">Ticket Type</label>
                         <select id="Ticket_Type" name="ticket_type" value={userDetails.ticket_type} onChange={handleChange}>

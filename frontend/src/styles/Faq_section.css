@@ -11,8 +11,8 @@
 
 .Faq_placement {
     position: absolute;
-    right: 60px;
-    top: 110px;
+    right: -20px;
+    top: 4px;
     width: 20%; 
     background-color: #ffffff;
     border: 1px solid #ccc;
@@ -59,4 +59,13 @@
     font-size: 16px;
     color: #555;
     border-left: 3px solid #008fdb;
+}
+
+@media screen and (max-width: 1090px) {
+    .Faq_placement{
+        position: relative;;
+        align-content: center;
+        width: 50vw;
+    }
+    
 }

@@ -18,14 +18,17 @@ export default function Seller1() {
           {/* Search and Searched Content */}
           <div className="search-container">
             <SearchBox search={search} setSearch={setSearch} />
-            <div>
-              <Link to='/listing'><button className='add_event'>+Add Event</button></Link>
-            </div>
+           
 
-            <Searchedcontent condition={true} search={search} setSearch={setSearch} />
-          </div>
+            
+          </div> </div>
+          <div>
+              <Link to='/listing/step1_eventdetails'><button className='add_event'>+Add Event</button></Link>
+            </div>
+        <div className='container-serached'><Searchedcontent condition={true} search={search} setSearch={setSearch} /></div>
+        
   
-          {/* Features Section */}
+        
           <div className="features-container">
             <Featuresseller />
           </div>
@@ -34,8 +37,9 @@ export default function Seller1() {
           <div className="faq-container">
             
           </div>
-        </div>
-        <Faq faqData={faqDat} />
+          <div className='container-faqs'><Faq faqData={faqDat} /></div>
+       
+        
       </>
     );
   }

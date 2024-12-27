@@ -11,17 +11,20 @@ import Search_Box from './SearchBox'
 import Searched_content from './Searchedcontent'
 import "../styles/homepage.css"
 import Features from "./Features"
+import ProgressBar from "../Components/ProgressBar"
 
 
 
 function HomePage() {
   const [search, setSearch] = useState("")
+  let currentStep =1
   return (
     <>
     
     <div style={{ position: "relative" }}>
         
         <Carousel />
+        <ProgressBar currentStep={currentStep}/>
 
         <div
           style={{

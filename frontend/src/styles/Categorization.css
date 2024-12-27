@@ -2,23 +2,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 .categorycontainer {
-    height: 95vh;
+   
     width: 65%;
     max-width: 900px;
     display: flex;
     flex-direction: column;
-    background-color: #f1f1f1;
+    background-color: white;
     font-family: "Baloo Paaji 2", sans-serif;
     border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     padding: 20px;
     margin-top: 40px;
     margin-left: 20px;
+    margin-bottom: 40px;
 }
 
+#h1{
+    color:black;
+
+}
 .categorycontainer > h1 {
-    font-size: 2.4rem;
-    color: #2a3d7b;
+    font-size: 2.7rem;
+    color:#DB5500;
     text-align: left;
     margin-bottom: 20px;
     font-weight: 700;
