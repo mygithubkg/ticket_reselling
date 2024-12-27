@@ -63,9 +63,13 @@
 
 @media screen and (max-width: 1090px) {
     .Faq_placement{
-        position: relative;;
+        position:relative;
         align-content: center;
-        width: 50vw;
+        width: 80vw;
+        justify-self: center;
+        align-self: center;
+        right: 0;
+        
     }
     
 }

@@ -3,7 +3,7 @@
 
 .categorycontainer {
    
-    width: 65%;
+    width: 60vw;
     max-width: 900px;
     display: flex;
     flex-direction: column;
@@ -15,12 +15,16 @@
     margin-top: 40px;
     margin-left: 20px;
     margin-bottom: 40px;
+    margin-right: 20px
+
 }
 
 #h1{
-    color:black;
+    color:ghostwhite;
+    font-size: 2rem;
 
 }
+
 .categorycontainer > h1 {
     font-size: 2.7rem;
     color:#DB5500;
@@ -77,4 +81,12 @@
 
 #next:active {
     background-color: #205c8c;
+
+
+}
+
+@media screen and (max-width:1050px) {
+    .categorycontainer {
+        width: 80%;
+    }
 }

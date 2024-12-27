@@ -33,8 +33,14 @@ function LoginPage() {
       }
     }
   }
-  return (
+  return (<div className="container-login">
+ 
+  
+    
+    
+    
     <div className="containerx">
+      
       <form action="/login" method="POST" className="form_signin" onSubmit={handlesubmit}>
         <h1>Sign In</h1>
         <div>
@@ -48,15 +54,19 @@ function LoginPage() {
         </div>
         </div>
         
-        <div>
-          <Link to='/Register'>New User? Register Now</Link>
-        </div>
+       
         <div>
         <button type="submit">
           Login
         </button>
         </div>
+        <div>
+          <Link to='/Register'><div className="new_user">New User?  Register Now</div></Link>
+        </div>
       </form>
+    </div> <div className="image-login" id="1">
+    <img id="img-login" src="https://plus.unsplash.com/premium_photo-1724772007456-3d7dc11e0c86?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+  </div>
     </div>
   );
 }
