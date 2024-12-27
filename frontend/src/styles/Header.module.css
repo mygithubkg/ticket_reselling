@@ -84,17 +84,23 @@
 .menu_icon {
     display: none;
     margin-right: 4vw;
-    font-size: 1.3rem;    cursor: pointer;
+    font-size: 1.3rem;    
+    cursor: pointer;
     background-color: white;
 }
 
-.header_space3 span button {
+.button_sign {
     text-decoration: none;
-    font-size: 1.3rem;
+    font-size: 1rem;
     border: 0;
     background-color: white;
 }
 
+.button_sign:hover{
+    cursor: pointer;
+    color: red;
+
+}
 .header_space3 span button:hover {
     cursor: pointer;
     color: #DB5500;
@@ -151,6 +157,13 @@
     .divider {
         margin: 0 3vw;
     }
+    .button_sign{
+        font-size: 1.2rem;
+        border-bottom: 1px solid #ccc;
+        font-family: "Baloo Paaji 2", sans-serif;
+        text-align: left;
+        padding: 10px 0;
+    }
 }
 
 .menu_container {
@@ -166,7 +179,6 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
-    
     visibility: visible;    }
 
 
