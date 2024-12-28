@@ -10,15 +10,73 @@ import session from "express-session";
 import passport from "passport";
 import { Strategy } from "passport-local";
 
+// For Socket.io importing create server to upgrade
+import { createServer } from "http";
+import { Server } from "socket.io";
+import cors from "cors";
 
+// to find directory of file
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 env.config();
 
 // Declaring Const 
 const app = express();
 const port = process.env.SERVER_PORT;
 const saltrounds = parseInt(process.env.SALT_ROUND,10);
+
+// creating server for socket.io
+const server = createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000",  // Replace with your client URL
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  },
+});
+
+let users = {};
+let sockets = {};
+io.on('connection', (socket) => {
+  console.log('A user connected');
+
+  socket.on("join", (username)=> {
+    users[username] = socket.id;
+    sockets[socket.id] = username;
+    console.log(`User ${username} joined with socket ID: ${socket.id}`);
+  })
+
+  // Listen for a message from client
+  socket.on('send_message', (data) => {
+    const { recipient, message } = data;
+    console.log('Data received:', data);
+
+    const recipientSocketId = users[recipient];
+    const senderUsername = sockets[socket.id]; // Retrieve sender's username
+    if (recipientSocketId) {
+        io.to(recipientSocketId).emit('receive_message', {
+            sender: senderUsername, // You can use username if available
+            recipient,
+            message,
+        });
+    } else {
+        console.log(`User ${recipient} is not connected`);
+    }
+  }); 
+
+  socket.on('disconnect', () => {
+    for (const [username, id] of Object.entries(users)) {
+        if (id === socket.id) {
+            delete users[username];
+            console.log(`User ${username} disconnected`);
+            break;
+        }
+    }
+  });
+
+});
+
 
 // Connecting to database
 const db = new pg.Client({
@@ -53,10 +111,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+// To verify if user is Loggedin
 
 app.get('/verify', (req,res)=>{
   if (req.isAuthenticated()){
-    res.json({success:true});
+    res.json({success:true, username: req.user.username});
   }else{
     res.json({success:false})
   }
@@ -299,6 +358,9 @@ passport.deserializeUser(async (user, cb) => {
 });
 
 
-app.listen(port, () => {
+
+// listening to server instead of app to incorporate the socket feature
+
+server.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
