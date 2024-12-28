@@ -25,7 +25,8 @@ export default function Seller1() {
           </div> </div>
           <div>
               <Link to='/listing/step1_eventdetails'><button className='add_event'>+Add Event</button></Link>
-            </div>
+              <Link to='/listing/step3_ticketdetails'><button className='add_event'>+Add Ticket</button></Link>
+          </div>
         <div className='container-serached'><Searchedcontent condition={true} search={search} setSearch={setSearch} /></div>
         
   

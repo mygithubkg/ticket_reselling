@@ -48,30 +48,35 @@ function TicketDetails(){
             alert(result.message);
         }
     }
-    let currentStep= 2
+    let currentStep= 2;
     return (
         <div>
             <ProgressBar currentStep={currentStep}/>
             <form className="categorycontainer3" onSubmit={handlesubmit}>
                 <h1 id="h1">Ticket Details</h1>
                     <div className="typess">
+                        <label htmlFor="Event Name">Event Name</label>
+                        <input type="text" id="texting" placeholder="Enter Event Name" required />
+                    </div>
+                    <div className="typess">
                         <label htmlFor="Ticket Type">Ticket Type</label>
-                        <select id="Ticket_Type" name="ticket_type" value={userDetails.ticket_type} onChange={handleChange}>
+                        <select id="Ticket_Type" name="ticket_type" value={userDetails.ticket_type} onChange={handleChange} required>
+                            <option value="" disabled selected>Select Ticket Type</option>
                             <option value="VIP" name="vip">VIP Tickets</option>
                             <option value="E-Tickets" name="eticket">E-Tickets</option>
                         </select>
                     </div>
                     <div className="typess">
                         <label htmlFor="Quantity">Number of Tickets</label>
-                        <input type="number" id="quantity" min= '1' max='10' name="quantity" placeholder="0" value={userDetails.quantity} onChange={handleChange} />
+                        <input type="number" id="quantity" min= '1' max='10' name="quantity" placeholder="0" value={userDetails.quantity} onChange={handleChange} required />
                     </div>
                     <div className="typess">
                         <label htmlFor="Seating Information">Ticket Format</label>
-                        <input type="text" id="information" name="ticket_format" value={userDetails.ticket_format} onChange={handleChange} placeholder="Enter Seating Information"/>
+                        <input type="text" id="information" name="ticket_format" value={userDetails.ticket_format} onChange={handleChange} placeholder="Enter Seating Information" required/>
                     </div>
                     <div className="typess">
                         <label htmlFor="Transferbiality">Mode of Transfer</label>
-                        <select id="moreinfo" name="transferiability" placeholder="Online/Physical Delivery" value={userDetails.transferability} onChange={handleChange} >
+                        <select id="moreinfo" name="transferability" placeholder="Online/Physical Delivery" value={userDetails.transferability} onChange={handleChange} required >
                             <option value="" disabled selected>Select your option</option>
                             <option value="Online" name="online" >Online</option>
                             <option value="Physical Delivery" name="delivery" >Physical Delivery</option>
@@ -79,14 +84,14 @@ function TicketDetails(){
                     </div>
                     <div className="typess">
                         <label htmlFor="Face Value">Face Value</label>
-                        <input type="number" id="face_value" name="face_value" placeholder="800/-" value={userDetails.face_value} onChange={handleChange}/>
+                        <input type="number" id="face_value" name="face_value" placeholder="800/-" value={userDetails.face_value} onChange={handleChange} required/>
                     </div>
                     <div className="typess">
                         <label htmlFor="Selling Price">Selling Price</label>
-                        <input type="number" id="selling_price" name="selling_price" placeholder="1000/-" value={userDetails.selling_price} onChange={handleChange}/>
+                        <input type="number" id="selling_price" name="selling_price" placeholder="1000/-" value={userDetails.selling_price} onChange={handleChange} required/>
                     </div>
                     <div className="typess">
-                        <input type="submit" id="submit" value="Add Listing"/>
+                        <input type="submit" id="submit" value="Add Listing" required/>
                     </div>
             </form>
             <div>
