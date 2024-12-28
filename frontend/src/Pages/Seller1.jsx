@@ -11,14 +11,7 @@ import MessageDropdown from '../Components/chat';
 
 export default function Seller1() {
     const [search, setSearch] = useState("");
-    const [messages, setMessages] = useState([
-      { user: "Alice", text: "Hi there!" },
-      { user: "Bob", text: "Hello!" },
-    ]);
-  
-    const handleSendMessage = (newMessage) => {
-      setMessages((prevMessages) => [...prevMessages, { user: "Me", text: newMessage }]);
-    };
+
   
     return (
       <>
@@ -49,8 +42,7 @@ export default function Seller1() {
           <div className='container-faqs'><Faq faqData={faqDat} /></div>
        
 
-          <MessageDropdown messages={messages} onSendMessage={handleSendMessage} />
-        </div>
+          <MessageDropdown />
 
         
       </>

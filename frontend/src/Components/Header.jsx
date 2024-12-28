@@ -44,7 +44,7 @@ function Header() {
         const interval = setInterval(() => {
             handleUser();
         }, 5000);
-
+        
         return () => {
             clearInterval(interval);
         };
