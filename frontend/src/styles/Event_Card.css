@@ -1,12 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-.card-container {
-    display: grid;
-    grid-template-columns: 0.25fr 0.25fr 0.25fr 0.25fr;
-    gap: 20px; 
-    padding: 20px;
-    
-  }
   
   
   .card {
@@ -59,16 +53,8 @@
   }
 
 .Result{
-    font-family: "Inter", sans-serif;
-    font-size: 1.5em
-}
-
-@media screen and (max-width:700px){
-  .card-container{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  
+  font-family: "Baloo Paaji 2", sans-serif;
+    font-size: 1.7em;
+    margin: 20px 0;
+    
 }

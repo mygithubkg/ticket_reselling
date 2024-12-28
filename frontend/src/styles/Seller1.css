@@ -1,72 +1,69 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 .container-main {
-    width: 70vw; /* Restrict the width for better readability */
-    margin: 40px 40px 0 0; /* Center the content */
+  
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px; /* Space between sections */
+    align-content: center;
+    justify-content: center;
+    
+     
   }
+.container-serached{
+  margin-left: 20px;
+ margin-right: 20px;
   
+  
+}
   .add_event{
     font-family: "Inter", sans-serif; 
     font-size: 1rem;
-    background-color:#008fdb;
+    background-color:#DB5500;
     color: white;
     border-radius: 30px;
     padding: 10px;
-    margin: 10px 0 30px 0 ;
-    border-color: white;
+    margin: 10px 0 0 0 ;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.13);
+    transition: all 0.3s ease;
+    margin-left: 20px;
+
+  
+  }
+  .add_event:hover{
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.281);
+    transform: scale(1.1)
   }
   .search-container{
 
-    width: 70%;
-  }
-  /* Features Section */
-  .features-container {
-    width: 70%; /* Stretch to container width */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
+    width: 70vw;
   }
   
-  /* Aligning Feature Boxes */
-  .feature-box {
-    width: calc(50% - 10px); /* Two boxes in one row */
-    background-color: white;
-    border: 3px solid #008fdb;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .feature-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-  }
-  
+.container-faqs{
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
 
-  .faq-container {
-    margin-top: 30px;
-    width: 90%; 
-    display: flex;
-    justify-content: center;
-  }
-  
+.features-container{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px
 
-  @media screen and (max-width: 768px) {
-    .container-main {
-      width: 90vw; 
-    }
+}
+@media screen  and (min-width:1000px){
+  .features-container{
+    width: 70vw;
+  }
+  .container-main{
+    width: 70vw;
+    
+  }
+  .container-serached{
+    
+   
+    
+    width: 60vw;}
+
   
-    .feature-box {
-      width: 100%; /* Single box per row */
-    }
   
-    .faq-container {
-      width: 100%; /* Ensure FAQ fits */
-    }
 }

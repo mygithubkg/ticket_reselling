@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+.progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14vw; /* Adjust spacing dynamically */
+  margin: 20px 0;
+  background-color: white;
+  border-radius: 12px;
+  padding: 10px;
+  margin-left: 20px;
+  width: 70%;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.progress-step {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  flex: 1;
+}
+
+.circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #d9d9d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: black;
+  position: relative;
+  z-index: 1; /* Ensure circles are above the lines */
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  font-family: "Inter", sans-serif;
+}
+
+.circle.active {
+  background-color: #008FDB;
+}
+
+.label {
+  font-size: 0.8rem;
+  text-align: center;
+  font-family: "Baloo Paaji 2", sans-serif;
+  padding: 10px;
+  white-space: nowrap;
+}
+
+.line {
+  width: 26vw; /* Adjust the width to match spacing */
+  height: 4px;
+  background-color: #d9d9d9;
+  position: absolute;
+  top: 30px; /* Align line with the middle of the circle */
+  left: 60px; /* Ensures it connects properly to the next step */
+  z-index: 0;
+}
+
+.line.active {
+  background-color: #008FDB;
+}
+
+@media screen and (max-width: 1000px) {
+  .progress-bar {
+  
+    gap: 10vw; /* Reduce gaps for smaller screens */
+   
+    padding: 10px;
+  }
+
+  .circle {
+    width: 50px; /* Reduce circle size for smaller screens */
+    height: 50px;
+    font-size: 12px;
+  }
+
+  .line {
+    width: 23vw; /* Adjust line length for smaller screens */
+    left: 50px; /* Match with circle size changes */
+  }
+
+  .label {
+    font-size: 0.9rem; /* Slightly smaller label text for smaller screens */
+    padding: 5px;
+  }
+}
+@media screen and (max-width: 750px) {
+    .progress-bar {
+      width: 80%;
+      justify-content: center; /* Center the entire bar */
+      align-items: center; /* Center items vertically */
+      flex-direction: column; /* Stack elements vertically */
+      gap: 20px; /* Add spacing between elements */
+      margin: 0 auto; /* Center the progress bar within its container */
+    }
+  
+    .progress-step {
+      flex-direction: row; /* Align steps horizontally */
+      align-items: center; /* Center items vertically within each step */
+      justify-content: center; /* Center content in the step */
+    
+    }
+  
+    .circle {
+      margin: 0 auto; /* Ensure circles are centered individually */
+    }
+  
+    .line {
+      display: none; /* Hide connecting lines on small screens */
+    }
+  
+    .label {
+      margin-left: 10px; /* Add spacing for labels */
+      text-align:center; /* Align text properly */
+    }
+  }
+  

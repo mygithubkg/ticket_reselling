@@ -1,91 +1,176 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-.containerx {
+.container-login {
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr;
+    flex-direction: row-reverse !important;
+    gap: 40px;
+    background-color: white;
+    border-color: white;
+    border-width: 3px;
+    border-radius: 107px;
+    margin: 0 30px;
+    height: 80vh;
+    justify-content: space-around;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.image-login {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50%;
-    margin: 40px auto;
-    min-height: 80vh;
-    background-color: #f4f7fc;
-    font-family: "Baloo Paaji 2", sans-serif;
+    border-radius: 0 106px 106px 0;
+    overflow: hidden;
+    height: 100%;
+}
+
+#img-login {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
 .form_signin > h1 {
-    font-size: 2rem;
+    font-size: 2.4rem;
     font-weight: bold;
     color: #333;
-    margin-bottom: 20px;  
-    text-align: center;     
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: "Baloo Paaji 2", sans-serif;
 }
-.form_signin p{
+
+.form_signin p {
     color: red;
 }
+
 .form_signin {
     width: 100%;
-    height: 60vh;
-    max-width: 400px;
-    background-color: #fff;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    padding: 40px;
-    border-radius: 10%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin-right: 5px auto;
-    padding-right: 55px;
+    padding: 0 30px;
+    align-content: center;
+    align-items: center;
+    margin-top: 5px;
 }
 
 .form_signin .form-group {
-margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .form_signin label {
-font-size: 1rem;
-color: #555;
-display: block;
-margin-bottom: 8px;
+    font-size: 1rem;
+    color: #555;
+    display: block;
+    margin-bottom: 8px;
+    font-family: "Baloo Paaji 2", sans-serif;
+    transition: color 0.3s ease;
+}
+
+.form_signin label:hover {
+    color: #008FDB;
 }
 
 .form_signin input[type="email"],
 input[type="password"] {
-width: 93%;
-padding: 10px;
-font-size: 0.8rem;
-border: 1px solid #ccc;
-border-radius: 4px;
-margin-bottom: 10px;
+    width: 20vw;
+    font-family: "Baloo Paaji 2", sans-serif;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 40px;
 }
 
 .form_signin input[type="email"]:focus,
 input[type="password"]:focus {
-border-color: #007bff;
-outline: none;
+    border-color: #007bff;
+    outline: none;
 }
 
 .form_signin button {
-width: 100%;
-padding: 10px;
-background-color: #007bff;
-color: white;
-font-size: 0.8rem;
-border: none;
-border-radius: 8%;
-cursor: pointer;
-transition: background-color 0.3s ease;
+    width: 100%;
+    padding: 10px 60px;
+    margin: 10px 0;
+    background-color: #DB5500;
+    color: white;
+    font-size: 1.3rem;
+    border: none;
+    border-radius: 107px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-family: "Baloo Paaji 2", sans-serif;
 }
 
 .form_signin button:hover {
-background-color: #0056b3;
+    background-color: #0056b3;
+    transform: scale(1.05);
 }
 
 .form_signin button:focus {
-outline: none;
+    outline: none;
 }
 
 .container > div {
-text-align: center;
+    text-align: center;
+}
+
+.new_user, .already_register {
+    font-family: "Baloo Paaji 2", sans-serif;
+    color: black;
+    margin-bottom: 20px;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.new_user:hover, .already_register:hover {
+    color: #DB5500;
+    text-decoration: underline;
+}
+
+.image-login:hover #img-login {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+    .container-login {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .image-login {
+        border-radius: 0;
+    }
+
+    .form_signin {
+        padding: 20px;
+    }
+
+    .form_signin input[type="email"],
+    input[type="password"] {
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .form_signin > h1 {
+        font-size: 2rem;
+    }
+
+    .form_signin button {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .form_signin > h1 {
+        font-size: 1.5rem;
+    }
+
+    .form_signin input[type="email"],
+    input[type="password"] {
+        width: 100%;
+    }
 }

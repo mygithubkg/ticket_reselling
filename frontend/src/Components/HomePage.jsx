@@ -14,14 +14,17 @@ import Features from "./Features"
 
 
 
+
 function HomePage() {
   const [search, setSearch] = useState("")
+ 
   return (
     <>
     
     <div style={{ position: "relative" }}>
         
         <Carousel />
+       
 
         <div
           style={{

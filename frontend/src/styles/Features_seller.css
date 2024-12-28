@@ -1,25 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 .Container {
-    width: 60%;
+    margin-top: 50px;
+    width: 90%;
     display: flex;
     flex-wrap: wrap;
-    gap: 40px; /* Space between the boxes */
+    gap: 100px; /* Space between the boxes */
     justify-content:center ;
  }
  
  .Box {
-    width: calc(45% - 10px); /* Two boxes per row with some space in between */
-    height: 20vh ;
+    width: calc(30% - 10px);
+    height: 25vh ;
+    min-width: 250px;
     background-color: white; /* White background color for the boxes */
     color: #008fdb; /* Text color */
     padding: 20px;
-    border-radius: 10px; /* Rounded corners */
-    border: 2px solid grey; /* Set border color to grey with thickness 3px */
+    border-radius: 80px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 10px  #008FDB, -10px 10px  #008FDB;
+ /* Set border color to grey with thickness 3px */
     text-align: center;
     box-sizing: border-box; /* Include padding in width calculation */
  }
  
  .Box p {
-    margin: 0;
-    font-size: 1.2em;
+    margin: 10px;
+    font-size: 1.3em;
+    color: black;
+    font-family: "Inter", sans-serif;
+
  }
+
+ .Box img{
+   margin-top: 10px;
+
+ }
+
  

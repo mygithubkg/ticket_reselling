@@ -6,13 +6,14 @@ import SubHeading from "../Components/Subheading";
 import Carousel from "../Components/Carousel";
 import SearchBox from '../Components/SearchBox'
 import Searchedcontent from '../Components/Searchedcontent'
+import "../styles/Headings.css"
 
 function Explore(){
      const [search, setSearch] = useState("")
     return (
         <div>
             <Carousel />
-            <SubHeading info="Discover your Next Event" />
+            <div className="heading" style={{margin:"25px 0px", alignContent:"center"}}> Discover your Next&nbsp;<span>Event</span></div>
             <SearchBox search={search} setSearch={setSearch}/>
             <Searchedcontent condition={false} search={search} setSearch={setSearch} />
          

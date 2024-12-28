@@ -1,10 +1,23 @@
 /* sub-heading */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 .sub_heading{
     font-family: "Inter", sans-serif; ;
     font-size: 35px;
     
     margin: 30px 0;
 
+
+}
+
+.heading{ font-size: 2.5rem;
+    font-family: "Baloo Paaji 2", sans-serif;
+    font-weight: bolder;
+    color: black;
+
+
+}
+.heading span{
+    color:  #DB5500; ;
 
 }
