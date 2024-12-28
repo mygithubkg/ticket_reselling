@@ -28,54 +28,54 @@ const saltrounds = parseInt(process.env.SALT_ROUND,10);
 
 // creating server for socket.io
 const server = createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:3000",  // Replace with your client URL
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type"],
-  },
-});
+// const io = new Server(server, {
+//   cors: {
+//     origin: "http://localhost:3000",  // Replace with your client URL
+//     methods: ["GET", "POST"],
+//     allowedHeaders: ["Content-Type"],
+//   },
+// });
 
-let users = {};
-let sockets = {};
-io.on('connection', (socket) => {
-  console.log('A user connected');
+// let users = {};
+// let sockets = {};
+// io.on('connection', (socket) => {
+//   console.log('A user connected');
 
-  socket.on("join", (username)=> {
-    users[username] = socket.id;
-    sockets[socket.id] = username;
-    console.log(`User ${username} joined with socket ID: ${socket.id}`);
-  })
+//   socket.on("join", (username)=> {
+//     users[username] = socket.id;
+//     sockets[socket.id] = username;
+//     console.log(`User ${username} joined with socket ID: ${socket.id}`);
+//   })
 
-  // Listen for a message from client
-  socket.on('send_message', (data) => {
-    const { recipient, message } = data;
-    console.log('Data received:', data);
+//   // Listen for a message from client
+//   socket.on('send_message', (data) => {
+//     const { recipient, message } = data;
+//     console.log('Data received:', data);
 
-    const recipientSocketId = users[recipient];
-    const senderUsername = sockets[socket.id]; // Retrieve sender's username
-    if (recipientSocketId) {
-        io.to(recipientSocketId).emit('receive_message', {
-            sender: senderUsername, // You can use username if available
-            recipient,
-            message,
-        });
-    } else {
-        console.log(`User ${recipient} is not connected`);
-    }
-  }); 
+//     const recipientSocketId = users[recipient];
+//     const senderUsername = sockets[socket.id]; // Retrieve sender's username
+//     if (recipientSocketId) {
+//         io.to(recipientSocketId).emit('receive_message', {
+//             sender: senderUsername, // You can use username if available
+//             recipient,
+//             message,
+//         });
+//     } else {
+//         console.log(`User ${recipient} is not connected`);
+//     }
+//   }); 
 
-  socket.on('disconnect', () => {
-    for (const [username, id] of Object.entries(users)) {
-        if (id === socket.id) {
-            delete users[username];
-            console.log(`User ${username} disconnected`);
-            break;
-        }
-    }
-  });
+//   socket.on('disconnect', () => {
+//     for (const [username, id] of Object.entries(users)) {
+//         if (id === socket.id) {
+//             delete users[username];
+//             console.log(`User ${username} disconnected`);
+//             break;
+//         }
+//     }
+//   });
 
-});
+// });
 
 
 // Connecting to database
@@ -220,10 +220,29 @@ app.post('/listing2', async (req,res)=>{
   }
 })
 
+app.post('/eventdetails', async (req, res) => {
+  const id  = req.body.id;
+  console.log(id);
 
+  if (!id) {
+    return res.status(400).json({ success: false, message: "Event ID is required." });
+  }
 
-
-
+  try {
+    const data = await db.query("SELECT * FROM events WHERE event_id = $1", [id]);
+    console.log(data);
+    if (data.rows.length > 0) {
+      const event = data.rows[0];
+      console.log(event);
+      res.status(200).json({ success: true, event });
+    } else {
+      res.status(404).json({ success: false, message: "No event found." });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Internal server error." });
+  }
+});
 
 
 
