@@ -14,10 +14,16 @@
     font-family: "Baloo Paaji 2", sans-serif;
     font-weight: bolder;
     color: black;
+    display: flex;
+    justify-content: center;
 
 
 }
 .heading span{
     color:  #DB5500; ;
 
+}
+@media screen and (max-width:600px) {
+    .heading{font-size: 2rem;}
+    
 }

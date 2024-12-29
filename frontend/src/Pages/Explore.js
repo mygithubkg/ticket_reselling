@@ -13,8 +13,8 @@ function Explore(){
     return (
         <div>
             <Carousel />
-            <div className="heading" style={{margin:"25px 0px", alignContent:"center"}}> Discover your Next&nbsp;<span>Event</span></div>
-            <SearchBox search={search} setSearch={setSearch}/>
+            <div  className="heading" style={{margin:"25px 0px", alignContent:"center"}}> Discover your Next&nbsp;<span>Event</span></div>
+            <div style={{width:'100%',display:"flex",justifyContent:"center"}}><SearchBox search={search} setSearch={setSearch}/></div>
             <Searchedcontent condition={false} search={search} setSearch={setSearch} />
          
             

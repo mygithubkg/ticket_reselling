@@ -30,7 +30,7 @@
 }
 
 #logo {
-    margin-top: 6px;
+    
     text-decoration: none;
     font-family: "Baloo Paaji 2", sans-serif;
     color: #008FDB;
@@ -38,7 +38,7 @@
     align-items: center;
     align-content: center;
     justify-content: center;
-    font-size: 1.7rem;
+    font-size: 2rem;
 }
 
 .header_space1, .header_space2, .header_space3 {
@@ -101,13 +101,14 @@
 }
 
 .sell_button {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     background-color: #DB5500;
     padding: 8px 3vw;
     height: 50%;
     border-radius: 31px;
     text-decoration: none;
     color: white;
+    font-family: "Inter", sans-serif;
 }
 
 .link {
@@ -138,7 +139,7 @@
     background-color: #ccc;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 900px) {
     .header_space2 {
         display: none;
     }

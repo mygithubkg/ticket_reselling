@@ -16,54 +16,54 @@ export default function Event_Page() {
     return <p>Event not found.</p>;
   }
 
-  return (
-    <div className="event-page">
-      <h1>{event.eventName}</h1>
-      <p className='Intro-line'> {event.eventDescription}</p>
-      <div className='Upper_section'>
-        <img className="align-centre event-photo event-photo" src={event.photo} alt={event.eventName}/>
-        <div className='Upper_details '>
-          <div className='Pricing-Detials'>
-          <h1 className='Price'> <strong> ₹{event.sellingPrice} </strong></h1>
-          {/* <p id="sp">Selling Price</p> */}
-
-          <p><strong>Face Value:</strong> ₹{event.faceValue}</p>
-            
-
-
-
-          </div>
-          <div className='buttons'>
-         <button className='Interested'> <Link className="sell" to="/addevent_3">Sell</Link></button>
-          <button className='Interested'>Buy</button>
-          </div>
-          < div className='Seller Details'>
-            <h2>Seller Details</h2>
-            <p>Name:</p>
-            <p>Rating:</p>
-          </div>
-        </div>
+  return (<div className="event-card">
+     <div className="background-image"><img src={event.photo}  /></div>
+  
+    
+    <div className="event-header">
+     
+      <div className='above-image'>
+      <img src={event.photo} alt="Event Poster" className="event-image" /></div>
+      <div className='event-name'><h2>{event.eventName}</h2></div>
+      
+      <div className="event-meta">
+        <p><strong>Date & Time:</strong> {event.eventDateTime}</p>
+        <p><strong>Location:</strong> {event.eventLocation}</p>
       </div>
-
-      <div className='details-container'>
-
-        <div className='Event-Deatils'>
-          <p><strong>Event Type:</strong> {event.eventType}</p>
-          <p><strong>Date & Time:</strong> {event.eventDateTime}</p>
-          <p><strong>Location:</strong> {event.eventLocation}</p>
-          <p><strong>Description:</strong> {event.eventDescription}</p>
-        </div>
-        <div className='Ticket-Detials'>
-          <p><strong>Ticket Type:</strong> {event.ticketType}</p>
-
-          <p><strong>Quantity:</strong> {event.quantity}</p>
-          <p><strong>Seating Info:</strong> {event.seatingInfo}</p>
-          <p><strong>Transferable:</strong> {event.transferability ? "Yes" : "No"}</p>
-          <p><strong>Ticket Format:</strong> {event.ticketFormat}</p>
-        </div>
-      </div>
-
-
     </div>
-  );
-}
+    
+
+    <div className="event-details">
+      
+      <div className="price-section">
+        <h3>₹{event.sellingPrice}/-</h3>
+        <p>Selling price per ticket</p>
+      </div>
+      <div className="chat">
+      <button className="chat-button">Chat with Seller</button></div>
+    </div>
+
+    <div className="seller-details">
+      <h4>Seller Details</h4>
+      <p><strong>Name:</strong> {event.sellerName}</p>
+      <p><strong>Rating:</strong> {event.sellerRating}</p>
+    </div>
+
+    <div className="ticket-details">
+      <h4>Ticket Details</h4>
+      <p><strong>Ticket Type:</strong> {event.ticketType}</p>
+      <p><strong>Quantity:</strong> {event.quantity}</p>
+      <p><strong>Seating Info:</strong> {event.seatingInfo}</p>
+      <p><strong>Transferable:</strong> {event.transferability ? "Yes" : "No"}</p>
+      <p><strong>Ticket Format:</strong> {event.ticketFormat}</p>
+    </div>
+
+    <div className="event-extra">
+      <h4>Event Details</h4>
+      <p><strong>Event Type:</strong> {event.eventType}</p>
+      <p><strong>Organizer:</strong> {event.organizer}</p>
+      <p><strong>Description:</strong> {event.description}</p>
+    </div>
+  </div>
+);
+};
