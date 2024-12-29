@@ -3,19 +3,21 @@ import { useNavigate, Link } from "react-router-dom";
 import styles from "../styles/Header.module.css";
 
 function Header() {
-    const navigate = useNavigate();
 
+    // Managing web pages
+    const navigate = useNavigate();
     const handleSignInClick = () => {
         navigate('/SignIn'); // Navigate to login page
     };
-
-    const [show, setShow] = useState(false);
-    const handleMenu = () => {
+    const handleSignInClick_1 = () => {
         setShow(!show);
+        navigate('/SignIn'); // Navigate to login page
     };
-
+    
+    // Declaring user 
     const [user, setUser] = useState(false);
 
+    // Checking user is Login or not
     const handleUser = async () => {
         try {
             const response = await fetch('/verify', {
@@ -35,6 +37,7 @@ function Header() {
         }
     };
 
+    // To Check when user get's logged out, [] treated as a dependency array
     useEffect(() => {
         handleUser();
 
@@ -46,6 +49,13 @@ function Header() {
             clearInterval(interval);
         };
     }, []);
+
+
+    // For Responsive website
+    const [show, setShow] = useState(false);
+    const handleMenu = () => {
+        setShow(!show);
+    };
 
     return (
         <>
@@ -77,7 +87,7 @@ function Header() {
                                 </p>
                             </Link>
                         ) : (
-                            <button onClick={handleSignInClick}>Sign In/Register</button>
+                            <button onClick={handleSignInClick} className={styles.button_sign}>Sign In/Register</button>
                         )}
                     </span>
                     <div
@@ -90,11 +100,10 @@ function Header() {
             {show && (
                 <div className={styles.menu}>
                     <div className={styles.menu_container}>
-                        <Link to="/Explore" className={styles.menuItem}>Explore</Link>
-                        <Link to="/HowItWorks" className={styles.menuItem}>How it works!</Link>
-                        <Link to="/ContactUs" className={styles.menuItem}>Contact Us</Link>
-                        <Link to="/Seller1" className={styles.menuItem}>Sell</Link>
-                        <span >
+                        <Link to="/Explore" className={styles.menuItem} onClick={handleMenu}>Explore</Link>
+                        <Link to="/HowItWorks" className={styles.menuItem} onClick={handleMenu}>How it works!</Link>
+                        <Link to="/ContactUs" className={styles.menuItem} onClick={handleMenu}>Contact Us</Link>
+                        <Link to="/Seller1" className={styles.menuItem} onClick={handleMenu}>Sell</Link>
                         {user ? (
                             <Link to='/profile'>
                                 <p>
@@ -105,10 +114,8 @@ function Header() {
                                 </p>
                             </Link>
                         ) : (
-                            <button onClick={handleSignInClick}>Sign In/Register</button>
+                            <button onClick={handleSignInClick_1} className={styles.button_sign}>Sign In/Register</button>
                         )}
-                    </span>
-
                     </div>
                 </div>
             )}
