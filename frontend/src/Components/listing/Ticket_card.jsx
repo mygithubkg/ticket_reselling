@@ -59,7 +59,7 @@ function Ticket_card({ event }) {
                     </div>
                     <div className='buttons'>
                         <button className='btn-sell'>
-                            <Link to="/step3_ticketdetails" className="btn-link">Sell</Link>
+                            <Link to="listing/step3_ticketdetails" className="btn-link">Sell</Link>
                         </button>
                         <button className='btn-buy'>Buy</button>
                     </div>

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import "../../styles/Ticketdetails.css";
 import Faq from "../Faq_section";
 import { faqDat } from "../../data";
@@ -25,6 +25,26 @@ function TicketDetails(){
         }));
     }
 
+    const [name, setname] = useState(null);
+    useEffect(()=>{
+        const fetchname = async ()=>{
+            const response = await fetch('/event/event_name',{
+                method:'POST',
+            })
+
+            const result = await response.json();
+
+            if (result.success){
+                setname(result.names);
+            }
+        }
+        fetchname();
+    },[]);
+
+    if (!name){
+        return<div>Add event First</div>;
+    }
+    
     const handlesubmit = async (e)=>{
         e.preventDefault();
         const ticket_type = userDetails.ticket_type;
@@ -48,15 +68,21 @@ function TicketDetails(){
             alert(result.message);
         }
     }
-    let currentStep= 2;
+    // let currentStep= 2;
     return (
         <div>
-            <ProgressBar currentStep={currentStep}/>
+            {/* <ProgressBar currentStep={currentStep}/> */}
             <form className="categorycontainer3" onSubmit={handlesubmit}>
                 <h1 id="h1">Ticket Details</h1>
                     <div className="typess">
                         <label htmlFor="Event Name">Event Name</label>
-                        <input type="text" id="texting" placeholder="Enter Event Name" required />
+                        <select id="texting"  required >
+                        <option value="" disabled selected>Select Event Name</option>
+                        {name.map((names, index) => (
+                            <option key={index} value={names.event_name}>{names.event_name}</option>
+                        ))}
+                        </select>
+                        <p style={{ color: "red", fontWeight: "bold", fontSize: "16px", textAlign: "center" }}>If event does not exist kindly add event first</p>
                     </div>
                     <div className="typess">
                         <label htmlFor="Ticket Type">Ticket Type</label>
@@ -71,8 +97,8 @@ function TicketDetails(){
                         <input type="number" id="quantity" min= '1' max='10' name="quantity" placeholder="0" value={userDetails.quantity} onChange={handleChange} required />
                     </div>
                     <div className="typess">
-                        <label htmlFor="Seating Information">Ticket Format</label>
-                        <input type="text" id="information" name="ticket_format" value={userDetails.ticket_format} onChange={handleChange} placeholder="Enter Seating Information" required/>
+                        <label htmlFor="Ticket Information">Ticket Format</label>
+                        <input type="text" id="information" name="ticket_format" value={userDetails.ticket_format} onChange={handleChange} placeholder="Enter Ticket Information" required/>
                     </div>
                     <div className="typess">
                         <label htmlFor="Transferbiality">Mode of Transfer</label>
@@ -91,7 +117,7 @@ function TicketDetails(){
                         <input type="number" id="selling_price" name="selling_price" placeholder="1000/-" value={userDetails.selling_price} onChange={handleChange} required/>
                     </div>
                     <div className="typess">
-                        <input type="submit" id="submit" value="Add Listing" required/>
+                        <input type="submit" id="submit" value="Add Ticket" required/>
                     </div>
             </form>
             <div>

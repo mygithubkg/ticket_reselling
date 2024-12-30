@@ -8,6 +8,8 @@ import ProgressBar from "../ProgressBar"
 function Category(){
 
     const navigate = useNavigate();
+
+    // For backend Data Fetch
     const [userDetails, setUserDetails] = useState({
         event_type : "",
         event_date : "",
@@ -48,13 +50,14 @@ function Category(){
             alert(result.message);
         }
     }
-    let currentStep= 0
+
+    // let currentStep= 0
     return(
         <div>
-             <ProgressBar currentStep={currentStep}/>
+             {/* <ProgressBar currentStep={currentStep}/> */}
            
             <form className="categorycontainer" onSubmit={handlesubmit}>
-                <h1 id="h1">Categorization</h1>
+                <h1 id="h1">Event Details</h1>
                 <div className="typess">
                     <label htmlFor="Event Type">Event Type</label>
                     <select id="Event_Type" name="event_type" value={userDetails.event_type} onChange={handleChange} required>
