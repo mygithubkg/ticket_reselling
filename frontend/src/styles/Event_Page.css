@@ -1,224 +1,200 @@
-/* EventCard.css */
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+/* Event_Page.css */
 
-.event-card {
-  width: 90%;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+.event-page {
+  padding: 20px;
   max-width: 1200px;
-  height: auto;
-  margin: 20px auto;
-  background: white;
-  border-radius: 107px;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-  
-  font-family: "Inter", sans-serif;
+  margin: auto;
+  margin: 0;
+  font-family: "Baloo Paaji 2", sans-serif;
+  background: linear-gradient(135deg, #f0f4ff, #dfe7ff);
   color: #333;
-  display: flex;
-  flex-direction: column;
+  text-align: center;
+  margin-left: 15%;
 }
 
-.background-image img {
-  object-fit: fill;
-  width: 100%;
-  height: 100%;
-  border-radius: 107px 107px 0 0;
-}
-
-.background-image {
-  position: relative;
-  width: 100%;
-  height: 40vh;
-  filter: blur(4px);
-  overflow: hidden;
-}
-
-.event-image {
-  margin-top: -25vh;
-  width: 29vw;
-
-  height: 20vw;
-  
-  object-fit: cover;
-  border-radius: 107px;
-  z-index: 10;
-  align-self: center;
-}
-
-.above-image {
-  display: flex;
-  justify-content: center;
-}
-
-.event-name {
-  display: flex;
-  justify-content: center;
-  padding: 20px 0;
-}
-
-.event-name h2 {
+.event-page h1{
+  text-align: center;
   font-size: 3rem;
+  margin-bottom: 20px;
+  color: #0056b3;
+  font-weight: 600;
+}
+
+.event-page .intro-line {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.upper-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.upper-section .event-photo {
+  max-width: 500px;
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.upper-section .event-photo:hover {
+  transform: scale(1.05);
+}
+
+.upper-section .event-details {
+  max-width: 600px;
+  flex: 1;
+}
+
+.upper-section .event-details p {
+  margin: 15px 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.upper-section .event-details strong {
+  color: #0056b3;
+}
+
+.tickettt {
   text-align: center;
 }
 
-.event-meta {
+.tickett-heading {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+  margin-top: 5%;
+}
+
+.tickets-container {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  margin: 10px 60px;
-  gap: 10px;
+  gap: 30px;
+  justify-content: center;
+}
+
+.ticket-card {
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 15px;
+  padding: 20px;
+  width: 350px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.ticket-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.ticket-card .pricing-details {
+  margin-bottom: 15px;
+}
+
+.ticket-card .pricing-details .price {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff5722;
+}
+
+.ticket-card .buttons {
+  margin: 15px 0;
+  display: flex;
   justify-content: space-between;
 }
 
-.event-meta p {
-  font-size: 1.5rem;
-}
-
-.event-details {
-  padding: 20px;
-  text-align: center;
-}
-
-.event-details h2 {
-  font-size: 1.8rem;
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
-.price-section {
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin: 0 20px;
-  margin-left: 2.5vw;
-}
-
-.price-section h3 {
-  color: black;
-  font-size: 2.5rem;
- 
-}
-
-.chat {
-  display: flex;
-  justify-content: left;
- 
-}
-
-.chat-button {
-  background-color: #008FDB;
+.ticket-card .btn-sell,
+.ticket-card .btn-buy {
+  background-color: #0056b3;
   color: white;
+  padding: 12px 20px;
   border: none;
-  padding: 10px 20px;
-  border-radius: 25px;
-  font-size: 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  margin-left: 2.3vw;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  transition: background-color 0.3s;
 }
 
-.chat-button:hover {
-  background-color: #218838;
+.ticket-card .btn-sell:hover,
+.ticket-card .btn-buy:hover {
+  background-color: #003a80;
 }
 
-.seller-details {
-  padding: 10px 20px;
-  border-top: 1px solid #ddd;
+.ticket-card .btn-link {
+  color: white;
+  text-decoration: none;
+}
+
+.ticket-card .seller-details,
+.ticket-card .ticket-details {
   text-align: left;
+  margin-top: 15px;
 }
 
-.seller-details p {
+.ticket-card .seller-details h3 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.ticket-card .ticket-details p {
   margin: 5px 0;
-  font-size: 1.2rem;
-}
-
-.ticket-details, .event-extra {
-  padding: 15px 20px;
-  border-top: 1px solid #ddd;
-  text-align: left;
-}
-
-.ticket-details h4, .event-extra h4, .seller-details h4 {
-  margin-bottom: 10px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #008FDB;
-}
-
-.ticket-details p, .event-extra p {
-  margin: 5px 0;
-  font-size: 1.2rem;
-}
-
-.event-extra {
-  margin-bottom: 20px;
-}
-
-.ticket-details, .event-extra, .seller-details {
-  margin-left: 10px;
+  font-size: 1rem;
+  color: #555;
 }
 
 /* Responsive Styles */
+
 @media (max-width: 768px) {
-  .event-card {
-    width: 95%;
+  .upper-section {
+    flex-direction: column;
   }
 
-  .event-image {
-    margin-top: -10vh;
-    width: 40vw;
-    height: 40vw;
-    max-width: 150px;
-    max-height: 150px;
+  .tickets-container {
+    gap: 20px;
   }
 
-  .event-name h2 {
-    font-size: 2rem;
-  }
-
-  .event-meta {
-    margin: 10px;
-    gap: 5px;
-  }
-
-  .price-section h3 {
-    font-size: 1.5rem;
-  }
-
-  .chat-button {
-    font-size: 1rem;
-    margin-left: 10px;
-    margin-top: 10px;
+  .ticket-card {
+    width: 90%;
   }
 }
 
 @media (max-width: 480px) {
-  .event-card {
-    width: 100%;
+  .event-page h1 {
+    font-size: 2.5rem;
   }
 
-  .event-image {
-    margin-top: -8vh;
-    width: 50vw;
-    height: 50vw;
-    max-width: 120px;
-    max-height: 120px;
-  }
-
-  .event-name h2 {
-    font-size: 1.5rem;
-  }
-
-  .event-meta p {
+  .event-page .intro-line {
     font-size: 1rem;
   }
 
-  .price-section h3 {
-    font-size: 1.2rem;
+  .ticket-card .pricing-details .price {
+    font-size: 1.5rem;
   }
 
-  .chat-button {
-    padding: 8px 16px;
+  .ticket-card .btn-sell,
+  .ticket-card .btn-buy {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+
+  .ticket-card .seller-details h3 {
+    font-size: 1rem;
+  }
+
+  .ticket-card .ticket-details p {
     font-size: 0.9rem;
   }
 }
