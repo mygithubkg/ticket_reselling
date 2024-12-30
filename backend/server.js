@@ -10,15 +10,73 @@ import session from "express-session";
 import passport from "passport";
 import { Strategy } from "passport-local";
 
+// For Socket.io importing create server to upgrade
+import { createServer } from "http";
+import { Server } from "socket.io";
+import cors from "cors";
 
+// to find directory of file
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 env.config();
 
 // Declaring Const 
 const app = express();
 const port = process.env.SERVER_PORT;
 const saltrounds = parseInt(process.env.SALT_ROUND,10);
+
+// creating server for socket.io
+const server = createServer(app);
+// const io = new Server(server, {
+//   cors: {
+//     origin: "http://localhost:3000",  // Replace with your client URL
+//     methods: ["GET", "POST"],
+//     allowedHeaders: ["Content-Type"],
+//   },
+// });
+
+// let users = {};
+// let sockets = {};
+// io.on('connection', (socket) => {
+//   console.log('A user connected');
+
+//   socket.on("join", (username)=> {
+//     users[username] = socket.id;
+//     sockets[socket.id] = username;
+//     console.log(`User ${username} joined with socket ID: ${socket.id}`);
+//   })
+
+//   // Listen for a message from client
+//   socket.on('send_message', (data) => {
+//     const { recipient, message } = data;
+//     console.log('Data received:', data);
+
+//     const recipientSocketId = users[recipient];
+//     const senderUsername = sockets[socket.id]; // Retrieve sender's username
+//     if (recipientSocketId) {
+//         io.to(recipientSocketId).emit('receive_message', {
+//             sender: senderUsername, // You can use username if available
+//             recipient,
+//             message,
+//         });
+//     } else {
+//         console.log(`User ${recipient} is not connected`);
+//     }
+//   }); 
+
+//   socket.on('disconnect', () => {
+//     for (const [username, id] of Object.entries(users)) {
+//         if (id === socket.id) {
+//             delete users[username];
+//             console.log(`User ${username} disconnected`);
+//             break;
+//         }
+//     }
+//   });
+
+// });
+
 
 // Connecting to database
 const db = new pg.Client({
@@ -53,10 +111,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+// To verify if user is Loggedin
 
 app.get('/verify', (req,res)=>{
   if (req.isAuthenticated()){
-    res.json({success:true});
+    res.json({success:true, username: req.user.username});
   }else{
     res.json({success:false})
   }
@@ -137,20 +196,36 @@ app.post('/listing1', async (req,res)=>{
 
 app.post('/listing2', async (req,res)=>{
   console.log(req.body);
+  console.log(req.user);
   if (!req.isAuthenticated()){
     return res.status(500).json({ success: false, message: "Technical error" });
   }
   else{
     try{
+      //Selecting username of user 
       const data = await db.query("SELECT username FROM users WHERE username = $1",[req.user.username]);
+
+
       if (data.rows.length >=1 ){
         console.log(`data :`,data.rows[0].username);
-        console.log(req.user.username)
-        if (data.rows[0].username === req.user.username){
-          await db.query("INSERT INTO tickets (username, ticket_type, selling_price, face_value, transferability, ticket_format, quantity) VALUES ($1, $2,$3,$4,$5,$6,$7)",[req.user.username, req.body.ticket_type, req.body.selling_price, req.body.face_value, req.body.transferability, req.body.ticket_format, req.body.quantity]);
-          res.status(200).json({success:true, message:"Event Details Added!!"});
+
+        // Selecting Name of User
+
+        const name_of_user = await db.query("SELECT full_name FROM details WHERE username = $1",[req.user.username]);
+
+        if (name_of_user.rows.length > 0){
+          const name = name_of_user.rows[0].full_name;
+          
+          // rechecking Existence of user
+
+          if (data.rows[0].username === req.user.username){
+            await db.query("INSERT INTO tickets (username, ticket_type, selling_price, face_value, transferability, ticket_format, quantity, seller_name) VALUES ($1, $2,$3,$4,$5,$6,$7,$8)",[req.user.username, req.body.ticket_type, req.body.selling_price, req.body.face_value, req.body.transferability, req.body.ticket_format, req.body.quantity,name]);
+            res.status(200).json({success:true, message:"Event Details Added!!"});
+          }else{
+            res.status(500).json({success:false, message:"Problem adding Event Details"});
+          }
         }else{
-          res.status(500).json({success:false, message:"Problem adding Event Details"});
+          res.status(500).json({success:false, message: "Kindly update your Profile first!"});
         }
       }else{
         res.status(500).json({success:false, message:"User not Authorized"});
@@ -161,15 +236,53 @@ app.post('/listing2', async (req,res)=>{
   }
 })
 
+app.post('/eventdetails', async (req, res) => {
+  const id  = req.body.id;
+  console.log(id);
 
+  if (!id) {
+    return res.status(400).json({ success: false, message: "Event ID is required." });
+  }
 
+  try {
+    const data = await db.query("SELECT * FROM events WHERE event_id = $1", [id]);
+    console.log(data);
+    if (data.rows.length > 0) {
+      const event = data.rows[0];
+      console.log(event);
+      res.status(200).json({ success: true, event });
+    } else {
+      res.status(404).json({ success: false, message: "No event found." });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Internal server error." });
+  }
+});
 
+app.post('/ticketdetails', async (req, res) => {
+  const id  = req.body.id;
+  console.log(id);
 
+  if (!id) {
+    return res.status(400).json({ success: false, message: "Event ID is required." });
+  }
 
-
-
-
-
+  try {
+    const data = await db.query("SELECT * FROM events WHERE event_id = $1", [id]);
+    console.log(data);
+    if (data.rows.length > 0) {
+      const event = data.rows[0];
+      console.log(event);
+      res.status(200).json({ success: true, event });
+    } else {
+      res.status(404).json({ success: false, message: "No event found." });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Internal server error." });
+  }
+});
 
 
 
@@ -299,6 +412,9 @@ passport.deserializeUser(async (user, cb) => {
 });
 
 
-app.listen(port, () => {
+
+// listening to server instead of app to incorporate the socket feature
+
+server.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

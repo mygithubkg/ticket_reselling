@@ -1,69 +1,70 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { tickets } from "../data";
 import "../styles/Event_Page.css"; // Optional: Add styles if needed
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
+import Ticket_card from '../Components/listing/Ticket_card';
 
 export default function Event_Page() {
-  const params = useParams();
-  const { id } = params;
+  const { id } = useParams();
+  const [event, setEvent] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true); // Added loading state
 
-  // Find the event details based on the id
-  const event = tickets.find((ticket) => ticket.id === parseInt(id));
+  useEffect(() => {
+    const fetchEvent = async () => {
+      console.log(id);
+      try {
+        const response = await fetch('/eventdetails', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id }),
+        });
 
-  // Check if event exists
+        const result = await response.json();
+        if (result.success) {
+          setEvent(result.event);
+        } else {
+          setError(result.message || "Error fetching event");
+        }
+      } catch (err) {
+        setError("An unexpected error occurred.");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvent();
+  }, [id]);
+
+  if (loading) {
+    return <p>Loading event details...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
+
   if (!event) {
     return <p>Event not found.</p>;
   }
 
-  return (<div className="event-card">
-     <div className="background-image"><img src={event.photo}  /></div>
-  
-    
-    <div className="event-header">
-     
-      <div className='above-image'>
-      <img src={event.photo} alt="Event Poster" className="event-image" /></div>
-      <div className='event-name'><h2>{event.eventName}</h2></div>
-      
-      <div className="event-meta">
-        <p><strong>Date & Time:</strong> {event.eventDateTime}</p>
-        <p><strong>Location:</strong> {event.eventLocation}</p>
+
+  return (
+    <div className="event-page">
+      <h1>{event.event_name}</h1>
+      <p className='Intro-line'>{event.event_bio}</p>
+      <div className='Upper_section'>
+        <img className="align-centre event-photo" src={event.photo} alt={event.event_name} />
+        <div className='Event-Deatils'>
+            <p><strong>Event Type:</strong> {event.event_type}</p>
+            <p><strong>Date & Time:</strong> {event.event_date}  {event.event_time}</p>
+            <p><strong>Location:</strong> {event.event_location}</p>
+            <p><strong>Description:</strong> {event.event_bio}</p>
+        </div>
       </div>
-    </div>
-    
-
-    <div className="event-details">
-      
-      <div className="price-section">
-        <h3>₹{event.sellingPrice}/-</h3>
-        <p>Selling price per ticket</p>
-      </div>
-      <div className="chat">
-      <button className="chat-button">Chat with Seller</button></div>
+      <Ticket_card />
     </div>
 
-    <div className="seller-details">
-      <h4>Seller Details</h4>
-      <p><strong>Name:</strong> {event.sellerName}</p>
-      <p><strong>Rating:</strong> {event.sellerRating}</p>
-    </div>
-
-    <div className="ticket-details">
-      <h4>Ticket Details</h4>
-      <p><strong>Ticket Type:</strong> {event.ticketType}</p>
-      <p><strong>Quantity:</strong> {event.quantity}</p>
-      <p><strong>Seating Info:</strong> {event.seatingInfo}</p>
-      <p><strong>Transferable:</strong> {event.transferability ? "Yes" : "No"}</p>
-      <p><strong>Ticket Format:</strong> {event.ticketFormat}</p>
-    </div>
-
-    <div className="event-extra">
-      <h4>Event Details</h4>
-      <p><strong>Event Type:</strong> {event.eventType}</p>
-      <p><strong>Organizer:</strong> {event.organizer}</p>
-      <p><strong>Description:</strong> {event.description}</p>
-    </div>
-  </div>
-);
-};
+  );
+}

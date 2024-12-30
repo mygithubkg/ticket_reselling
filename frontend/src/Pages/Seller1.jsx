@@ -11,14 +11,7 @@ import MessageDropdown from '../Components/chat';
 
 export default function Seller1() {
     const [search, setSearch] = useState("");
-    const [messages, setMessages] = useState([
-      { user: "Alice", text: "Hi there!" },
-      { user: "Bob", text: "Hello!" },
-    ]);
-  
-    const handleSendMessage = (newMessage) => {
-      setMessages((prevMessages) => [...prevMessages, { user: "Me", text: newMessage }]);
-    };
+
   
     return (
       <>
@@ -32,7 +25,8 @@ export default function Seller1() {
           </div> </div>
           <div>
               <Link to='/listing/step1_eventdetails'><button className='add_event'>+Add Event</button></Link>
-            </div>
+              <Link to='/listing/step3_ticketdetails'><button className='add_event'>+Add Ticket</button></Link>
+          </div>
         <div className='container-serached'><Searchedcontent condition={true} search={search} setSearch={setSearch} /></div>
         
   
@@ -49,8 +43,7 @@ export default function Seller1() {
           <div className='container-faqs'><Faq faqData={faqDat} /></div>
        
 
-          <MessageDropdown messages={messages} onSendMessage={handleSendMessage} />
-        </div>
+          <MessageDropdown />
 
         
       </>
