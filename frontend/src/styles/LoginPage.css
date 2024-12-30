@@ -4,14 +4,14 @@
 .container-login {
     display: grid;
     grid-template-columns: 0.5fr 0.5fr;
-    flex-direction: row-reverse !important;
-    gap: 40px;
+   
+
     background-color: white;
     border-color: white;
     border-width: 3px;
     border-radius: 107px;
     margin: 0 30px;
-    height: 80vh;
+    height: 75vh;
     justify-content: space-around;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
@@ -121,11 +121,12 @@ input[type="password"]:focus {
     color: black;
     margin-bottom: 20px;
     transition: color 0.3s ease, text-decoration 0.3s ease;
+    text-decoration: underline black;
 }
 
 .new_user:hover, .already_register:hover {
     color: #DB5500;
-    text-decoration: underline;
+    text-decoration: underline  ;
 }
 
 .image-login:hover #img-login {
@@ -136,37 +137,31 @@ input[type="password"]:focus {
 /* Media Queries for Responsiveness */
 @media (max-width: 1024px) {
     .container-login {
-        grid-template-columns: 1fr;
-        height: auto;
-    }
+       display: flex;
+       flex-direction: column-reverse;
+       height: auto;
+       justify-content: center;
+       align-content: center;
+      
+       
+       
+    
+       ;
+    
+   }
+
+   
 
     .image-login {
-        border-radius: 0;
+        border-radius:  106px 106px 0px 0px ;
+        height: 30vh;
+    width: auto;
+        
     }
 
-    .form_signin {
-        padding: 20px;
-    }
-
-    .form_signin input[type="email"],
-    input[type="password"] {
-        width: 80%;
-    }
-}
-
-@media (max-width: 768px) {
-    .form_signin > h1 {
-        font-size: 2rem;
-    }
-
-    .form_signin button {
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .form_signin > h1 {
-        font-size: 1.5rem;
+    .form_signin { padding: 20px 0px;
+        margin: 0px;
+       
     }
 
     .form_signin input[type="email"],

@@ -90,7 +90,7 @@ export {faqDat};
 const tickets = [
     {
       id: 1,
-      photo: "https://www.shutterstock.com/image-photo/blue-hole-white-paper-coming-600nw-660624601.jpg",
+      photo: "https://m.economictimes.com/thumb/msid-113568262,width-1200,height-900,resizemode-4,imgsize-1839857/coldplay-india-tour-2025.jpg",
       eventType: "Concert",
       eventDateTime: "24th Dec, 2024, 7:00 PM",
       eventLocation: "Mumbai, India",

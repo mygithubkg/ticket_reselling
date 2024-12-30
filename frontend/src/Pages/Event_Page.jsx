@@ -49,6 +49,7 @@ export default function Event_Page() {
     return <p>Event not found.</p>;
   }
 
+
   return (
     <div className="event-page">
       <h1>{event.event_name}</h1>

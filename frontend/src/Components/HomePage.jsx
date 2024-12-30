@@ -15,6 +15,7 @@ import Features from "./Features"
 
 
 
+
 function HomePage() {
   const [search, setSearch] = useState("")
  
@@ -30,7 +31,7 @@ function HomePage() {
           style={{
             position: "absolute",
             top: "50vh",
-            left: "50%",
+            left: "48%",
             transform: "translate(-50%, -50%)",
             
             width: "80%", 
