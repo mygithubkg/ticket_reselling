@@ -1,94 +1,122 @@
-// import React, { useState, useEffect, useRef } from "react";
-// // import { io } from "socket.io-client";
-// import "../styles/chat.css";
+import React, { useState, useEffect, useRef } from "react";
+import { io } from "socket.io-client";
+import "../styles/chat.css";
+import { useNavigate } from "react-router-dom";
 
 // const socket = io("http://localhost:5000");
 
-// const MessageDropdown = () => {
-//     // to catch all listeners
-//     socket.onAny((event, ...args) => {
-//         console.log(event, args);
-//     });
-
-//     const [isOpen, setIsOpen] = useState(false);
-//     const [newMessage, setNewMessage] = useState("");
-//     const [messages, setMessages] = useState([]);
-//     const dropdownRef = useRef(null);
+const MessageDropdown = () => {
+  const navigate = useNavigate();
+  const [recipient, setRecipient] = useState("");
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
 
 
-//     useEffect(()=>{
-//         socket.on("receive_message", (data)=>{
-//             setMessages((prevMessages)=>[
-//                 ...prevMessages,
-//                 `${data.user}: ${data.text}`
-//             ]);
-//         });
+  const [user, setUser] = useState(false);
+  
+  // Checking user is Login or not
+  const handleUser = async () => {
+      try {
+          const response = await fetch('/verify', {
+              method: 'GET',
+              credentials: 'include',
+          });
 
-//         return ()=>{
-//             socket.off("receive_message");
-//         }
-//     });
-//     useEffect(() => {
-//     const handleClickOutside = (event) => {
-//         if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-//         setIsOpen(false);
-//         }
-//     };
+          const result = await response.json();
 
-//     document.addEventListener("mousedown", handleClickOutside);
-//     return () => {
-//         document.removeEventListener("mousedown", handleClickOutside);
-//     };
-//     }, []);
+          if (result.success) {
+              setUser(true);
+              socket.emit("join", result.username); // Send the username when joining
+          } else {
+              setUser(false);
+          }
+      } catch (err) {
+          console.log(err);
+      }
+  };
 
-//     // Handle sending messages
-//     const handleSendMessage = (newMessage) => {
-//     if (newMessage.trim()) {
-//         socket.emit("message", { user: "Me", text: newMessage });
-//         setNewMessage(""); // Clear input after sending
-//     }
-//     };
+  // To Check when user get's logged out, [] treated as a dependency array
+  useEffect(() => {
+      handleUser();
 
-//     // Listen for incoming messages
-//     useEffect(() => {
-//     socket.on("message", (message) => {
-//         console.log("Received message:", message); // Log received message
-//         setMessages((prevMessages) => [...prevMessages, message]);
-//     });
+      const interval = setInterval(() => {
+          handleUser();
+      }, 5000);
+      
+      return () => {
+          clearInterval(interval);
+      };
+  }, []);
 
-//     return () => {
-//         socket.off("message");
-//     };
-//     }, []);
+  useEffect(() => {
+    socket.on("receive_message", (data) => {
+        console.log("Message received:", data);
+        setMessages((prevMessages) => [
+            ...prevMessages,
+            `${data.recipient}: ${data.message}`, // Adjust rendering logic as needed
+        ]);
+    });
 
-//     return (
-//     <div className="message-dropdown" ref={dropdownRef}>
-//         <button className="message-toggle" onClick={() => setIsOpen(!isOpen)}>
-//         💬 Messages
-//         </button>
+    return () => {
+        socket.off("receive_message");
+    };
+}, []);
 
-//         {isOpen && (
-//         <div className="message-dropdown-content">
-//             <div className="message-list">
-//             {messages.map((msg, index) => (
-//                 <div key={index} className="message-item">
-//                 <strong>{msg.user}:</strong> {msg.text}
-//                 </div>
-//             ))}
-//             </div>
-//             <div className="message-input-container">
-//             <input
-//                 type="text"
-//                 placeholder="Type a message..."
-//                 value={newMessage}
-//                 onChange={(e) => setNewMessage(e.target.value)}
-//             />
-//             <button onClick={() => handleSendMessage(newMessage)}>Send</button>
-//             </div>
-//         </div>
-//         )}
-//     </div>
-//     );
-//     };
 
-//     export default MessageDropdown;
+  
+
+  const handleSendMessage = () => {
+    if (recipient && message) {
+      setMessages((prevMessages) => [
+          ...prevMessages,
+          `Me: ${message}`, // Show 'Me' for sender's messages
+      ]);
+      // Send the private message to the server
+      socket.emit("send_message", { recipient, message });
+      setMessage(""); // Clear message input
+    }
+  };
+
+  const handleLogin = () => {
+    navigate('/SignIn')
+  };
+
+  return (
+    <div>
+      {!user ? (
+        <div>
+          <button onClick={handleLogin}>Login</button>
+        </div>
+      ) : (
+        <div>
+          <div>
+            <input
+              type="text"
+              placeholder="Recipient username"
+              value={recipient}
+              onChange={(e) => setRecipient(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Type a message..."
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+            <button onClick={handleSendMessage}>Send</button>
+          </div>
+
+          <div>
+            <h3>Messages:</h3>
+            <div>
+              {messages.map((msg, index) => (
+                <div key={index}>{msg}</div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default MessageDropdown;
