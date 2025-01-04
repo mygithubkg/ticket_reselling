@@ -1,8 +1,14 @@
+<<<<<<< HEAD
+import React, { useState, useEffect, useCallback } from 'react';
+=======
 import React, { useState, useEffect } from 'react';
+>>>>>>> 9f45d79e6228f92150ded3eecfd1cd49586a6d96
 import { useParams } from 'react-router-dom';
 import "../styles/Event_Page.css"; // Optional: Add styles if needed
 import { Link } from "react-router-dom";
 import Ticket_card from '../Components/listing/Ticket_card';
+
+
 
 export default function Event_Page() {
   const { id } = useParams();
@@ -10,6 +16,11 @@ export default function Event_Page() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true); // Added loading state
 
+<<<<<<< HEAD
+ 
+  // Find the event details based on the id
+  const event = tickets.find((ticket) => ticket.id === parseInt(id));
+=======
   useEffect(() => {
     const fetchEvent = async () => {
       console.log(id);
@@ -44,12 +55,30 @@ export default function Event_Page() {
   if (error) {
     return <p>{error}</p>;
   }
+>>>>>>> 9f45d79e6228f92150ded3eecfd1cd49586a6d96
 
   if (!event) {
     return <p>Event not found.</p>;
+
+
   }
 
 
+<<<<<<< HEAD
+  return (<div className="event-card">
+     <div className="background-image"><img src={event.photo}  /></div>
+  
+    
+    <div className="event-header">
+     
+      <div id="test" className='above-image'>
+      <img src={event.photo} alt="Event Poster" className="event-image" /></div>
+      <div className='event-name'><h2>{event.eventName}</h2></div>
+      
+      <div className="event-meta">
+        <p><strong>Date & Time:</strong> {event.eventDateTime}</p>
+        <p><strong>Location:</strong> {event.eventLocation}</p>
+=======
   return (
     <div className="event-page">
       <h1>{event.event_name}</h1>
@@ -62,6 +91,7 @@ export default function Event_Page() {
             <p><strong>Location:</strong> {event.event_location}</p>
             <p><strong>Description:</strong> {event.event_bio}</p>
         </div>
+>>>>>>> 9f45d79e6228f92150ded3eecfd1cd49586a6d96
       </div>
       <Ticket_card event={event} />
     </div>
