@@ -1,20 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { tickets } from "../data";
 import "../styles/Event_Page.css"; // Optional: Add styles if needed
 import {Link} from "react-router-dom"
 
+
+
 export default function Event_Page() {
   const params = useParams();
   const { id } = params;
 
+ 
   // Find the event details based on the id
   const event = tickets.find((ticket) => ticket.id === parseInt(id));
 
   // Check if event exists
   if (!event) {
     return <p>Event not found.</p>;
+
+
   }
+
 
   return (<div className="event-card">
      <div className="background-image"><img src={event.photo}  /></div>
@@ -22,7 +28,7 @@ export default function Event_Page() {
     
     <div className="event-header">
      
-      <div className='above-image'>
+      <div id="test" className='above-image'>
       <img src={event.photo} alt="Event Poster" className="event-image" /></div>
       <div className='event-name'><h2>{event.eventName}</h2></div>
       

@@ -4,7 +4,7 @@ import EventCard from "./Event_Card";
 import { useNavigate, Link } from "react-router-dom";
 import { tickets } from "../data";
 
-export default function Searchedcontent({search, condition }) {
+export default function Searchedcontent({search, condition, EventType, date, price}) {
   const navigate = useNavigate();
 
   function handleonclick  (id)  {
@@ -14,12 +14,21 @@ export default function Searchedcontent({search, condition }) {
   };
 
   let arr = tickets
-  
+
     
 
-  const filteredData = arr.filter((e) =>
-    e.eventName.toLowerCase().includes(search.toLowerCase())
+  var filteredData = (arr.filter((e) =>
+    (e.eventName.toLowerCase().includes(search.toLowerCase()) && e.eventName.toLowerCase().includes(EventType)))
   );
+
+  var filteredData = filteredData.sort((a, b) => {
+    if (price === "asc") {
+      return a.sellingPrice - b.sellingPrice;
+    } else if (price === "desc") {
+      return b.sellingPrice - a.sellingPrice;
+    }
+    return 0;
+  });
 
   return (
     <div>
