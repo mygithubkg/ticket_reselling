@@ -1,82 +1,164 @@
-// Modules used 
-import express from "express";
-import bodyParser from "body-parser";
-import pg from "pg";
-import bcrypt, { hash } from "bcrypt";
-import path from "path";
-import { fileURLToPath } from "url";
-import env from "dotenv";
-import session from "express-session";
-import passport from "passport";
-import { Strategy } from "passport-local";
+  // Modules used 
+  import express from "express";
+  import bodyParser from "body-parser";
+  import pg from "pg";
+  import bcrypt, { hash } from "bcrypt";
+  import path from "path";
+  import { fileURLToPath } from "url";
+  import env from "dotenv";
+  import session from "express-session";
+  import passport from "passport";
+  import { Strategy } from "passport-local";
 
-// For Socket.io importing create server to upgrade
-import { createServer } from "http";
-import { Server } from "socket.io";
-import cors from "cors";
+  // For Socket.io importing create server to upgrade
+  import { createServer } from "http";
+  import { Server } from "socket.io";
+  import cors from "cors";
 
-// to find directory of file
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+  // to find directory of file
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
 
-env.config();
+  env.config();
 
-// Declaring Const 
-const app = express();
-const port = process.env.SERVER_PORT;
-const saltrounds = parseInt(process.env.SALT_ROUND,10);
+  // Declaring Const 
+  const app = express();
+  const port = process.env.SERVER_PORT || 5000;
+  const saltrounds = parseInt(process.env.SALT_ROUND,10);
 
-// creating server for socket.io
-const server = createServer(app);
-// const io = new Server(server, {
-//   cors: {
-//     origin: "http://localhost:3000",  // Replace with your client URL
-//     methods: ["GET", "POST"],
-//     allowedHeaders: ["Content-Type"],
-//   },
-// });
+  // creating server for socket.io
+  const server = createServer(app);
+  const io = new Server(server, {
+    cors: {
+      origin: "http://localhost:3000",  // Replace with your client URL
+      methods: ["GET", "POST"],
+      allowedHeaders: ["Content-Type"],
+    },
+  });
 
-// let users = {};
-// let sockets = {};
-// io.on('connection', (socket) => {
-//   console.log('A user connected');
+  let users = {};
+  let sockets = {};
+  // io.on('connection', (socket) => {
+  //   console.log('A user connected');
 
-//   socket.on("join", (username)=> {
-//     users[username] = socket.id;
-//     sockets[socket.id] = username;
-//     console.log(`User ${username} joined with socket ID: ${socket.id}`);
-//   })
+  //   socket.on("join", (username)=> {
+  //     users[username] = socket.id;
+  //     sockets[socket.id] = username;
+  //     console.log(`User ${username} joined with socket ID: ${socket.id}`);
+  //   })
 
-//   // Listen for a message from client
-//   socket.on('send_message', (data) => {
-//     const { recipient, message } = data;
-//     console.log('Data received:', data);
+  //   // Listen for a message from client
+  //   socket.on('send_message', (data) => {
+  //     const { recipient, message } = data;
+  //     console.log('Data received:', data);
 
-//     const recipientSocketId = users[recipient];
-//     const senderUsername = sockets[socket.id]; // Retrieve sender's username
-//     if (recipientSocketId) {
-//         io.to(recipientSocketId).emit('receive_message', {
-//             sender: senderUsername, // You can use username if available
-//             recipient,
-//             message,
-//         });
-//     } else {
-//         console.log(`User ${recipient} is not connected`);
-//     }
-//   }); 
+  //     const recipientSocketId = users[recipient];
+  //     const senderUsername = sockets[socket.id]; // Retrieve sender's username
+  //     if (recipientSocketId) {
+  //         io.to(recipientSocketId).emit('receive_message', {
+  //             sender: senderUsername, // You can use username if available
+  //             recipient,
+  //             message,
+  //         });
+  //     } else {
+  //         console.log(`User ${recipient} is not connected`);
+  //     }
+  //   }); 
 
-//   socket.on('disconnect', () => {
-//     for (const [username, id] of Object.entries(users)) {
-//         if (id === socket.id) {
-//             delete users[username];
-//             console.log(`User ${username} disconnected`);
-//             break;
-//         }
-//     }
-//   });
+  //   socket.on('disconnect', () => {
+  //     for (const [username, id] of Object.entries(users)) {
+  //         if (id === socket.id) {
+  //             delete users[username];
+  //             console.log(`User ${username} disconnected`);
+  //             break;
+  //         }
+  //     }
+  //   });
 
-// });
+  // });
 
+  app.use((req, res, next) => {
+    req.headers["socket-id"] = req.get("Socket-ID");
+    next();
+  });
+  
+  io.on("connection", (socket) => {
+    console.log("A user connected");
+  
+    // Handle user joining
+    socket.on("join", (username) => {
+      users[username] = socket.id;
+      sockets[socket.id] = username;
+      console.log(`User ${username} joined with socket ID: ${socket.id}`);
+  
+      // Broadcast the updated user list to all clients
+      io.emit("update_users", Object.keys(users));
+    });
+  
+    // Listen for a message from a client
+    // Add this to the `send_message` event in io.on('connection'):
+socket.on("send_message", async (data) => {
+  const { recipient, message } = data;
+  const senderUsername = sockets[socket.id]; // Retrieve sender's username
+  
+  try {
+    // Fetch recipient user ID
+    const recipientQuery = "SELECT customer_id FROM users WHERE username = $1";
+    const recipientResult = await db.query(recipientQuery, [recipient]);
+    if (recipientResult.rows.length === 0) {
+      console.log(`Recipient ${recipient} not found`);
+      return;
+    }
+
+    const recipientId = recipientResult.rows[0].customer_id;
+
+    // Fetch sender user ID
+    const senderQuery = "SELECT customer_id FROM users WHERE username = $1";
+    const senderResult = await db.query(senderQuery, [senderUsername]);
+    if (senderResult.rows.length === 0) {
+      console.log(`Sender ${senderUsername} not found`);
+      return;
+    }
+
+    const senderId = senderResult.rows[0].customer_id;
+
+    // Insert message into the database
+    const messageQuery = `
+      INSERT INTO messages (sender_id, recipient_id, message)
+      VALUES ($1, $2, $3)
+    `;
+    await db.query(messageQuery, [senderId, recipientId, message]);
+
+    // Emit the message to the recipient
+    const recipientSocketId = users[recipient];
+    if (recipientSocketId) {
+      io.to(recipientSocketId).emit("receive_message", {
+        sender: senderUsername,
+        message,
+      });
+    } else {
+      console.log(`User ${recipient} is not connected`);
+    }
+  } catch (error) {
+    console.error("Error sending message:", error);
+  }
+});
+
+  
+    // Handle user disconnection
+    socket.on("disconnect", () => {
+      const disconnectedUser = sockets[socket.id];
+      if (disconnectedUser) {
+        delete users[disconnectedUser];
+        delete sockets[socket.id];
+        console.log(`User ${disconnectedUser} disconnected`);
+  
+        // Broadcast the updated user list to all clients
+        io.emit("update_users", Object.keys(users));
+      }
+    });
+  });
+  
 
 // Connecting to database
 const db = new pg.Client({
@@ -120,6 +202,7 @@ app.get('/verify', (req,res)=>{
     res.json({success:false})
   }
 })
+
 
 
 // Normal get request
@@ -194,6 +277,24 @@ app.post('/listing1', async (req,res)=>{
   }
 })
 
+
+app.post('/event/event_name', async(req,res)=>{
+  try{
+    const response = await db.query("SELECT event_name FROM events");
+    const names = response.rows;
+    console.log(names);
+    if (response.rows.length > 0){
+      res.status(200).json({success:true, names});
+    }
+    else{
+      res.status(500).json({success:false,message: "Add event first"} )
+  }
+  }catch(err){
+    console.log(err);
+  }  
+})
+
+
 app.post('/listing2', async (req,res)=>{
   console.log(req.body);
   console.log(req.user);
@@ -246,10 +347,10 @@ app.post('/eventdetails', async (req, res) => {
 
   try {
     const data = await db.query("SELECT * FROM events WHERE event_id = $1", [id]);
-    console.log(data);
+    // console.log(data);
     if (data.rows.length > 0) {
       const event = data.rows[0];
-      console.log(event);
+      // console.log(event);
       res.status(200).json({ success: true, event });
     } else {
       res.status(404).json({ success: false, message: "No event found." });
@@ -261,20 +362,15 @@ app.post('/eventdetails', async (req, res) => {
 });
 
 app.post('/ticketdetails', async (req, res) => {
-  const id  = req.body.id;
-  console.log(id);
-
-  if (!id) {
-    return res.status(400).json({ success: false, message: "Event ID is required." });
-  }
-
+  const event_name = req.body.event_name;
+  // console.log(event_name)
   try {
-    const data = await db.query("SELECT * FROM events WHERE event_id = $1", [id]);
-    console.log(data);
+    const data = await db.query("SELECT * FROM tickets WHERE event_name = $1", [event_name]);
+    // console.log(data.rows);
     if (data.rows.length > 0) {
-      const event = data.rows[0];
-      console.log(event);
-      res.status(200).json({ success: true, event });
+      const ticket= data.rows;
+      // console.log(ticket);
+      res.status(200).json({ success: true, ticket });
     } else {
       res.status(404).json({ success: false, message: "No event found." });
     }
@@ -296,6 +392,65 @@ app.post('/logout', function(req, res, next){
       }
     res.json({success:true});
   });
+});
+
+// Message Backend
+app.get("/getMessages", async (req, res) => {
+  const { recipientId } = req.query;
+  const senderUsername = sockets[req.headers["socket-id"]];
+
+  try {
+    const senderQuery = "SELECT customer_id FROM users WHERE username = $1";
+    const senderResult = await db.query(senderQuery, [senderUsername]);
+    if (senderResult.rows.length === 0) {
+      return res.status(404).json({ success: false, message: "Sender not found" });
+    }
+
+    const senderId = senderResult.rows[0].customer_id;
+
+    const messageQuery = `
+      SELECT m.message, u.username AS sender
+      FROM messages m
+      JOIN users u ON m.sender_id = u.customer_id
+      WHERE (m.sender_id = $1 AND m.recipient_id = $2)
+         OR (m.sender_id = $2 AND m.recipient_id = $1)
+      ORDER BY m.created_at
+    `;
+    const messageResult = await db.query(messageQuery, [senderId, recipientId]);
+
+    res.json({ success: true, messages: messageResult.rows });
+  } catch (error) {
+    console.error("Error fetching messages:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+// Route to verify and "add" an existing user to the chat list
+app.post("/addUser", async (req, res) => {
+  const { username } = req.body;
+
+  if (!username) {
+    return res.status(400).json({ success: false, message: "Username is required" });
+  }
+
+  try {
+    const userQuery = "SELECT * FROM users WHERE username = $1";
+    const userResult = await db.query(userQuery, [username]);
+
+    if (userResult.rows.length === 0) {
+      return res.status(404).json({ success: false, message: "User does not exist" });
+    }
+
+    const user = userResult.rows[0];
+    return res.status(200).json({
+      success: true,
+      message: "User exists and is added to your chat list.",
+      user: { username: user.username, userId: user.id },
+    });
+  } catch (error) {
+    console.error("Error adding user:", error);
+    return res.status(500).json({ success: false, message: "Server error" });
+  }
 });
 
 
