@@ -28,9 +28,7 @@ import Progress from '../Components/listing/Listing';
 import Category from '../Components/listing/Categorization';
 import EventDetails from '../Components/listing/Eventdetails';
 import TicketDetails from '../Components/listing/Ticketdetails';
-import { motion, useScroll } from 'framer-motion'
 
-import { delay, easeIn} from 'framer-motion';
 
 const tickets = [
   { id: 1, name: "Diljit", price: 10000, details: "fffhewjfkjfbeiuwfkjewfgffiu", image: "image_url" },
@@ -41,19 +39,13 @@ const tickets = [
 
 
 function App() {
- 
   return (
     <BrowserRouter>
       <div className="App">
-        <motion.div style={{transformOrigin: "top",
-         
-          position: "fixed",
-          height:"600px",
-          top: 0,
-          zIndex: -1,
-}}initial={{y:-1000}} animate={{y:0}} transition={{duration:2,ease: "easeOut"}} className='gradient'>          
-        </motion.div>
-        <div style={{}} className='Header'>
+        <div className='gradient'>
+          
+        </div>
+        <div className='Header'>
         <Header />
         </div>
 
