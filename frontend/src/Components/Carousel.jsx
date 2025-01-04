@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import "../styles/Carousel.css"; // Ensure this file exists and is properly configured
-
+import { motion } from 'framer-motion';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 const Trademyticket_images = [
-    'https://media-hosting.imagekit.io//4c445833cbef4510/pixelcut-export.png?Expires=1735323671&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=psyj~~jlj4u~Swioali9h-V90Gvim6Ia1-30aVaeqbRVdprGC8o6K8e4oNgiyXRTheQi6Gfw2U880rG-GtPLGJf8gxLMEEtrvDaQW9Hnyhi4iLS9ELJTw6Y8OVNuCF-v7GoKset-ZEhLgdD5HTeu58ycM9XpMrpQkf1cl7bHPQEoWrEOO~giEvXyn63emmbPnxeBNZNbK0gAyLWSM3C~z7q1R2sZ8jg3YKKkVDlIWN45xle5JqRfYFt0GjBwyMlYINFtJaaCW7oFKVTzWvtYGySwxwOkA0WwOYzMBJMj6vwdV--N7hqvf4tTZq9wt3yvHhu5mruaaCkm0Qyitc3WYQ__',
+    "https://media-hosting.imagekit.io//83a53cd2a7554622/pexels-photo-8261823.webp?Expires=1735834334&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=lNztvpi5ykSur2DLKmH1m2XvQP4kAnBTMmk5D~XEa8hCFPk2srYeWUq-Gjs2oCYd7MU7AsOLzocS4gR7jwuZCItV4Rob6yhe9-DHD1~Tz-47kTvrP~CUZqhy52jdhfmrZhKr06x5woYIXO~N~fik2klEKwE-~KJOFie5F4dX535beX~A7SomDb2fG6EnvNkqZkYbzG1hvtpCZlsiLjarWmPcat0QnaPcZhzVaJmHRdS6OREKpt5PPL7oBbJDxUiZ2e2xyRoUQMf5hD~~YCClVpZ~~bkiI4D7osfsaozH3fJWQ53FKrnXDe2ENjHIkcRO0Qx~KVdTWpiFEx7fHnktog__",
 
 ];
 
@@ -30,12 +32,15 @@ function Carousel() {
         Move_state((state) => (state - 1 + Trademyticket_images.length) % Trademyticket_images.length);
     };
 
+
     return (
-        <div className="slider-container">
+        <motion.div  initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }} className="slider-container">
             <button className="nav-button left" onClick={prev_state}>&#10094;</button>
             <img className="slider-image" src={Trademyticket_images[curr_state]} alt={`Image ${curr_state}`} />
             <button className="nav-button right" onClick={next_state}>&#10095;</button>
-        </div>
+            <div id="test"><p>askwdwjdwwhwddddddd</p></div>
+          
+        </motion.div>
     );
 }
 

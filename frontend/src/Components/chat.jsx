@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import "../styles/chat.css";
 import { useNavigate } from "react-router-dom";
 
-const socket = io("http://localhost:5000");
+// const socket = io("http://localhost:5000");
 
 const ChatSystem = () => {
   const navigate = useNavigate();
