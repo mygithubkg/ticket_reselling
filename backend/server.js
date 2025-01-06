@@ -83,7 +83,7 @@ app.use((req, res, next) => {
 const db = new pg.Client({
   connectionString: process.env.DATABASE_URL, // Contains all connection details
   ssl: {
-    rejectUnauthorized: false, // Required for secure connection on Render
+    rejectUnauthorized: true, // Required for secure connection on Render
   },
 });
 
