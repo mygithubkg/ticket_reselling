@@ -2,7 +2,8 @@
   import express from "express";
   import bodyParser from "body-parser";
   import pg from "pg";
-  import bcrypt, { hash } from "bcryptjs";
+  import bcrypt from "bcryptjs";
+  const { hash } = bcrypt;  
   import path from "path";
   import { fileURLToPath } from "url";
   import env from "dotenv";
