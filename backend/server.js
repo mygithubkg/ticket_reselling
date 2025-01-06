@@ -10,6 +10,7 @@
   import session from "express-session";
   import passport from "passport";
   import { Strategy } from "passport-local";
+  import fs from "fs";
 
   // For Socket.io importing create server to upgrade
   import { createServer } from "http";
@@ -19,7 +20,6 @@
   // to find directory of file
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
-
   env.config();
 
   // Declaring Const 
@@ -31,148 +31,17 @@
   const server = createServer(app);
   const io = new Server(server, {
     cors: {
-      origin: "http://localhost:3000",  // Replace with your client URL
+      origin: process.env.CLIENT_URL || "http://localhost:3000", // Replace with your Render client URL
       methods: ["GET", "POST"],
       allowedHeaders: ["Content-Type"],
     },
   });
+  
 
   let users = {};
   let sockets = {};
-  // io.on('connection', (socket) => {
-  //   console.log('A user connected');
 
-  //   socket.on("join", (username)=> {
-  //     users[username] = socket.id;
-  //     sockets[socket.id] = username;
-  //     console.log(`User ${username} joined with socket ID: ${socket.id}`);
-  //   })
-
-  //   // Listen for a message from client
-  //   socket.on('send_message', (data) => {
-  //     const { recipient, message } = data;
-  //     console.log('Data received:', data);
-
-  //     const recipientSocketId = users[recipient];
-  //     const senderUsername = sockets[socket.id]; // Retrieve sender's username
-  //     if (recipientSocketId) {
-  //         io.to(recipientSocketId).emit('receive_message', {
-  //             sender: senderUsername, // You can use username if available
-  //             recipient,
-  //             message,
-  //         });
-  //     } else {
-  //         console.log(`User ${recipient} is not connected`);
-  //     }
-  //   }); 
-
-  //   socket.on('disconnect', () => {
-  //     for (const [username, id] of Object.entries(users)) {
-  //         if (id === socket.id) {
-  //             delete users[username];
-  //             console.log(`User ${username} disconnected`);
-  //             break;
-  //         }
-  //     }
-  //   });
-
-  // });
-
-  app.use((req, res, next) => {
-    req.headers["socket-id"] = req.get("Socket-ID");
-    next();
-  });
-  
-  io.on("connection", (socket) => {
-    console.log("A user connected");
-  
-    // Handle user joining
-    socket.on("join", (username) => {
-      users[username] = socket.id;
-      sockets[socket.id] = username;
-      console.log(`User ${username} joined with socket ID: ${socket.id}`);
-  
-      // Broadcast the updated user list to all clients
-      io.emit("update_users", Object.keys(users));
-    });
-  
-    // Listen for a message from a client
-    // Add this to the `send_message` event in io.on('connection'):
-socket.on("send_message", async (data) => {
-  const { recipient, message } = data;
-  const senderUsername = sockets[socket.id]; // Retrieve sender's username
-  
-  try {
-    // Fetch recipient user ID
-    const recipientQuery = "SELECT customer_id FROM users WHERE username = $1";
-    const recipientResult = await db.query(recipientQuery, [recipient]);
-    if (recipientResult.rows.length === 0) {
-      console.log(`Recipient ${recipient} not found`);
-      return;
-    }
-
-    const recipientId = recipientResult.rows[0].customer_id;
-
-    // Fetch sender user ID
-    const senderQuery = "SELECT customer_id FROM users WHERE username = $1";
-    const senderResult = await db.query(senderQuery, [senderUsername]);
-    if (senderResult.rows.length === 0) {
-      console.log(`Sender ${senderUsername} not found`);
-      return;
-    }
-
-    const senderId = senderResult.rows[0].customer_id;
-
-    // Insert message into the database
-    const messageQuery = `
-      INSERT INTO messages (sender_id, recipient_id, message)
-      VALUES ($1, $2, $3)
-    `;
-    await db.query(messageQuery, [senderId, recipientId, message]);
-
-    // Emit the message to the recipient
-    const recipientSocketId = users[recipient];
-    if (recipientSocketId) {
-      io.to(recipientSocketId).emit("receive_message", {
-        sender: senderUsername,
-        message,
-      });
-    } else {
-      console.log(`User ${recipient} is not connected`);
-    }
-  } catch (error) {
-    console.error("Error sending message:", error);
-  }
-});
-
-  
-    // Handle user disconnection
-    socket.on("disconnect", () => {
-      const disconnectedUser = sockets[socket.id];
-      if (disconnectedUser) {
-        delete users[disconnectedUser];
-        delete sockets[socket.id];
-        console.log(`User ${disconnectedUser} disconnected`);
-  
-        // Broadcast the updated user list to all clients
-        io.emit("update_users", Object.keys(users));
-      }
-    });
-  });
-  
-
-// Connecting to database
-const db = new pg.Client({
-  user: process.env.DATABASE_USER,
-  host: process.env.DATABASE_HOST,
-  database: process.env.DATABASE_DB,
-  password: process.env.DATABASE_PASS,
-  port: process.env.DATABASE_PORT,
-});
-
-db.connect();
-
-// Using Middlewares
+  // Using Middlewares
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -192,6 +61,129 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+
+app.use((req, res, next) => {
+  req.headers["socket-id"] = req.get("Socket-ID");
+  next();
+});
+
+
+
+// Connecting to database
+// const db = new pg.Client({
+//   user: process.env.DATABASE_USER,
+//   host: process.env.DATABASE_HOST,
+//   database: process.env.DATABASE_DB,
+//   password: process.env.DATABASE_PASS,
+//   port: process.env.DATABASE_PORT,
+// });
+
+const db = new pg.Client({
+  connectionString: process.env.DATABASE_URL, // Contains all connection details
+  ssl: {
+    rejectUnauthorized: false, // Required for secure connection on Render
+  },
+});
+
+
+db.connect();
+
+
+
+// Creating Tables
+
+async function createTables() {
+  const schemaPath = path.join(__dirname, "schema.sql"); // Save the SQL script above in a file named 'schema.sql'
+  const schema = fs.readFileSync(schemaPath, "utf-8");
+
+  try {
+    await db.query(schema);
+    console.log("Database tables created successfully!");
+  } catch (error) {
+    console.error("Error creating database tables:", error);
+  }
+}
+
+createTables();
+
+io.on("connection", (socket) => {
+  console.log("A user connected");
+
+  // Handle user joining
+  socket.on("join", (username) => {
+    users[username] = socket.id;
+    sockets[socket.id] = username;
+    console.log(`User ${username} joined with socket ID: ${socket.id}`);
+
+    // Broadcast the updated user list to all clients
+    io.emit("update_users", Object.keys(users));
+  });
+
+  // Listen for a message from a client
+  // Add this to the `send_message` event in io.on('connection'):
+socket.on("send_message", async (data) => {
+const { recipient, message } = data;
+const senderUsername = sockets[socket.id]; // Retrieve sender's username
+
+try {
+  // Fetch recipient user ID
+  const recipientQuery = "SELECT customer_id FROM users WHERE username = $1";
+  const recipientResult = await db.query(recipientQuery, [recipient]);
+  if (recipientResult.rows.length === 0) {
+    console.log(`Recipient ${recipient} not found`);
+    return;
+  }
+
+  const recipientId = recipientResult.rows[0].customer_id;
+
+  // Fetch sender user ID
+  const senderQuery = "SELECT customer_id FROM users WHERE username = $1";
+  const senderResult = await db.query(senderQuery, [senderUsername]);
+  if (senderResult.rows.length === 0) {
+    console.log(`Sender ${senderUsername} not found`);
+    return;
+  }
+
+  const senderId = senderResult.rows[0].customer_id;
+
+  // Insert message into the database
+  const messageQuery = `
+    INSERT INTO messages (sender_id, recipient_id, message)
+    VALUES ($1, $2, $3)
+  `;
+  await db.query(messageQuery, [senderId, recipientId, message]);
+
+  // Emit the message to the recipient
+  const recipientSocketId = users[recipient];
+  if (recipientSocketId) {
+    io.to(recipientSocketId).emit("receive_message", {
+      sender: senderUsername,
+      message,
+    });
+  } else {
+    console.log(`User ${recipient} is not connected`);
+  }
+} catch (error) {
+  console.error("Error sending message:", error);
+}
+});
+
+
+  // Handle user disconnection
+  socket.on("disconnect", () => {
+    const disconnectedUser = sockets[socket.id];
+    if (disconnectedUser) {
+      delete users[disconnectedUser];
+      delete sockets[socket.id];
+      console.log(`User ${disconnectedUser} disconnected`);
+
+      // Broadcast the updated user list to all clients
+      io.emit("update_users", Object.keys(users));
+    }
+  });
+});
 
 
 // To verify if user is Loggedin
