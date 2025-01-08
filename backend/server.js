@@ -1,47 +1,50 @@
-  // Modules used 
-  import express from "express";
-  import bodyParser from "body-parser";
-  import pg from "pg";
-  import bcrypt from "bcryptjs";
-  const { hash } = bcrypt;  
-  import path from "path";
-  import { fileURLToPath } from "url";
-  import env from "dotenv";
-  import session from "express-session";
-  import passport from "passport";
-  import { Strategy } from "passport-local";
-  import fs from "fs";
+// Modules used 
+import express from "express";
+import bodyParser from "body-parser";
+import pg from "pg";
+import bcrypt from "bcryptjs";
+const { hash } = bcrypt;  
+import path from "path";
+import { fileURLToPath } from "url";
+import env from "dotenv";
+import session from "express-session";
+import passport from "passport";
+import { Strategy } from "passport-local";
+import fs from "fs";
+import Nodemailer from "nodemailer";
+import { MailtrapTransport } from "mailtrap";
 
-  // For Socket.io importing create server to upgrade
-  import { createServer } from "http";
-  import { Server } from "socket.io";
-  import cors from "cors";
 
-  // to find directory of file
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = path.dirname(__filename);
-  env.config();
+// For Socket.io importing create server to upgrade
+import { createServer } from "http";
+import { Server } from "socket.io";
+import cors from "cors";
 
-  // Declaring Const 
-  const app = express();
-  const port = process.env.SERVER_PORT || 5000;
-  const saltrounds = parseInt(process.env.SALT_ROUND,10);
+// to find directory of file
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+env.config();
 
-  // creating server for socket.io
-  const server = createServer(app);
-  const io = new Server(server, {
-    cors: {
-      origin: process.env.CLIENT_URL || "http://localhost:3000", // Replace with your Render client URL
-      methods: ["GET", "POST"],
-      allowedHeaders: ["Content-Type"],
-    },
-  });
-  
+// Declaring Const 
+const app = express();
+const port = process.env.SERVER_PORT || 5000;
+const saltrounds = parseInt(process.env.SALT_ROUND,10);
 
-  let users = {};
-  let sockets = {};
+// creating server for socket.io
+const server = createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: process.env.CLIENT_URL || "http://localhost:3000", // Replace with your Render client URL
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  },
+});
 
-  // Using Middlewares
+
+let users = {};
+let sockets = {};
+
+// Using Middlewares
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -70,23 +73,38 @@ app.use((req, res, next) => {
 });
 
 
+// Setting up email sending 
+const TOKEN = process.env.MailTrapToken;
+
+const transport = Nodemailer.createTransport(
+  MailtrapTransport({
+    token: TOKEN,
+    testInboxId: 3358452,
+  })
+);
+
+const sender = {
+  address: "hello@example.com",
+  name: "Mailtrap Test",
+};
+
+
 
 // Connecting to database
-// const db = new pg.Client({
-//   user: process.env.DATABASE_USER,
-//   host: process.env.DATABASE_HOST,
-//   database: process.env.DATABASE_DB,
-//   password: process.env.DATABASE_PASS,
-//   port: process.env.DATABASE_PORT,
-// });
-
 const db = new pg.Client({
-  connectionString: process.env.DATABASE_URL, // Contains all connection details
-  ssl: {
-    rejectUnauthorized: true, // Required for secure connection on Render
-  },
+  user: process.env.DATABASE_USER,
+  host: process.env.DATABASE_HOST,
+  database: process.env.DATABASE_DB,
+  password: process.env.DATABASE_PASS,
+  port: process.env.DATABASE_PORT,
 });
 
+// const db = new pg.Client({
+//   connectionString: process.env.DATABASE_URL, // Contains all connection details
+//   ssl: {
+//     rejectUnauthorized: true, // Required for secure connection on Render
+//   },
+// });
 
 db.connect();
 
@@ -210,6 +228,7 @@ app.post("/register", (req, res)=> {
   const password = req.body.password; 
   // console.log(email);
   // console.log(password);
+  
   bcrypt.hash(password,saltrounds, async (err,hash)=> {
     // console.log(hash);
     if (err){
@@ -243,7 +262,61 @@ app.post("/register", (req, res)=> {
   });
 });
 
+let OTP = 0;
 
+app.post('/verify/sendotp', async (req, res) => {
+  if (!req.isAuthenticated()) {
+      return res.status(401).json({ success: false, message: "User not authenticated" });
+  }
+
+  const email = req.user.username;
+  const recipients = [
+    email,
+  ];
+  try{
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    OTP = otp;
+    transport
+      .sendMail({
+        from: sender,
+        to: recipients,
+        subject: "TrademyTicket!! Verify your account",
+        text: `Your OTP is ${otp}, Use this to verify your account`,
+        category: "Account Verification",
+        sandbox: true
+      })
+      .then(console.log, console.error);
+    res.status(200).json({ success: true, message: "OTP sent successfully" });
+  }catch(err){
+    console.log(err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+app.post('/verify/otp', async (req, res) => {
+  if (!req.isAuthenticated()) {
+      return res.status(401).json({ success: false, message: "User not authenticated" });
+  }
+  const code = req.body.otp;
+  const email = req.user.username;
+  if (code == OTP){
+    try {
+        const result = await db.query("SELECT * FROM users WHERE username = $1", [email]);
+        if (result.rows.length === 0) {
+            return res.status(404).json({ success: false, message: "User not found" });
+        } else{
+            await db.query("UPDATE users SET verified = true WHERE username = $1", [email]);
+            return res.status(200).json({ success: true, message: "Account verified successfully" });
+        }
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ success: false, message: "Server error" });
+    }
+  } else {
+    return res.status(400).json({ success: false, message: "Invalid OTP" });
+  }
+
+});
 app.post('/listing1', async (req,res)=>{
   console.log(req.body);
   if (!req.isAuthenticated()){
