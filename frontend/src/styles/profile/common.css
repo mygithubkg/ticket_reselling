@@ -69,6 +69,7 @@
     display: flex;
     justify-content: center;
     gap: 1rem;
+    overflow-y: scroll;
 }
 
 
@@ -250,7 +251,13 @@
     margin-top: 25%;
 }
 
-.profile-form{
+.profile-form {
     position: relative;
     margin-top: 25%;
+    max-height: 40vh; /* Adjust the maximum height as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 1rem;
+    border: 1px solid #ccc; /* Optional: Add a border for better distinction */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    background-color: white; /* Ensure a consistent background */
 }

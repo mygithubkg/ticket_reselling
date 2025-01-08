@@ -18,7 +18,7 @@ import Recent from '../Components/profile/RecentEvents';
 import PreviousListing from '../Components/profile/Previous Listing';
 import Manage from '../Components/profile/Manage';
 import Ratings from '../Components/profile/Ratings';
-
+import Dashboard from '../Components/profile/Dashboard';
 import HowItWorks from "./HowItWorks"
 import Footer from '../Components/Footer';
 import Seller1 from "./Seller1"
@@ -71,7 +71,7 @@ function App() {
           <Route path="/Event/:id" element={<Event_Page />} />
           <Route path ="/ContactUs" element= {<ContactUs/>}/>
           <Route path="/profile" element={<Profile />} />
-          {/* <Route path="/profile/dashboard" element={<Dashboard />} /> */}
+          <Route path="/profile/dashboard" element={<Dashboard />} />
           <Route path='/profile/orders' element={<Orders />} />
           {/* <Route path='/profile/wallet' element={<Wallet />} /> */}
           <Route path='/profile/recentevents' element={<Recent /> } />

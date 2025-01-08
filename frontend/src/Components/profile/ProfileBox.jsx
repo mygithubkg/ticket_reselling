@@ -8,9 +8,9 @@ function ProfileBox(){
     const handleProfile = ()=>{
         Navigate('/profile')
     }
-    // const handleDashboard = ()=>{
-    //     Navigate('/profile/dashboard')
-    // }
+    const handleDashboard = ()=>{
+        Navigate('/profile/dashboard')
+    }
     const handleOrders = ()=>{
         Navigate('/profile/orders')
     }
@@ -37,7 +37,7 @@ function ProfileBox(){
         <div className="profile_container">
             <button className="profile" onClick={handleProfile}>Profile</button>
             <button onClick={handleRatings}className="profile">Your Ratings</button>
-            {/* <button className="profile" onClick={handleDashboard}>Dashboard</button> */}
+            <button className="profile" onClick={handleDashboard}>Dashboard</button>
             <button className="profile" onClick={handleOrders}>Orders</button>
             {/* <button className="profile" onClick={handleWallet}>Wallet</button> */}
             <button className="profile" onClick={handleRecentEvents}>Recent Events</button>
