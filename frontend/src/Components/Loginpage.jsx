@@ -1,9 +1,12 @@
 import React from "react";
 import "../styles/LoginPage.css"
 import { Link, useNavigate } from "react-router-dom";
+import env from "dotenv";
+env.config();
 
 function LoginPage() {
   const navigate = useNavigate();
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
 
   const handlesubmit = async (e)=>{
     e.preventDefault();
@@ -11,7 +14,7 @@ function LoginPage() {
     const username = formData.get('username');
     const password = formData.get('password');
 
-    const response = await fetch('/login', {
+    const response = await fetch(`${API_BASE_URL}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({username, password}),

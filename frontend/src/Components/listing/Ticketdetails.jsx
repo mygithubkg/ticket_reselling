@@ -4,7 +4,9 @@ import Faq from "../Faq_section";
 import { faqDat } from "../../data";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "../ProgressBar"
+import env from "dotenv";
 
+env.config();
 
 function TicketDetails(){
     const navigate = useNavigate();
@@ -16,7 +18,7 @@ function TicketDetails(){
         quantity : "",
         transferiability: "",
     })
-
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
     const handleChange = (e)=>{
         const {name,value} = e.target;
         setUserDetails((prevDetails) => ({
@@ -28,7 +30,7 @@ function TicketDetails(){
     const [name, setname] = useState(null);
     useEffect(()=>{
         const fetchname = async ()=>{
-            const response = await fetch('/event/event_name',{
+            const response = await fetch(`${API_BASE_URL}/event/event_name`,{
                 method:'POST',
             })
 

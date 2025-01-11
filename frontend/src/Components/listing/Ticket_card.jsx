@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import "../../styles/Event_Page.css"; // Ensure the CSS file is updated accordingly
 import { Link } from "react-router-dom";
+import env from "dotenv";
+
+env.config();
 
 function Ticket_card({ event }) {
     const [tickets, setTickets] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
-
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
     useEffect(() => {
         const fetchTickets = async () => {
             const event_name = event.event_name;
             try {
-                const response = await fetch('/ticketdetails', {
+                const response = await fetch(`${API_BASE_URL}/ticketdetails`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ event_name }),

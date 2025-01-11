@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 import "../styles/Event_Page.css"; // Optional: Add styles if needed
 import { Link } from "react-router-dom";
 import Ticket_card from '../Components/listing/Ticket_card';
-
+import env from "dotenv";
+env.config();
 
 
 export default function Event_Page() {
@@ -11,12 +12,12 @@ export default function Event_Page() {
   const [event, setEvent] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true); // Added loading state
-
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
   useEffect(() => {
     const fetchEvent = async () => {
       console.log(id);
       try {
-        const response = await fetch('/eventdetails', {
+        const response = await fetch(`${API_BASE_URL}/eventdetails`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id }),

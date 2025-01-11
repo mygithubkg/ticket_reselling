@@ -4,9 +4,11 @@ import Faq from "../Faq_section";
 import { faqDat } from "../../data";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "../ProgressBar"
+import env from "dotenv";
 
+env.config();
 function Category(){
-
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
     const navigate = useNavigate();
 
     // For backend Data Fetch
@@ -36,7 +38,7 @@ function Category(){
         const event_time = userDetails.event_time;
         const event_name = userDetails.event_name;
         console.log(event_time);
-        const response = await fetch('/listing1',{
+        const response = await fetch('${API_BASE_URL}/listing1',{
             method : 'POST',
             headers : { 'Content-Type': 'application/json' },
             body : JSON.stringify({event_bio, event_date, event_location, event_name, event_time, event_type })

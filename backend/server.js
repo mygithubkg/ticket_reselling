@@ -62,6 +62,12 @@ app.use(session({
   },
 }));
 
+app.use(cors({
+  origin: process.env.CLIENT_URL || "https://ticket-reselling-frontend.onrender.com",
+  credentials: true,
+}));
+
+
 app.use(passport.initialize());
 app.use(passport.session());
 

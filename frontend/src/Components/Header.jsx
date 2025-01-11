@@ -5,7 +5,9 @@ import { delay, easeIn, motion , whileHover} from 'framer-motion';
 
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import env from "dotenv";
 
+env.config();
 
 
 
@@ -23,11 +25,12 @@ function Header() {
 
     // Declaring user 
     const [user, setUser] = useState(false);
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
 
     // Checking user is Login or not
     const handleUser = async () => {
         try {
-            const response = await fetch('/verify', {
+            const response = await fetch(`${API_BASE_URL}/verify`, {
                 method: 'GET',
                 credentials: 'include',
             });

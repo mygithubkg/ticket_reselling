@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { io } from "socket.io-client";
 import "../styles/chat.css";
 import { useNavigate } from "react-router-dom";
+import env from "dotenv";
+env.confiq();
 
 // const socket = io("http://localhost:5000");
 
@@ -15,11 +17,12 @@ const ChatSystem = () => {
   const [messages, setMessages] = useState([]);
   const [showUsers, setShowUsers] = useState(true);
   const [newUsername, setNewUsername] = useState("");
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
 
   // Verify if the user is logged in
   const handleUser = async () => {
     try {
-      const response = await fetch("/verify", {
+      const response = await fetch(`${API_BASE_URL}/verify`, {
         method: "GET",
         credentials: "include",
       });

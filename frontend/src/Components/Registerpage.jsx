@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "../styles/LoginPage.css"
 import { Link, redirect, useNavigate } from "react-router-dom";
+import env from "dotenv";
 
+env.config();
 function RegisterPage() {
 
   const [pass,setpass] = useState('');
@@ -37,7 +39,7 @@ function RegisterPage() {
     // Redirect the user to your server's Google OAuth endpoint
     navigate('/auth/google');
   };
-  
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
   const handleSubmit = async (e) => { 
     const formData = new FormData(e.target);
     const username = formData.get('username');
@@ -46,7 +48,7 @@ function RegisterPage() {
     validatePass(pass); 
     validateConPass(pass, conpass);
     if ((!err.pass && !err.conpass) && (pass === conpass)) {
-      const response = await fetch('/register', 
+      const response = await fetch(`${API_BASE_URL}/register`, 
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
