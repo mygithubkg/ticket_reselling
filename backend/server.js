@@ -227,7 +227,7 @@ app.get('/verify', (req,res)=>{
 // Normal get request
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+  res.status(404).send('Incorrect URL');
 });
 
 

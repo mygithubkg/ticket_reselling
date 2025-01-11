@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS events (
 );
 
 CREATE TABLE IF NOT EXISTS tickets (
-    ticket_id SERIAL PRIMARY KEY,
+    ticket_id SERIAL PRIMARY KEY UNIQUE,
     username VARCHAR(255) NOT NULL,
     event_name VARCHAR(255) NOT NULL,
     ticket_type VARCHAR(50),
@@ -65,12 +65,12 @@ INSERT INTO events (username, event_type, event_date, event_time, event_name, ev
 ('johndoe@gmail.com', 'Conference', '2025-03-10', '10:00:00', 'Tech Conference 2025', 'Los Angeles Convention Center', 'A tech conference bringing together enthusiasts and professionals.'),
 ('janedoe@gmail.com', 'Music', '2025-06-15', '18:00:00', 'Music Fest 2025', 'Central Park, New York', 'An open-air music festival featuring top artists.'),
 ('alexsmith@gmail.com', 'Exhibition', '2025-04-05', '09:00:00', 'Art Exhibition', 'National Art Gallery', 'A showcase of contemporary and classical art.')
-ON CONFLICT (username, event_type, event_date, event_time) DO NOTHING;
+ON CONFLICT (event_name) DO NOTHING;
 
 -- Insert tickets
-INSERT INTO tickets (username, event_name, ticket_type, selling_price, face_value, transferability, ticket_format, quantity, seller_name) VALUES
-('johndoe@gmail.com', 'Tech Conference 2025', 'General Admission', 50.00, 40.00, TRUE, 'Digital', 10, 'John Doe'),
-('johndoe@gmail.com', 'Tech Conference 2025', 'VIP', 150.00, 120.00, FALSE, 'Physical', 5, 'John Doe'),
-('janedoe@gmail.com', 'Music Fest 2025', 'Regular', 30.00, 25.00, TRUE, 'Digital', 20, 'Jane Doe'),
-('alexsmith@gmail.com', 'Art Exhibition', 'General Admission', 15.00, 10.00, TRUE, 'Digital', 30, 'Alex Smith')
-ON CONFLICT (username, event_name, ticket_type) DO NOTHING;
+INSERT INTO tickets (ticket_id,username, event_name, ticket_type, selling_price, face_value, transferability, ticket_format, quantity, seller_name) VALUES
+(1,'johndoe@gmail.com', 'Tech Conference 2025', 'General Admission', 50.00, 40.00, TRUE, 'Digital', 10, 'John Doe'),
+(2,'johndoe@gmail.com', 'Tech Conference 2025', 'VIP', 150.00, 120.00, FALSE, 'Physical', 5, 'John Doe'),
+(3,'janedoe@gmail.com', 'Music Fest 2025', 'Regular', 30.00, 25.00, TRUE, 'Digital', 20, 'Jane Doe'),
+(4,'alexsmith@gmail.com', 'Art Exhibition', 'General Admission', 15.00, 10.00, TRUE, 'Digital', 30, 'Alex Smith')
+ON CONFLICT (ticket_id) DO NOTHING;
