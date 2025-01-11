@@ -48,7 +48,7 @@ let sockets = {};
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '../frontend/public')));
+app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 // For maintaing user signed throughout the session
 app.use(session({
@@ -218,9 +218,8 @@ app.get('/verify', (req,res)=>{
 
 // Normal get request
 
-
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/public', 'index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
 
 
