@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS events (
     event_type VARCHAR(100),
     event_date DATE,
     event_time TIME,
-    event_name VARCHAR(255),
+    event_name VARCHAR(255) UNIQUE, -- Add UNIQUE constraint here
     event_location VARCHAR(255),
     event_bio TEXT,
     FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE
