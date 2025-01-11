@@ -13,7 +13,7 @@ import { Strategy } from "passport-local";
 import fs from "fs";
 import Nodemailer from "nodemailer";
 import { MailtrapTransport } from "mailtrap";
-
+import GoogleStrategy from "passport-google-oauth2";
 
 // For Socket.io importing create server to upgrade
 import { createServer } from "http";
@@ -91,22 +91,22 @@ const sender = {
 
 
 // Connecting to database
-const db = new pg.Client({
-  user: process.env.DATABASE_USER,
-  host: process.env.DATABASE_HOST,
-  database: process.env.DATABASE_DB,
-  password: process.env.DATABASE_PASS,
-  port: process.env.DATABASE_PORT,
-});
-
 // const db = new pg.Client({
-//   connectionString: process.env.DATABASE_URL, // Contains all connection details
-//   ssl: {
-//     rejectUnauthorized: true, // Required for secure connection on Render
-//   },
+//   user: process.env.DATABASE_USER,
+//   host: process.env.DATABASE_HOST,
+//   database: process.env.DATABASE_DB,
+//   password: process.env.DATABASE_PASS,
+//   port: process.env.DATABASE_PORT,
 // });
 
-db.connect();
+const db = new pg.Client({
+  connectionString: process.env.DATABASE_URL, // Contains all connection details
+  ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: true } : false,
+});
+
+db.connect().catch(error => {
+  console.error('Error connecting to the database:', error);
+});
 
 
 
@@ -223,44 +223,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/public', 'index.html'));
 });
 
-app.post("/register", (req, res)=> {
-  const email = req.body.username;
-  const password = req.body.password; 
-  // console.log(email);
-  // console.log(password);
-  
-  bcrypt.hash(password,saltrounds, async (err,hash)=> {
-    // console.log(hash);
-    if (err){
-        console.log(err);
-        res.status(500).json({success: false, message: `Found ${err}`});
-    }
-    else{
-        try {
-            const check_user = await db.query("SELECT * FROM users WHERE username = ($1)",[email]);
-            if (check_user.rows.length >=1){
-              res.status(200).json({success: false, message: `Already Registered try Logging In`});
-            }
-            else{
-              try{
-                const result = await db.query("INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *",[email,hash]);
-                await db.query("INSERT INTO details (username) VALUES ($1)",[email]);
-                const user = result.rows[0];
-                req.login(user, (err)=> {
-                  console.log(err);
-                  res.status(200).json({success: true, message: `Registration Success`});
-                })
-              }
-              catch (err){
-                res.status(500).json({success: false, message: `Try After Some Time! `});
-              }
-            }
-          }catch (err){
-            res.status(500).json({success: false, message: `Try After Some Time Server Error! `});
-          }
-    }
-  });
-});
+
 
 let OTP = 0;
 
@@ -520,22 +483,7 @@ app.post("/addUser", async (req, res) => {
 });
 
 
-app.post("/login", (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
-    if (err) {
-      return res.status(500).json({ success: false, message: "Technical error" });
-    }
-    if (!user) {
-      return res.status(401).json({ success: false, message: info.message });
-    }
-    req.logIn(user, (err) => {
-      if (err) {
-        return res.status(500).json({ success: false, message: "Login failed" });
-      }
-      return res.status(200).json({ success: true, message: "Login successful" });
-    });
-  })(req, res, next);
-});
+
 
 // Saving user details
 
@@ -579,11 +527,73 @@ app.post('/usersinfo', async (req, res) => {
 });
 
 
+app.post("/register", (req, res)=> {
+  const email = req.body.username;
+  const password = req.body.password; 
+  // console.log(email);
+  // console.log(password);
+  
+  bcrypt.hash(password,saltrounds, async (err,hash)=> {
+    // console.log(hash);
+    if (err){
+        console.log(err);
+        res.status(500).json({success: false, message: `Found ${err}`});
+    }
+    else{
+        try {
+            const check_user = await db.query("SELECT * FROM users WHERE username = ($1)",[email]);
+            if (check_user.rows.length >=1){
+              res.status(200).json({success: false, message: `Already Registered try Logging In`});
+            }
+            else{
+              try{
+                const result = await db.query("INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *",[email,hash]);
+                await db.query("INSERT INTO details (username) VALUES ($1)",[email]);
+                const user = result.rows[0];
+                req.login(user, (err)=> {
+                  console.log(err);
+                  res.status(200).json({success: true, message: `Registration Success`});
+                })
+              }
+              catch (err){
+                res.status(500).json({success: false, message: `Try After Some Time! `});
+              }
+            }
+          }catch (err){
+            res.status(500).json({success: false, message: `Try After Some Time Server Error! `});
+          }
+    }
+  });
+});
+
+app.post("/login", (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      return res.status(500).json({ success: false, message: "Technical error" });
+    }
+    if (!user) {
+      return res.status(401).json({ success: false, message: info.message });
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return res.status(500).json({ success: false, message: "Login failed" });
+      }
+      return res.status(200).json({ success: true, message: "Login successful" });
+    });
+  })(req, res, next);
+});
 
 
+app.get('/auth/google', passport.authenticate('google',{
+  scope: ['profile', 'email']
+}
+));
+app.get('google/auth/signIn', passport.authenticate('google', {
+  
+}));
 
 
-passport.use(new Strategy(
+passport.use("local",new Strategy(
   async function verification(username,password,cb){
     // console.log(username);
     // console.log(password);
@@ -614,6 +624,14 @@ passport.use(new Strategy(
   }
 ))
 
+passport.use("google",new GoogleStrategy({
+  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  callbackURL: "/auth/google",
+  passReqToCallback: true
+}, async(req, accessToken, refreshToken, profile, cb) => {
+  
+}));
 
 passport.serializeUser((user,cb) =>{
   cb(null,user);
