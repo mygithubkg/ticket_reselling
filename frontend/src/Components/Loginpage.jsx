@@ -1,8 +1,6 @@
 import React from "react";
 import "../styles/LoginPage.css"
 import { Link, useNavigate } from "react-router-dom";
-import env from "dotenv";
-env.config();
 
 function LoginPage() {
   const navigate = useNavigate();

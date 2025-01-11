@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { io } from "socket.io-client";
 import "../styles/chat.css";
 import { useNavigate } from "react-router-dom";
-import env from "dotenv";
-env.confiq();
 
 // const socket = io("http://localhost:5000");
 

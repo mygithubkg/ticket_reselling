@@ -3,8 +3,7 @@ import { useParams } from 'react-router-dom';
 import "../styles/Event_Page.css"; // Optional: Add styles if needed
 import { Link } from "react-router-dom";
 import Ticket_card from '../Components/listing/Ticket_card';
-import env from "dotenv";
-env.config();
+
 
 
 export default function Event_Page() {

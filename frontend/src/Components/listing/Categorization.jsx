@@ -4,9 +4,7 @@ import Faq from "../Faq_section";
 import { faqDat } from "../../data";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "../ProgressBar"
-import env from "dotenv";
 
-env.config();
 function Category(){
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
     const navigate = useNavigate();

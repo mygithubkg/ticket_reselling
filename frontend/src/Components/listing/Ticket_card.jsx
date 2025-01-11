@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "../../styles/Event_Page.css"; // Ensure the CSS file is updated accordingly
 import { Link } from "react-router-dom";
-import env from "dotenv";
 
-env.config();
 
 function Ticket_card({ event }) {
     const [tickets, setTickets] = useState([]);

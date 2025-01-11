@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import "../styles/LoginPage.css"
 import { Link, redirect, useNavigate } from "react-router-dom";
-import env from "dotenv";
 
-env.config();
 function RegisterPage() {
 
   const [pass,setpass] = useState('');

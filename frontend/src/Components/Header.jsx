@@ -5,9 +5,6 @@ import { delay, easeIn, motion , whileHover} from 'framer-motion';
 
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import env from "dotenv";
-
-env.config();
 
 
 

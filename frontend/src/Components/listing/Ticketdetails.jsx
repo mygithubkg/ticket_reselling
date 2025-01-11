@@ -4,9 +4,6 @@ import Faq from "../Faq_section";
 import { faqDat } from "../../data";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "../ProgressBar"
-import env from "dotenv";
-
-env.config();
 
 function TicketDetails(){
     const navigate = useNavigate();
