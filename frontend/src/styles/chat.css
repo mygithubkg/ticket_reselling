@@ -113,10 +113,11 @@
   background-color: #005a91;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .chat-layout {
     flex-direction: column;
   }
+
   .users-list {
     width: 100%;
     border-right: none;

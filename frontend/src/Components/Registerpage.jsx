@@ -33,7 +33,11 @@ function RegisterPage() {
     }
     seterr((prevstate) => ({...prevstate, conpass: error}));
   }
-
+  const handleGoogleSignIn = () => {
+    // Redirect the user to your server's Google OAuth endpoint
+    navigate('/auth/google');
+  };
+  
   const handleSubmit = async (e) => { 
     const formData = new FormData(e.target);
     const username = formData.get('username');
@@ -92,6 +96,9 @@ function RegisterPage() {
         <div>
         <button type="submit">
           Register
+        </button>
+        <button onClick={handleGoogleSignIn} className="google-signin-btn">
+          Sign in with Google
         </button>
         </div>
         <div>

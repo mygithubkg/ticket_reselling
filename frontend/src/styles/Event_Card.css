@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
   
@@ -6,14 +7,9 @@
   .card {
     display: flex;
     flex-direction: column;
-    
-    
-   
-    
-  
     border: 1px solid #ddd;
     border-radius: 25px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    box-shadow: rgb(50 50 93 / 25%) 0 6px 12px -2px, rgb(0 0 0 / 30%) 0 3px 7px -3px;
     height: 500px;
     padding: 0 ;
     text-align: center;
@@ -25,20 +21,19 @@
   
   .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 12px rgb(0 0 0 / 20%);
   }
+
   .image-container{
     width: 100%;
     height: 45%;
-    
-    border-radius: 25px 25px 0px 0px;
+    border-radius: 25px 25px 0 0;
   }
+
   .image-card {
     width: 100%;
     height: 100%;
-    border-radius: 25px 25px 0px 0px;
-    
-    
+    border-radius: 25px 25px 0 0;
     object-fit: fill;
     border-bottom: 1px solid #ddd;
     margin-bottom: 10px;
@@ -56,7 +51,6 @@
   
   .price {
     color:#008FDB;
-    
     font-size: 1.8em;
     font-family: "Baloo Paaji 2", sans-serif;
     font-weight: bolder;
@@ -67,7 +61,7 @@
     .details {
       color: #666;
       font-size: 0.9em;
-      font-family: "Inter", sans-serif;
+      font-family: Inter, sans-serif;
       white-space:nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -90,7 +84,7 @@
   justify-content: left;
   align-items: center;
   gap: 20px;
-  margin: 20px 0px 0px 0px;
+  margin: 20px 0 0;
 }
 
 .Price_container{
@@ -111,5 +105,5 @@
 }
 
 .details,.Price_container,.text_icon{
-  padding: 0px 20px;
+  padding: 0 20px;
 }

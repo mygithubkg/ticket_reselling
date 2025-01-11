@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 .header {
     height: 9vh;
     display: flex;
     min-width: 80vw;
-    justify-content: space-between;
-    align-content: center;
-    margin: 10px 0 75px 0;
+    place-content: center space-between;
+    margin: 10px 0 75px;
     border-radius: 20px;
     background-color: white;
     z-index: -2;
@@ -33,14 +33,12 @@
 }
 
 #logo {
-    
     text-decoration: none;
     font-family: "Baloo Paaji 2", sans-serif;
     color: #008FDB;
     display: flex;
     align-items: center;
-    align-content: center;
-    justify-content: center;
+    place-content: center center;
     font-size: 2rem;
 }
 
@@ -54,27 +52,23 @@
 .header_space3 {
     display: flex;
     align-items: center;
-    align-content: center;
-    justify-content: center;
+    place-content: center center;
 }
 
 .header_space2 p  {
     display: flex;
     align-items: center;
-    align-content: center;
-    justify-content: center;
-   
-    font-family: "Inter", sans-serif;
+    place-content: center center;
+    font-family: Inter, sans-serif;
     font-size: 1.3vw;
 }
+
 .header_space3 span{
     display: flex;
     align-items: center;
-    align-content: center;
-    justify-content: center;
+    place-content: center center;
     padding-right: 2vh;
-   
-    font-family: "Inter", sans-serif;
+    font-family: Inter, sans-serif;
     font-size: 1.2vw;
 }
 
@@ -104,6 +98,7 @@
     color: red;
 
 }
+
 .header_space3 span button:hover {
     cursor: pointer;
     color: #DB5500;
@@ -115,10 +110,9 @@
     padding: 8px 3vw;
     height: 50%;
     border-radius: 20px;
-    
     text-decoration: none;
     color: white;
-    font-family: "Inter", sans-serif;
+    font-family: Inter, sans-serif;
 }
 
 .link {
@@ -137,6 +131,7 @@
 
   
 }
+
 .header_space2 p:hover {
     color:white;
   
@@ -157,7 +152,6 @@
 }
 
 .header_space2 p:hover::after{
-    
     top:0%;
    
 }
@@ -181,19 +175,23 @@
     background-color: #ccc;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (width <= 900px) {
     .header_space2 {
         display: none;
     }
+
     .menu_icon {
         display: inline;;
     }
+
     .header_space3 span {
         display: none;
     }
+
     .divider {
         margin: 0 3vw;
     }
+
     .button_sign{
         font-size: 1.2rem;
         border-bottom: 1px solid #ccc;
@@ -209,9 +207,9 @@
     background-color: white;
     position: absolute;
     top: 95px;
-    right: 0px;
+    right: 0;
     z-index: 20;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
     border-radius: 10px;
     display: flex;
     flex-direction: column;

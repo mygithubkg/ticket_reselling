@@ -9,11 +9,11 @@
 
 
 }
+
 .filer-container{
     display: flex;
     flex-direction: row;
     justify-content: left;
-    
     gap:5vw;
     align-items: center;
     height: 100%;
@@ -21,8 +21,6 @@
 }
 
 #dropdown,#date_filter{
-   
-    
     border-radius: 107px;
     background-color:white;
     width: 12vw;
@@ -34,13 +32,13 @@
     align-items: center;
     color: black;
     border-color: #008FDB;;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-
-    font-family: "Inter", sans-serif;
+    box-shadow: rgb(50 50 93 / 25%) 0 6px 12px -2px, rgb(0 0 0 / 30%) 0 3px 7px -3px;
+    font-family: Inter, sans-serif;
     text-align:left
    
   
 }
+
 .remove-filter{
     font-size: 1.7rem;
     display: flex;

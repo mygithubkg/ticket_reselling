@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 /* Styling the main container */
 .Search-contanier1 {
     display: flex;
@@ -8,7 +9,6 @@
     width: 100%;
     appearance: none;
     padding: 10px;
-   
     border-color: white;
    
   }
@@ -18,11 +18,8 @@
     padding: 15px 20px;
     font-size: 1rem;
     appearance: none;
-    box-shadow: #008FDB 0px 7px 14px, #008FDB 0px 5px 5px;
-    
-   
+    box-shadow: #008FDB 0 7px 14px, #008FDB 0 5px 5px;
     border-radius: 25px;
- 
     border-color:white;
     border-width: 2px;
 
@@ -30,7 +27,7 @@
   }
   
   .Search-box1::placeholder {
-    font-family: "Inter", sans-serif;
+    font-family: Inter, sans-serif;
     color: #a3a3a3;
     font-size: 1.2rem;
   }

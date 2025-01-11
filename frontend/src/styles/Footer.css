@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 .footer{
@@ -18,9 +19,9 @@
 .footer{
     display: flex;
     flex-direction: row;
-    justify-content:space-around;
-    align-content: center;
+    place-content:center space-around;
 }
+
 .logo_box{
     background-color: white;
     height: 30%;
@@ -29,26 +30,27 @@
     border-color: #008FDB;
     border-style: solid;
 }
+
 .logo_button{
-    
     color:#008FDB ;
     font-size:4vw;
     font-family: "Baloo Paaji 2", sans-serif; 
+
     /* not giving the same look as logo */
     font-weight: bolder;
     transition: transform 0.3s ease;
 
 }
+
 .footer_links p{
     margin: 8px 0;
-  
-    
     font-size: 1.5em;
-    font-family: "Inter", sans-serif;
+    font-family: Inter, sans-serif;
     color:white;
     padding: 10px;
 }
-.footer_links Link{
+
+.footer_links link{
     text-decoration: none;
 }
 

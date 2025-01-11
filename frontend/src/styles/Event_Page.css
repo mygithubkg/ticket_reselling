@@ -42,7 +42,7 @@
   max-width: 500px;
   width: 100%;
   border-radius: 20px;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 15px rgb(0 0 0 / 10%);
   transition: transform 0.3s;
 }
 
@@ -89,13 +89,13 @@
   border-radius: 15px;
   padding: 20px;
   width: 350px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .ticket-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 20px rgb(0 0 0 / 15%);
 }
 
 .ticket-card .pricing-details {
@@ -157,7 +157,7 @@
 
 /* Responsive Styles */
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .upper-section {
     flex-direction: column;
   }
@@ -171,7 +171,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (width <= 480px) {
   .event-page h1 {
     font-size: 2.5rem;
   }
