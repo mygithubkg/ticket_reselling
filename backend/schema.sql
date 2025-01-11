@@ -57,17 +57,20 @@ CREATE TABLE IF NOT EXISTS messages (
 INSERT INTO users (username, password) VALUES
 ('johndoe@gmail.com', 'hashedpassword1'),
 ('janedoe@gmail.com', 'hashedpassword2'),
-('alexsmith@gmail.com', 'hashedpassword3');
+('alexsmith@gmail.com', 'hashedpassword3')
+ON CONFLICT (username) DO NOTHING;
 
 -- Insert events
 INSERT INTO events (username, event_type, event_date, event_time, event_name, event_location, event_bio) VALUES
 ('johndoe@gmail.com', 'Conference', '2025-03-10', '10:00:00', 'Tech Conference 2025', 'Los Angeles Convention Center', 'A tech conference bringing together enthusiasts and professionals.'),
 ('janedoe@gmail.com', 'Music', '2025-06-15', '18:00:00', 'Music Fest 2025', 'Central Park, New York', 'An open-air music festival featuring top artists.'),
-('alexsmith@gmail.com', 'Exhibition', '2025-04-05', '09:00:00', 'Art Exhibition', 'National Art Gallery', 'A showcase of contemporary and classical art.');
+('alexsmith@gmail.com', 'Exhibition', '2025-04-05', '09:00:00', 'Art Exhibition', 'National Art Gallery', 'A showcase of contemporary and classical art.')
+ON CONFLICT (username, event_type, event_date, event_time) DO NOTHING;
 
 -- Insert tickets
 INSERT INTO tickets (username, event_name, ticket_type, selling_price, face_value, transferability, ticket_format, quantity, seller_name) VALUES
 ('johndoe@gmail.com', 'Tech Conference 2025', 'General Admission', 50.00, 40.00, TRUE, 'Digital', 10, 'John Doe'),
 ('johndoe@gmail.com', 'Tech Conference 2025', 'VIP', 150.00, 120.00, FALSE, 'Physical', 5, 'John Doe'),
 ('janedoe@gmail.com', 'Music Fest 2025', 'Regular', 30.00, 25.00, TRUE, 'Digital', 20, 'Jane Doe'),
-('alexsmith@gmail.com', 'Art Exhibition', 'General Admission', 15.00, 10.00, TRUE, 'Digital', 30, 'Alex Smith');
+('alexsmith@gmail.com', 'Art Exhibition', 'General Admission', 15.00, 10.00, TRUE, 'Digital', 30, 'Alex Smith')
+ON CONFLICT (username, event_name, ticket_type) DO NOTHING;
