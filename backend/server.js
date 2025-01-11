@@ -37,6 +37,7 @@ const io = new Server(server, {
     origin: process.env.CLIENT_URL || "http://localhost:3000", // Replace with your Render client URL
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type"],
+    credentials: true, // Allow credentials (cookies)
   },
 });
 
@@ -50,14 +51,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-// For maintaing user signed throughout the session
+//  For maintaining user signed throughout the session
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
-    secure: process.env.NODE_ENV ==='production',
+    secure: process.env.NODE_ENV === 'production',
     httpOnly: true,
+    sameSite: 'None', // Ensure cookies are sent in cross-site requests
     maxAge: 24 * 60 * 60 * 1000, // 1 day
   },
 }));
