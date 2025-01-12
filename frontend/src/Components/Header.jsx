@@ -47,14 +47,14 @@ function Header() {
     // To Check when user get's logged out, [] treated as a dependency array
     useEffect(() => {
         handleUser();
-
-        const interval = setInterval(() => {
-            handleUser();
-        }, 5000);
         
-        return () => {
-            clearInterval(interval);
-        };
+        // const interval = setInterval(() => {
+        //     handleUser();
+        // }, 5000);
+        
+        // return () => {
+        //     clearInterval(interval);
+        // };
     }, []);
 
 
