@@ -14,6 +14,9 @@ import fs from "fs";
 import Nodemailer from "nodemailer";
 import { MailtrapTransport } from "mailtrap";
 import GoogleStrategy from "passport-google-oauth2";
+import pgSession from "connect-pg-simple";
+
+
 
 // For Socket.io importing create server to upgrade
 import { createServer } from "http";
@@ -29,6 +32,9 @@ env.config();
 const app = express();
 const port = process.env.SERVER_PORT || 5000;
 const saltrounds = parseInt(process.env.SALT_ROUND,10);
+
+
+
 
 // creating server for socket.io
 const server = createServer(app);
@@ -51,17 +57,27 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
+
+
+
+
 //  For maintaining user signed throughout the session
+
 app.use(session({
+  store: new (pgSession(session))({
+    conObject: {
+      connectionString: process.env.DATABASE_URL, // Your PostgreSQL connection string
+    },
+  }),
   secret: process.env.SECRET,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
-    secure: true,
-    // secure: process.env.NODE_ENV === 'production',
-    maxAge: 24 * 60 * 60 * 1000, // 1 day
+    secure: process.env.NODE_ENV === "production",
+    maxAge: 1 * 60 * 60 * 1000, // 1 hour
   },
 }));
+
 
 app.use(cors({
   origin: process.env.CLIENT_URL || "https://ticket-reselling-frontend.onrender.com",
