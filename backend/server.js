@@ -3,7 +3,6 @@ import express from "express";
 import bodyParser from "body-parser";
 import pg from "pg";
 import bcrypt from "bcryptjs";
-const { hash } = bcrypt;  
 import path from "path";
 import { fileURLToPath } from "url";
 import env from "dotenv";
@@ -15,8 +14,6 @@ import Nodemailer from "nodemailer";
 import { MailtrapTransport } from "mailtrap";
 import GoogleStrategy from "passport-google-oauth2";
 import pgSession from "connect-pg-simple";
-
-
 
 // For Socket.io importing create server to upgrade
 import { createServer } from "http";
@@ -33,8 +30,10 @@ const app = express();
 const port = process.env.SERVER_PORT || 5000;
 const saltrounds = parseInt(process.env.SALT_ROUND,10);
 
+const { hash } = bcrypt; 
 
-
+let users = {};
+let sockets = {};
 
 // creating server for socket.io
 const server = createServer(app);
@@ -48,8 +47,6 @@ const io = new Server(server, {
 });
 
 
-let users = {};
-let sockets = {};
 
 // Using Middlewares
 
@@ -57,12 +54,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-
-
+// General Error Handler
+app.use((err, req, res, next) => {
+  console.error(err.stack); // log the error
+  res.status(500).json({ success: false, message: "Internal Server Error" });
+});
 
 
 //  For maintaining user signed throughout the session
-
 app.use(session({
   store: new (pgSession(session))({
     conObject: {
@@ -78,15 +77,30 @@ app.use(session({
   },
 }));
 
-
-app.use(cors({
-  origin: process.env.CLIENT_URL || "https://ticket-reselling-frontend.onrender.com",
-  credentials: true,
-}));
-
-
+// Passport Middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+
+
+const allowedOrigins = [
+  process.env.CLIENT_URL_1, // Local development
+  process.env.CLIENT_URL // Production environment
+];
+// Cors Middleware
+app.use(cors({
+  origin: function(origin, callback) {
+    if (allowedOrigins.includes(origin) || !origin) {
+      // Allow requests from both specified origins and also allow no origin (for certain requests like Postman)
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true, // Allow cookies or credentials
+}));
+
 
 
 
@@ -114,18 +128,18 @@ const sender = {
 
 
 // Connecting to database
-// const db = new pg.Client({
-//   user: process.env.DATABASE_USER,
-//   host: process.env.DATABASE_HOST,
-//   database: process.env.DATABASE_DB,
-//   password: process.env.DATABASE_PASS,
-//   port: process.env.DATABASE_PORT,
-// });
-
 const db = new pg.Client({
-  connectionString: process.env.DATABASE_URL, // Contains all connection details
-  ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: true } : false,
+  user: process.env.DATABASE_USER,
+  host: process.env.DATABASE_HOST,
+  database: process.env.DATABASE_DB,
+  password: process.env.DATABASE_PASS,
+  port: process.env.DATABASE_PORT,
 });
+
+// const db = new pg.Client({
+//   connectionString: process.env.DATABASE_URL, // Contains all connection details
+//   ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: true } : false,
+// });
 
 db.connect().catch(error => {
   console.error('Error connecting to the database:', error);
@@ -135,19 +149,19 @@ db.connect().catch(error => {
 
 // Creating Tables
 
-async function createTables() {
-  const schemaPath = path.join(__dirname, "schema.sql"); // Save the SQL script above in a file named 'schema.sql'
-  const schema = fs.readFileSync(schemaPath, "utf-8");
+// async function createTables() {
+//   const schemaPath = path.join(__dirname, "schema.sql"); // Save the SQL script above in a file named 'schema.sql'
+//   const schema = fs.readFileSync(schemaPath, "utf-8");
 
-  try {
-    await db.query(schema);
-    console.log("Database tables created successfully!");
-  } catch (error) {
-    console.error("Error creating database tables:", error);
-  }
-}
+//   try {
+//     await db.query(schema);
+//     console.log("Database tables created successfully!");
+//   } catch (error) {
+//     console.error("Error creating database tables:", error);
+//   }
+// }
 
-createTables();
+// createTables();
 
 io.on("connection", (socket) => {
   console.log("A user connected");
@@ -230,6 +244,8 @@ try {
 // To verify if user is Loggedin
 
 app.get('/verify', (req,res)=>{
+  // console.log("user session:", req.session); // Log the session object
+  // console.log("User g:", req.user); // Log the user object
   if (req.isAuthenticated()){
     res.json({success:true, username: req.user.username});
   }else{
@@ -276,6 +292,10 @@ app.post('/verify/sendotp', async (req, res) => {
     console.log(err);
     res.status(500).json({ success: false, message: "Server error" });
   }
+});
+app.use((req, res, next) => {
+  console.log("Authenticated:", req.isAuthenticated());
+  next();
 });
 
 app.post('/verify/otp', async (req, res) => {
@@ -600,6 +620,7 @@ app.post("/login", (req, res, next) => {
       if (err) {
         return res.status(500).json({ success: false, message: "Login failed" });
       }
+      console.log(req.session);
       return res.status(200).json({ success: true, message: "Login successful" });
     });
   })(req, res, next);
@@ -621,7 +642,9 @@ passport.use("local",new Strategy(
     // console.log(password);
     try {
       const check_user = await db.query("SELECT password FROM users WHERE username = ($1)",[username]);
+      // console.log(`Database query result: ${JSON.stringify(check_user.rows)}`);
       if (check_user.rows.length == 0){
+          console.log("User does not exist");
           return cb(null,false,{message:"User does not Exist! Register now"})
           // res.status(500).json({success:false, message:"User does not Exist! Register now"});
       }else{
@@ -629,11 +652,14 @@ passport.use("local",new Strategy(
           const hashh = check_user.rows[0].password;
           bcrypt.compare(password,hashh, (err,result) =>{
             if (err){
+              console.log(`Bcrypt error: ${err}`)
               return cb(err);
             }
             if (result){
+              // console.log("Password match");
               return cb(null, { username });
             }else{
+              console.log("Incorrect password");
               return cb(null, false, { message: "Incorrect password." });
             }
           })
@@ -655,6 +681,8 @@ passport.use("google",new GoogleStrategy({
   
 }));
 
+
+
 passport.serializeUser((user,cb) =>{
   cb(null,user);
 });
@@ -671,11 +699,7 @@ passport.deserializeUser(async (user, cb) => {
       cb(err, null);
   }
 });
-
-
-
 // listening to server instead of app to incorporate the socket feature
-
 server.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

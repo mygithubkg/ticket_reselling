@@ -74,3 +74,27 @@ INSERT INTO tickets (ticket_id,username, event_name, ticket_type, selling_price,
 (3,'janedoe@gmail.com', 'Music Fest 2025', 'Regular', 30.00, 25.00, TRUE, 'Digital', 20, 'Jane Doe'),
 (4,'alexsmith@gmail.com', 'Art Exhibition', 'General Admission', 15.00, 10.00, TRUE, 'Digital', 30, 'Alex Smith')
 ON CONFLICT (ticket_id) DO NOTHING;
+
+-- Create table if it doesn't exist
+CREATE TABLE IF NOT EXISTS "session" (
+    "sid" varchar NOT NULL COLLATE "default",
+    "sess" json NOT NULL,
+    "expire" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE);
+
+-- Add primary key if it doesn't already exist
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'session_pkey') THEN
+        ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid");
+    END IF;
+END $$;
+
+-- Create index if it doesn't exist
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_indexes WHERE indexname = 'IDX_session_expire') THEN
+        CREATE INDEX "IDX_session_expire" ON "session" ("expire");
+    END IF;
+END $$;
