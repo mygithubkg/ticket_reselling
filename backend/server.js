@@ -87,21 +87,13 @@ app.use(passport.session());
 
 
 
-const allowedOrigins = [
-  process.env.CLIENT_URL_1, // Local development
-  process.env.CLIENT_URL // Production environment
-];
+
 // Cors Middleware
 app.use(cors({
-  origin: function(origin, callback) {
-    if (allowedOrigins.includes(origin) || !origin) {
-      // Allow requests from both specified origins and also allow no origin (for certain requests like Postman)
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true, // Allow cookies or credentials
+  origin:  process.env.CLIENT_URL || 'https://ticket-reselling-frontend.onrender.com',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204
 }));
 
 app.use((req, res, next) => {
