@@ -14,14 +14,13 @@ function Profile() {
         phoneNumber: "",
         otherDetails: "",
     });
-
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('/usersinfo', {
+                const response = await fetch(`${API_BASE_URL}/usersinfo`, {
                     method: 'POST',
                     credentials: 'include',
-                    cache: "no-store",
                 });
                 if (!response.ok) {
                     throw new Error("Failed to fetch user data");

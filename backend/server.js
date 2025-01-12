@@ -73,6 +73,7 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     secure: process.env.NODE_ENV === "production",
+    httpOnly:true,
     maxAge: 1 * 60 * 60 * 1000, // 1 hour
   },
 }));
@@ -100,9 +101,6 @@ app.use(cors({
   },
   credentials: true, // Allow cookies or credentials
 }));
-
-
-
 
 app.use((req, res, next) => {
   req.headers["socket-id"] = req.get("Socket-ID");
@@ -149,19 +147,19 @@ db.connect().catch(error => {
 
 // Creating Tables
 
-async function createTables() {
-  const schemaPath = path.join(__dirname, "schema.sql"); // Save the SQL script above in a file named 'schema.sql'
-  const schema = fs.readFileSync(schemaPath, "utf-8");
+// async function createTables() {
+//   const schemaPath = path.join(__dirname, "schema.sql"); // Save the SQL script above in a file named 'schema.sql'
+//   const schema = fs.readFileSync(schemaPath, "utf-8");
 
-  try {
-    await db.query(schema);
-    console.log("Database tables created successfully!");
-  } catch (error) {
-    console.error("Error creating database tables:", error);
-  }
-}
+//   try {
+//     await db.query(schema);
+//     console.log("Database tables created successfully!");
+//   } catch (error) {
+//     console.error("Error creating database tables:", error);
+//   }
+// }
 
-createTables();
+// createTables();
 
 io.on("connection", (socket) => {
   console.log("A user connected");
@@ -293,6 +291,7 @@ app.post('/verify/sendotp', async (req, res) => {
     res.status(500).json({ success: false, message: "Server error" });
   }
 });
+
 app.use((req, res, next) => {
   console.log("Authenticated:", req.isAuthenticated());
   next();
@@ -325,9 +324,9 @@ app.post('/verify/otp', async (req, res) => {
 app.post('/listing1', async (req,res)=>{
   console.log(req.body);
   if (!req.isAuthenticated()){
-    return res.status(500).json({ success: false, message: "Technical error" });
+    return res.status(500).json({ success: false, message: "Login to Add Event" });
   }
-  else{
+  else{ 
     try{
       const data = await db.query("SELECT username FROM users WHERE username = $1",[req.user.username]);
       if (data.rows.length >=1 ){

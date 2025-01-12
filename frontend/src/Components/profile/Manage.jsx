@@ -6,9 +6,9 @@ import { useNavigate } from "react-router-dom";
 function Manage() {
 
     const Navigate = useNavigate();
-    
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
     const handlelogout = async ()=> {
-        const response = await fetch('/logout',{
+        const response = await fetch(`${API_BASE_URL}/logout`,{
             method: 'POST',
             credentials: 'include',
         })
