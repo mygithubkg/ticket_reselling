@@ -128,18 +128,18 @@ const sender = {
 
 
 // Connecting to database
-const db = new pg.Client({
-  user: process.env.DATABASE_USER,
-  host: process.env.DATABASE_HOST,
-  database: process.env.DATABASE_DB,
-  password: process.env.DATABASE_PASS,
-  port: process.env.DATABASE_PORT,
-});
-
 // const db = new pg.Client({
-//   connectionString: process.env.DATABASE_URL, // Contains all connection details
-//   ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: true } : false,
+//   user: process.env.DATABASE_USER,
+//   host: process.env.DATABASE_HOST,
+//   database: process.env.DATABASE_DB,
+//   password: process.env.DATABASE_PASS,
+//   port: process.env.DATABASE_PORT,
 // });
+
+const db = new pg.Client({
+  connectionString: process.env.DATABASE_URL, // Contains all connection details
+  ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: true } : false,
+});
 
 db.connect().catch(error => {
   console.error('Error connecting to the database:', error);
@@ -149,19 +149,19 @@ db.connect().catch(error => {
 
 // Creating Tables
 
-// async function createTables() {
-//   const schemaPath = path.join(__dirname, "schema.sql"); // Save the SQL script above in a file named 'schema.sql'
-//   const schema = fs.readFileSync(schemaPath, "utf-8");
+async function createTables() {
+  const schemaPath = path.join(__dirname, "schema.sql"); // Save the SQL script above in a file named 'schema.sql'
+  const schema = fs.readFileSync(schemaPath, "utf-8");
 
-//   try {
-//     await db.query(schema);
-//     console.log("Database tables created successfully!");
-//   } catch (error) {
-//     console.error("Error creating database tables:", error);
-//   }
-// }
+  try {
+    await db.query(schema);
+    console.log("Database tables created successfully!");
+  } catch (error) {
+    console.error("Error creating database tables:", error);
+  }
+}
 
-// createTables();
+createTables();
 
 io.on("connection", (socket) => {
   console.log("A user connected");
