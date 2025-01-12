@@ -9,20 +9,24 @@ import { useGSAP } from '@gsap/react';
 
 
 function Header() {
+    // Declaring user 
+    const [user, setUser] = useState(false);
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
 
     // Managing web pages
+
     const navigate = useNavigate();
-    const handleSignInClick = () => {
-        navigate('/SignIn'); // Navigate to login page
-    };
+
+    // const handleSignInClick = () => {
+    //     navigate('/SignIn'); 
+    // };
+
     const handleSignInClick_1 = () => {
         setShow(!show);
         navigate('/SignIn'); // Navigate to login page
     };
 
-    // Declaring user 
-    const [user, setUser] = useState(false);
-    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
+   
 
     // Checking user is Login or not
     const handleUser = async () => {
@@ -34,6 +38,9 @@ function Header() {
 
             const result = await response.json();
 
+            // debug
+            console.log(result);
+            
             if (result.success) {
                 setUser(true);
             } else {
@@ -47,7 +54,7 @@ function Header() {
     // To Check when user get's logged out, [] treated as a dependency array
     useEffect(() => {
         handleUser();
-        
+
         // const interval = setInterval(() => {
         //     handleUser();
         // }, 5000);
