@@ -55,13 +55,13 @@ function Header() {
     useEffect(() => {
         handleUser();
 
-        // const interval = setInterval(() => {
-        //     handleUser();
-        // }, 5000);
+        const interval = setInterval(() => {
+            handleUser();
+        }, 2000);
         
-        // return () => {
-        //     clearInterval(interval);
-        // };
+        return () => {
+            clearInterval(interval);
+        };
     }, []);
 
 
