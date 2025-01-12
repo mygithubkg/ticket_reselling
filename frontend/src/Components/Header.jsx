@@ -17,9 +17,9 @@ function Header() {
 
     const navigate = useNavigate();
 
-    // const handleSignInClick = () => {
-    //     navigate('/SignIn'); 
-    // };
+    const handleSignInClick = () => {
+        navigate('/SignIn'); 
+    };
 
     const handleSignInClick_1 = () => {
         setShow(!show);
@@ -40,7 +40,7 @@ function Header() {
 
             // debug
             console.log(result);
-            
+
             if (result.success) {
                 setUser(true);
             } else {
