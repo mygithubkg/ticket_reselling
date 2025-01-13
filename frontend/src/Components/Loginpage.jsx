@@ -29,6 +29,7 @@ function LoginPage() {
     else{
       if (response.status === 200){
         alert(result.message);
+        // localStorage.setItem("Token",result.token_1);
       }
       else{
         alert(result.message);
