@@ -3,6 +3,7 @@
   h2 {
     text-align: center;
     color: #333;
+    margin-bottom: 10px;
   }
   
   .event-list {
@@ -61,7 +62,15 @@
     
  
     
-  
-    max-width: 60vw;
+  width: 100%;
    }
-    
+
+
+   @media screen and (width <= 1090px) {
+    .event-list{
+       
+    }
+
+  
+   }
+   

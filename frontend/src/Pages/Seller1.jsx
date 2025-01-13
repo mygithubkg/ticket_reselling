@@ -26,26 +26,26 @@ export default function Seller1() {
         {/* Search and Searched Content */}
         <div className="search-container">
           <SearchBox search={search} setSearch={setSearch} />
-        </div>
+        
         <div style={{"display": "flex"
 ,
     "justify-content": "right",
-    "width": "65%"
+    
         }}>
           <Link to="/listing/step1_eventdetails">
           <p className='add_event'>Event not listed? Add it now!</p>
           
             
-          </Link>
+          </Link></div>
         </div>
         <div className="container-serached">
         <EventList search={search}/>
 
           
         </div>
-        <div className="features-container">
+        {/* <div className="features-container">
           <Featuresseller />
-        </div>
+        </div> */}
 
         {/* FAQ Section */}
         <div className="faq-container"></div>
