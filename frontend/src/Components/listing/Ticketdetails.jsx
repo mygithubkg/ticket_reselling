@@ -1,12 +1,16 @@
 import React, {useState,useEffect} from "react";
 import "../../styles/Ticketdetails.css";
 import Faq from "../Faq_section";
-import { faqDat } from "../../data";
+import { faqDat , tickets} from "../../data";
 import { useNavigate } from "react-router-dom";
 import ProgressBar from "../ProgressBar"
+import { useParams } from 'react-router-dom';
 
 function TicketDetails(){
     const navigate = useNavigate();
+    const { id } = useParams();
+
+let event = tickets[id - 1];
     const [userDetails, setUserDetails] = useState({
         ticket_type : "",
         selling_price : "",
@@ -67,10 +71,21 @@ function TicketDetails(){
             alert(result.message);
         }
     }
-    // let currentStep= 2;
+    
+
+
+
     return (
-        <div>
-            {/* <ProgressBar currentStep={currentStep}/> */}
+        <div className="align_centre_column">
+            <div className="event-card2" >
+      <img src={event.photo} alt={event.eventName} className="event-image" />
+      <div className="event-details2">
+        <h3 className="event-name2">{event.eventName}</h3>
+        <p className="event-location2">📍 {event.eventLocation}</p>
+        <p className="event-date2">📅 {event.eventDateTime}</p>
+      </div>
+    </div>
+            
             <form className="categorycontainer3" onSubmit={handlesubmit}>
                 <h1 id="h1">Ticket Details</h1>
                     <div className="typess">

@@ -24,8 +24,8 @@
 
 .logo_box{
     background-color: white;
-    height: 30%;
-    width: 30%;
+    height: 10vmax;
+    width: auto;
     border-radius: 127px;
     border-color: #008FDB;
     border-style: solid;
@@ -35,12 +35,16 @@
     color:#008FDB ;
     font-size:4vw;
     font-family: "Baloo Paaji 2", sans-serif; 
+    padding: 0 10px;
+    
 
     /* not giving the same look as logo */
     font-weight: bolder;
     transition: transform 0.3s ease;
 
 }
+
+
 
 .footer_links p{
     margin: 8px 0;

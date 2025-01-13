@@ -4,7 +4,7 @@ import EventCard from "./Event_Card";
 import { useNavigate, Link } from "react-router-dom";
 import { tickets } from "../data";
 
-export default function Searchedcontent({search, condition, EventType, date, price}) {
+export default function Searchedcontent({search, condition, EventType = "", date, price}) {
   const navigate = useNavigate();
 
   function handleonclick  (id)  {

@@ -30,7 +30,7 @@ export default function Filters({ setEventType, setdate, setprice }) {
     };
 
     return (<div className='flex'>
-        <div className='remove-filter' onClick={handleremove}>X</div>
+      
         <div className='filer-container'>
          
             <div>
@@ -66,6 +66,7 @@ export default function Filters({ setEventType, setdate, setprice }) {
                     <option value="desc">High-Low</option>
                 </select>
             </div>
+            <div className='remove-filter' onClick={handleremove}>clear</div>
         </div></div>
     );
 }

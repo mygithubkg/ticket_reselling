@@ -1,0 +1,67 @@
+
+  
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .event-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+   
+  }
+  
+  .event-card {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .event-card:hover {
+    transform: scale(1.02);
+  }
+  
+  .event-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1a73e8;
+    margin-bottom: 8px;
+  }
+  
+  .event-location,
+  .event-date {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .add-event-button {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #1a73e8;
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-event-button:hover {
+    background-color: #1558b0;
+  }
+  
+  /* EventList.css */
+.event-list-container {
+    
+ 
+    
+  
+    max-width: 60vw;
+   }
+    

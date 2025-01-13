@@ -11,7 +11,7 @@
     display: flex;
     justify-content: center;
     z-index: 11;
-    font-size: 5rem;
+    font-size: 5.5vw;
     font-family: "Baloo Paaji 2", sans-serif;
     font-weight: bolder;}
    
@@ -60,10 +60,47 @@
 }
 
 
+.search-box-conatiner-hp{
+  position: relative; padding: 0 10px; width: 50%;
+  display: flex
+  ;
+      justify-content: center;
+
+      margin-top: 4px;
+
+
+
+}
+
+
 
 @media screen  and (width <=700px) {
     .statement{font-size: 1.6rem;}
     
+}
+
+
+@media screen  and (max-width:850px){
+  .search-box-conatiner-hp{
+    width: 100%;
+   }
+    
+
+
+}
+
+
+@media screen  and (max-width:480px) {
+  .statement{font-size: 2.2rem;
+    display: flex; position: static; color: black;
+    margin-top: 30px;
+   
+
+ }
+ .search-box-conatiner-hp{
+  width: 100%;
+ }
+  
 }
 
 

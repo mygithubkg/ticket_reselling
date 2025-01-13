@@ -6,6 +6,7 @@ import Searchedcontent from "../Components/Searchedcontent";
 import Featuresseller from "../Components/Features_seller";
 import "../styles/Seller1.css";
 import { Link } from "react-router-dom";
+import EventList from "../Components/EventList"
 // import MessageDropdown from '../Components/chat';
 
 export default function Seller1() {
@@ -26,15 +27,22 @@ export default function Seller1() {
         <div className="search-container">
           <SearchBox search={search} setSearch={setSearch} />
         </div>
-        <div>
+        <div style={{"display": "flex"
+,
+    "justify-content": "right",
+    "width": "65%"
+        }}>
           <Link to="/listing/step1_eventdetails">
-            <button className="add_event">+Add Event</button>
+          <p className='add_event'>Event not listed? Add it now!</p>
+          
+            
           </Link>
         </div>
         <div className="container-serached">
-          <Searchedcontent condition={true} search={search} setSearch={setSearch} />
-        </div>
+        <EventList search={search}/>
 
+          
+        </div>
         <div className="features-container">
           <Featuresseller />
         </div>

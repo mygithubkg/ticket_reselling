@@ -1,46 +1,88 @@
-.flex{
+/* Flex container for desktop */
+.flex {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: left;
-    gap:1vw;
+    justify-content: flex-start;
+    gap: 1vw;
     margin-top: 30px;
-    
-
-
+    flex-wrap: nowrap; /* Prevent wrapping to keep filters in one line */
 }
 
-.filer-container{
+/* Filter container for desktop */
+.filer-container {
     display: flex;
     flex-direction: row;
-    justify-content: left;
-    gap:5vw;
+    justify-content: flex-start;
+    gap: 2vw;
     align-items: center;
-    height: 100%;
-    
+    flex-wrap: nowrap; /* Prevent wrapping */
 }
 
-#dropdown,#date_filter{
+/* Dropdowns and date input styling */
+#dropdown, #date_filter {
     border-radius: 107px;
-    background-color:white;
+    background-color: white;
     width: 12vw;
-    font-size: 1.3rem;
-    padding:10px 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    min-width: 120px;
+    font-size: 1rem;
+    padding: 10px 15px;
     color: black;
-    border-color: #008FDB;;
-    box-shadow: rgb(50 50 93 / 25%) 0 6px 12px -2px, rgb(0 0 0 / 30%) 0 3px 7px -3px;
+    border: 1px solid #008FDB;
+    box-shadow: 0 6px 12px -2px rgba(50, 50, 93, 0.25), 0 3px 7px -3px rgba(0, 0, 0, 0.3);
     font-family: Inter, sans-serif;
-    text-align:left
-   
-  
+    text-align: left;
 }
 
-.remove-filter{
-    font-size: 1.7rem;
+/* Clear button styling */
+.remove-filter {
+    font-size: 1rem;
     display: flex;
     align-items: center;
+    cursor: pointer;
+    padding: 8px 12px;
+    background-color: #f44336;
+    color: white;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.remove-filter:hover {
+    background-color: #d32f2f;
+}
+
+/* Responsive design for tablets */
+@media (max-width: 768px) {
+    .filer-container {
+        flex-direction: row;
+        gap: 10px;
+        flex-wrap: nowrap; /* Maintain single line on tablets */
+        overflow-x: auto; /* Allow horizontal scrolling if needed */
+    }
+
+    #dropdown, #date_filter {
+        width: 30vw;
+        font-size: 1rem;
+    }
+}
+
+/* Responsive design for mobile devices */
+@media (max-width: 480px) {
+    .filer-container {
+        flex-direction: row;
+        gap: 8px;
+        flex-wrap: nowrap; /* Maintain single line on mobile */
+        overflow-x: auto; /* Enable horizontal scroll */
+    }
+
+    #dropdown, #date_filter {
+        width: 45vw;
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+
+    .remove-filter {
+        width: auto;
+        padding: 8px 12px;
+    }
 }
