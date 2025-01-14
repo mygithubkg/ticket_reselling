@@ -1,27 +1,58 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/Searched_content.css";
 import EventCard from "./Event_Card";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { tickets } from "../data";
 
 export default function Searchedcontent({search, condition, EventType = "", date, price}) {
   const navigate = useNavigate();
 
-  function handleonclick  (id)  {
-    navigate(`/Event/${id}`)
- 
-    
-  };
+  function handleonclick(id) {
+    navigate(`/Event/${id}`);
+  }
 
-  let arr = tickets
+  const [localSearch, setLocalSearch] = useState("");
+  const [event, setEvent] = useState(null);
+  const [error, setError] = useState(null);
+  const [Loading, setLoading] = useState(null);
 
-    
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "";
 
-  var filteredData = (arr.filter((e) =>
-    (e.eventName.toLowerCase().includes(search.toLowerCase()) && e.eventName.toLowerCase().includes(EventType)))
+  useEffect(() => {
+    const fetchEvent = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/eventdetail`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          setEvent(result.event);
+        } else {
+          setError(result.message || "Error fetching event");
+        }
+      } catch (err) {
+        setError("An unexpected error occurred.");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchEvent();
+  }, []);
+
+  let arr;
+  event ? arr = event : arr = tickets;
+
+  let filteredData = arr.filter(
+    (e) =>
+      e.event_name.toLowerCase().includes(search.toLowerCase()) &&
+      e.event_name.toLowerCase().includes(EventType)
   );
 
-  var filteredData = filteredData.sort((a, b) => {
+  filteredData = filteredData.sort((a, b) => {
     if (price === "asc") {
       return a.sellingPrice - b.sellingPrice;
     } else if (price === "desc") {
@@ -39,11 +70,9 @@ export default function Searchedcontent({search, condition, EventType = "", date
             <div className="card-container">
               {filteredData.length > 0 ? (
                 filteredData.map((item) => (
-                  <div onClick={() => handleonclick(item.id)}> <EventCard
-                    key={item.id}
-                    
-                    item={item}
-                  /> </div>
+                  <div key={item.event_id} onClick={() => handleonclick(item.event_id)}>
+                    <EventCard item={item} />
+                  </div>
                 ))
               ) : (
                 <p>No Results Found</p>
@@ -57,15 +86,12 @@ export default function Searchedcontent({search, condition, EventType = "", date
           <div className="card-container">
             {filteredData.length > 0 ? (
               filteredData.map((item) => (
-                <div onClick={() => handleonclick(item.id)}> <EventCard
-                key={item.id}
-                
-                item={item}
-              /> </div>
-               
+                <div key={item.event_id} onClick={() => handleonclick(item.event_id)}>
+                  <EventCard item={item} />
+                </div>
               ))
             ) : (
-              <p> No Results Found</p>
+              <p>No Results Found</p>
             )}
           </div>
         </>
