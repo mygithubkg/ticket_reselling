@@ -1,71 +1,94 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
-.container-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    place-content: center center;
-    height: 80vh;
-     
-  }
-
-.container-serached{
- margin-left: 18px;
- margin-right: 20px;
-  
-  
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+:root {
+  --primary-color: #DB5500;
+  --secondary-color: #333;
+  --background-color: #f9f9f9;
+  --text-color: #444;
+  --font-family: "Inter", sans-serif;
+  --transition-duration: 0.3s;
 }
 
-  .add_event{
-    font-family: Inter, sans-serif; 
-    font-size: 1rem;
-    background-color:#DB5500;
-    color: white;
-    border-radius: 30px;
-    padding: 10px;
-    margin: 10px 0 0;
-    box-shadow: 0 4px 6px rgb(0 0 0 / 13%);
-    transition: all 0.3s ease;
-    margin-left: 20px;
 
-  
-  }
+.container-main {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
 
-  .add_event:hover{
-    box-shadow: 0 8px 15px rgb(0 0 0 / 28.1%);
-    transform: scale(1.1)
-  }
+.search-container {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 0px;
+}
 
-  .search-container{
-    width: 60vw;
-  }
-  
-.container-faqs{
+.container-serached {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 10px;
+  display: flex;
+
+      flex-direction: column;
+      align-items: center;
+
+
+}
+
+.add_event {
+  font-family: "Baloo Paaji 2", sans-serif; 
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  text-decoration: underline;
+  cursor: pointer;
+  margin-bottom: 25px;
+
+  transition: color var(--transition-duration), transform var(--transition-duration);
+}
+
+.add_event:hover {
+  color: black;
+  transform: scale(1.05);
+}
+
+.features-container {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.container-faqs {
+  width: 100%;
+  max-width: 800px;
   margin-top: 50px;
   display: flex;
   justify-content: center;
 }
 
-.features-container{
-  display: flex;
-  justify-content: center;
-  margin-top: 20px
-
+.faq-container {
+  margin-top: 40px;
 }
 
-@media screen  and (width >=1000px){
-  .features-container{
-    width: 70vw;
+@media screen and (max-width: 768px) {
+  .container-main {
+    padding: 10px;
   }
 
-  .container-main{
-    width: 70vw;
-    
+  .add_event {
+    font-size: 1rem;
   }
 
-  .container-serached{
-    width: 60vw;}
-
-  
-  
+  .search-container,
+  .container-serached,
+  .features-container,
+  .container-faqs {
+    width: 90%;
+  }
 }
+
+

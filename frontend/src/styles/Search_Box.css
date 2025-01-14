@@ -35,15 +35,24 @@
   /* Input hover and focus effects */
 
   
-  /* .Search-box1:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-  } */
+ .Search-box1:focus {
+    border-color: black;
+    
+  }
   
-.search-icon{
-  position: absolute;
-  right: 3%;
-}
-
-
-
+  .search-icon{
+    position: absolute;
+    right: 6%;
+  }
+  
+  @media screen  and (max-width:480px) {
+    .search-icon{
+     
+      right: 9%;
+    }
+  
+  
+  }
+  
+  
+  

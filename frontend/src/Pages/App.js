@@ -83,7 +83,7 @@ function App() {
           <Route path='/listing' element={<Progress />} />
           <Route path='/listing/step1_eventdetails' element={<Category />} />
           <Route path='/listing/step2_eventdetails' element={<EventDetails />} />
-          <Route path='/listing/step3_ticketdetails' element={<TicketDetails />} />
+          <Route path='/listing/step3_ticketdetails/:id' element={<TicketDetails />} />
         </Routes>
         </div>
         <Footer/>

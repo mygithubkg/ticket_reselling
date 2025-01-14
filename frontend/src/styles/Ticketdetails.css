@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 .categorycontainer3 {
-    height: 120vh;
+    height: auto;
     width: 65%;
     max-width: 900px;
     display: flex;
@@ -13,8 +13,8 @@
     border-radius: 12px;
     box-shadow: rgb(0 0 0 / 12%) 0 1px 3px, rgb(0 0 0 / 24%) 0 1px 2px;
     padding: 20px;
-    margin-top: 40px;
-    margin-left: 20px;
+    margin: 40px 0px;
+    
 }
 
 #h1{
@@ -89,3 +89,70 @@
 #submit:active {
     background-color: #205c8c;
 }
+
+
+
+.event-card2 {
+    display: flex;
+    flex-direction: row;
+    width: 300px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    padding: 20px;
+    width: 65%;
+    flex-wrap: wrap;
+   
+    
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .event-card2:hover {
+    transform: translateY(-5px);
+  }
+  
+  .event-image {
+    width: auto;
+    height: 180px;
+    object-fit: contain;
+  }
+  
+  .event-details2 {
+    padding: 15px;
+ 
+  }
+  
+  .event-name2 {
+    font-size: 3vw;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  .event-location2,
+  .event-date2 {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 5px;
+  }
+  
+
+  
+
+  @media screen and (width <= 1090px) {
+    .categorycontainer3, .event-card2{
+        width: 90%;
+    }
+    .align_centre_column{
+        display: flex
+        ;
+            flex-direction: column;
+            align-items: center
+      }
+    
+
+  }
+
+  

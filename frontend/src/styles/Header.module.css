@@ -7,7 +7,7 @@
     display: flex;
     min-width: 80vw;
     place-content: center space-between;
-    margin: 10px 0 75px;
+    margin: 30px 0 30px 0px;
     border-radius: 20px;
     background-color: white;
     z-index: -2;
@@ -24,7 +24,7 @@
     color: inherit;
     margin-top: 2%;
     padding-left: 20px;
-    font-size: 2rem;
+    font-size: 3vw;
 }
 
 .logoLink1 {
@@ -176,6 +176,12 @@
 }
 
 @media screen and (width <= 900px) {
+    #logo{
+        font-size: 1.8rem;
+    }
+
+   
+   
     .header_space2 {
         display: none;
     }
