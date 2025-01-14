@@ -39,7 +39,9 @@ function Category(){
         const response = await fetch(`${API_BASE_URL}/listing1`,{
             method : 'POST',
             headers : { 'Content-Type': 'application/json' },
-            body : JSON.stringify({event_bio, event_date, event_location, event_name, event_time, event_type })
+            credentials: 'include',
+            body : JSON.stringify({event_bio, event_date, event_location, event_name, event_time, event_type }
+            )
         })
 
         const result = await response.json();

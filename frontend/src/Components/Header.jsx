@@ -39,7 +39,7 @@ function Header() {
             const result = await response.json();
 
             // debug
-            console.log(result);
+            // console.log(result);
 
             if (result.success) {
                 setUser(true);

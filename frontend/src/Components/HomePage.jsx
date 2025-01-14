@@ -43,6 +43,17 @@ function HomePage() {
     };
     fetchEvent();
   }, [id]);
+  if (loading) {
+    return <p>Loading form...</p>;
+  }
+
+  if (error) {
+  return <p>{error}</p>;
+  }
+
+  if (!event) {
+  return <p>Some Error Occured.</p>;
+  }
 
   return (
     <>

@@ -14,15 +14,15 @@ export default function Event_Page() {
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
   useEffect(() => {
     const fetchEvent = async () => {
-      console.log(id);
       try {
-        const response = await fetch(`${API_BASE_URL}/eventdetails`, {
+        const response = await fetch(`${API_BASE_URL}/eventdetails/${id}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id }),
         });
 
         const result = await response.json();
+        console.log(id);
         if (result.success) {
           setEvent(result.event);
         } else {
@@ -39,6 +39,7 @@ export default function Event_Page() {
     fetchEvent();
   }, [id]);
 
+
   if (loading) {
     return <p>Loading event details...</p>;
   }
@@ -49,8 +50,6 @@ export default function Event_Page() {
 
   if (!event) {
     return <p>Event not found.</p>;
-
-
   }
 
 

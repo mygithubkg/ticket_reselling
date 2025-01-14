@@ -20,7 +20,6 @@ function Explore(){
         <div>
            
             <Carousel />
-            
             <div  className="heading" style={{margin:"25px 0px 0 0", alignContent:"center"}}> Discover your Next&nbsp;<span>Event</span></div>
             <div style={{ width: "100%", display: 'flex', justifyContent: "center" }}>
             <div className="search-box-conatiner-hp"><SearchBox search={search} setSearch={setSearch}/></div></div>

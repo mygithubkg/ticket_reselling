@@ -11,7 +11,7 @@ export default function Event_card({item}) {
     <div>
        <div className="card">
                   <div className='image-container'>
-                   <img className="image-card" src={item.image_url} alt={item.name} />
+                   <img className="image-card" src={item.image_url} alt={item.even_name} />
                   </div>
                   <p className="name">{item.event_name}</p>
                   <p className="details">{item.event_bio}</p>
@@ -23,11 +23,9 @@ export default function Event_card({item}) {
                   <FontAwesomeIcon icon={faCalendarDays} size="xl" style={{color:"#000000"}} />
                   <p>{item.event_location}</p>
                   </div>
-                  
-                
-                  <div className='Price_container'>
+                  {/* <div className='Price_container'>
                   <p className="price">₹{item.sellingPrice}</p>
-                  </div>
+                  </div> */}
                 </div>
     </div>
     

@@ -67,7 +67,7 @@ function Profile() {
         const age = userDetails.age;
         const bio = userDetails.otherDetails;
         const username = userDetails.email;
-        const response = await fetch('/save',{
+        const response = await fetch(`${API_BASE_URL}/save`,{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({username,full_name,bio,age,want_to,gender,phone_number}),

@@ -9,8 +9,39 @@ import { useParams } from 'react-router-dom';
 function TicketDetails(){
     const navigate = useNavigate();
     const { id } = useParams();
+    const [event, setEvent] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true); // Added loading state
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
+    
+    useEffect(() => {
+    const fetchEvent = async () => {
+        try {
+        const response = await fetch(`${API_BASE_URL}/eventdetails/${id}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id }),
+            credentials: 'include',
+        });
 
-let event = tickets[id - 1];
+        const result = await response.json();
+        console.log(id);
+        if (result.success) {
+            setEvent(result.event);
+        } else {
+            setError(result.message || "Error fetching event");
+        }
+        } catch (err) {
+        setError("An unexpected error occurred.");
+        console.error(err);
+        } finally {
+        setLoading(false);
+        }
+    };
+
+    fetchEvent();
+    }, [id]);
+
     const [userDetails, setUserDetails] = useState({
         ticket_type : "",
         selling_price : "",
@@ -19,7 +50,7 @@ let event = tickets[id - 1];
         quantity : "",
         transferiability: "",
     })
-    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
+
     const handleChange = (e)=>{
         const {name,value} = e.target;
         setUserDetails((prevDetails) => ({
@@ -33,6 +64,7 @@ let event = tickets[id - 1];
         const fetchname = async ()=>{
             const response = await fetch(`${API_BASE_URL}/event/event_name`,{
                 method:'POST',
+                credentials: 'include',
             })
 
             const result = await response.json();
@@ -56,7 +88,7 @@ let event = tickets[id - 1];
         const ticket_format = userDetails.ticket_format;
         const quantity = userDetails.quantity;
         const transferability = userDetails.transferability;
-        const response = await fetch('/listing2',{
+        const response = await fetch(`${API_BASE_URL}/listing2`,{
             method : 'POST',
             headers : { 'Content-Type': 'application/json' },
             body : JSON.stringify({ticket_type, selling_price, face_value, ticket_format, quantity, transferability})
@@ -73,16 +105,26 @@ let event = tickets[id - 1];
     }
     
 
+    if (loading) {
+        return <p>Loading form...</p>;
+    }
 
+    if (error) {
+    return <p>{error}</p>;
+    }
+
+    if (!event) {
+    return <p>Some Error Occured.</p>;
+    }
 
     return (
         <div className="align_centre_column">
             <div className="event-card2" >
-      <img src={event.photo} alt={event.eventName} className="event-image" />
+      <img src={event.image_url} alt={event.event_name} className="event-image" />
       <div className="event-details2">
-        <h3 className="event-name2">{event.eventName}</h3>
-        <p className="event-location2">📍 {event.eventLocation}</p>
-        <p className="event-date2">📅 {event.eventDateTime}</p>
+        <h3 className="event-name2">{event.event_name}</h3>
+        <p className="event-location2">📍 {event.event_location}</p>
+        <p className="event-date2">📅 {event.event_date}</p>
       </div>
     </div>
             

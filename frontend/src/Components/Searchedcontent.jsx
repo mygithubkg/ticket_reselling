@@ -6,12 +6,12 @@ import { tickets } from "../data";
 
 export default function Searchedcontent({search, condition, EventType = "", date, price}) {
   const navigate = useNavigate();
-
+  const [id, setId] = useState(null);
   function handleonclick(id) {
     navigate(`/Event/${id}`);
+    setId(id);
   }
 
-  const [localSearch, setLocalSearch] = useState("");
   const [event, setEvent] = useState(null);
   const [error, setError] = useState(null);
   const [Loading, setLoading] = useState(null);
@@ -28,6 +28,7 @@ export default function Searchedcontent({search, condition, EventType = "", date
         });
 
         const result = await response.json();
+        
         if (result.success) {
           setEvent(result.event);
         } else {
@@ -43,13 +44,13 @@ export default function Searchedcontent({search, condition, EventType = "", date
     fetchEvent();
   }, []);
 
-  let arr = tickets;
-  // event ? arr = event : arr = tickets;
-
+  let arr;
+  event ? (arr = event): (arr=tickets);
+    console.log(arr);
   let filteredData = arr.filter(
     (e) =>
-      e.eventName.toLowerCase().includes(search.toLowerCase()) &&
-      e.eventName.toLowerCase().includes(EventType)
+      e.event_name.toLowerCase().includes(search.toLowerCase()) &&
+      e.event_type.toLowerCase().includes(EventType)
   );
 
   filteredData = filteredData.sort((a, b) => {
@@ -70,7 +71,7 @@ export default function Searchedcontent({search, condition, EventType = "", date
             <div className="card-container">
               {filteredData.length > 0 ? (
                 filteredData.map((item) => (
-                  <div key={item.id} onClick={() => handleonclick(item.id)}>
+                  <div key={item.event_id} onClick={() => handleonclick(item.event_id)}>
                     <EventCard item={item} />
                   </div>
                 ))
@@ -86,7 +87,7 @@ export default function Searchedcontent({search, condition, EventType = "", date
           <div className="card-container">
             {filteredData.length > 0 ? (
               filteredData.map((item) => (
-                <div key={item.id} onClick={() => handleonclick(item.id)}>
+                <div key={item.event_id} onClick={() => handleonclick(item.event_id)}>
                   <EventCard item={item} />
                 </div>
               ))
