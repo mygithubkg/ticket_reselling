@@ -106,9 +106,8 @@ app.use((req, res, next) => {
   req.headers["socket-id"] = req.get("Socket-ID");
   next();
 });
-// const generateToken = (user) => {
-//   return jwt.sign({ username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
-// };
+
+
 
 
 // Setting up email sending 
@@ -244,28 +243,28 @@ try {
 
 // To verify if user is Loggedin
 
-app.get('/verify', (req,res)=>{
-  // console.log("user session:", req.session); // Log the session object
-  // console.log("User g:", req.user); // Log the user object
-  if (req.isAuthenticated()){
-    res.json({success:true, username: req.user.username});
-  }else{
-    res.json({success:false})
-  }
-})
-
-// app.get('/verify', (req, res) => {
-//   const token = req.cookies.jwt;
-//   if (!token) {
-//     return res.json({ success: false });
+// app.get('/verify', (req,res)=>{
+//   // console.log("user session:", req.session); // Log the session object
+//   // console.log("User g:", req.user); // Log the user object
+//   if (req.isAuthenticated()){
+//     res.json({success:true, username: req.user.username});
+//   }else{
+//     res.json({success:false})
 //   }
-//   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-//     if (err) {
-//       return res.json({ success: false });
-//     }
-//     res.json({ success: true, username: decoded.username });
-//   });
-// });
+// })
+
+app.get('/verify', (req, res) => {
+  const user_token = req.cookies.jwt_user_cookie;
+  if (!user_token) {
+    return res.json({ success: false });
+  }
+  jwt.verify(user_token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.json({ success: false });
+    }
+    res.json({ success: true, username: decoded.username });
+  });
+});
 
 
 // Normal get request
@@ -624,6 +623,8 @@ app.post("/register", (req, res)=> {
                 const user = result.rows[0];
                 req.login(user, (err)=> {
                   console.log(err);
+                  const token = generateToken(user);
+                  res.cookie('jwt_user_cookie', token, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "None" });
                   res.status(200).json({success: true, message: `Registration Success`});
                 })
               }
@@ -638,24 +639,6 @@ app.post("/register", (req, res)=> {
   });
 });
 
-app.post("/login", (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
-    if (err) {
-      return res.status(500).json({ success: false, message: "Technical error" });
-    }
-    if (!user) {
-      return res.status(401).json({ success: false, message: info.message });
-    }
-    req.logIn(user, (err) => {
-      if (err) {
-        return res.status(500).json({ success: false, message: "Login failed" });
-      }
-      console.log(req.session);
-      return res.status(200).json({ success: true, message: "Login successful" });
-    });
-  })(req, res, next);
-});
-
 // app.post("/login", (req, res, next) => {
 //   passport.authenticate('local', (err, user, info) => {
 //     if (err) {
@@ -668,12 +651,34 @@ app.post("/login", (req, res, next) => {
 //       if (err) {
 //         return res.status(500).json({ success: false, message: "Login failed" });
 //       }
-//       const token = generateToken(user);
-//       res.cookie('jwt', token, { httpOnly: true, secure: process.env.NODE_ENV === "production" });
-//       return res.status(200).json({ success: true, message: "Login successful" ,token_1: token});
+//       console.log(req.session);
+//       return res.status(200).json({ success: true, message: "Login successful" });
 //     });
 //   })(req, res, next);
 // });
+
+const generateToken = (user) => {
+  return jwt.sign({ username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+};
+
+app.post("/login", (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      return res.status(500).json({ success: false, message: "Technical error" });
+    }
+    if (!user) {
+      return res.status(401).json({ success: false, message: info.message });
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return res.status(500).json({ success: false, message: "Login failed" });
+      }
+      const token = generateToken(user);
+      res.cookie('jwt_user_cookie', token, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "None" });
+      return res.status(200).json({ success: true, message: "Login successful" ,token_1: token});
+    });
+  })(req, res, next);
+});
 
 
 app.get('/auth/google', passport.authenticate('google',{

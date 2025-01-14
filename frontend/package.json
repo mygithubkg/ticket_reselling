@@ -2,7 +2,7 @@
   "name": "ticketreselling",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://localhost:5000",
+  "proxy": "https://ticket-reselling.onrender.com",
   "dependencies": {
     "@babel/preset-react": "^7.26.3",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",

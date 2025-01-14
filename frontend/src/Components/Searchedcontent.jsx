@@ -43,13 +43,13 @@ export default function Searchedcontent({search, condition, EventType = "", date
     fetchEvent();
   }, []);
 
-  let arr;
-  event ? arr = event : arr = tickets;
+  let arr = tickets;
+  // event ? arr = event : arr = tickets;
 
   let filteredData = arr.filter(
     (e) =>
-      e.event_name.toLowerCase().includes(search.toLowerCase()) &&
-      e.event_name.toLowerCase().includes(EventType)
+      e.eventName.toLowerCase().includes(search.toLowerCase()) &&
+      e.eventName.toLowerCase().includes(EventType)
   );
 
   filteredData = filteredData.sort((a, b) => {
@@ -70,7 +70,7 @@ export default function Searchedcontent({search, condition, EventType = "", date
             <div className="card-container">
               {filteredData.length > 0 ? (
                 filteredData.map((item) => (
-                  <div key={item.event_id} onClick={() => handleonclick(item.event_id)}>
+                  <div key={item.id} onClick={() => handleonclick(item.id)}>
                     <EventCard item={item} />
                   </div>
                 ))
@@ -86,7 +86,7 @@ export default function Searchedcontent({search, condition, EventType = "", date
           <div className="card-container">
             {filteredData.length > 0 ? (
               filteredData.map((item) => (
-                <div key={item.event_id} onClick={() => handleonclick(item.event_id)}>
+                <div key={item.id} onClick={() => handleonclick(item.id)}>
                   <EventCard item={item} />
                 </div>
               ))
