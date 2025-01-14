@@ -5,21 +5,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapPin } from '@fortawesome/free-solid-svg-icons'
 import { faCalendarDays } from '@fortawesome/free-solid-svg-icons'
 export default function Event_card({item}) {
+ 
+
   return (
     <div>
        <div className="card">
                   <div className='image-container'>
-                   <img className="image-card" src={item.photo} alt={item.name} />
+                   <img className="image-card" src={item.image_url} alt={item.name} />
                   </div>
-                  <p className="name">{item.eventName}</p>
-                  <p className="details">{item.eventDescription}</p>
+                  <p className="name">{item.event_name}</p>
+                  <p className="details">{item.event_bio}</p>
                   <div className='text_icon'>
                   <FontAwesomeIcon icon={faMapPin} size="2xl" style={{color:"#000000"}} />
-                  <p>{item.eventDateTime}</p>
+                  <p>{item.event_date}</p>
                   </div>
                   <div className='text_icon'>
                   <FontAwesomeIcon icon={faCalendarDays} size="xl" style={{color:"#000000"}} />
-                  <p>{item.eventLocation}</p>
+                  <p>{item.event_location}</p>
                   </div>
                   
                 

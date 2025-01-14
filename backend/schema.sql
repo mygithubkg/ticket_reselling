@@ -60,13 +60,6 @@ INSERT INTO users (username, password) VALUES
 ('alexsmith@gmail.com', 'hashedpassword3')
 ON CONFLICT (username) DO NOTHING;
 
--- Insert events
-INSERT INTO events (username, event_type, event_date, event_time, event_name, event_location, event_bio) VALUES
-('johndoe@gmail.com', 'Conference', '2025-03-10', '10:00:00', 'Tech Conference 2025', 'Los Angeles Convention Center', 'A tech conference bringing together enthusiasts and professionals.'),
-('janedoe@gmail.com', 'Music', '2025-06-15', '18:00:00', 'Music Fest 2025', 'Central Park, New York', 'An open-air music festival featuring top artists.'),
-('alexsmith@gmail.com', 'Exhibition', '2025-04-05', '09:00:00', 'Art Exhibition', 'National Art Gallery', 'A showcase of contemporary and classical art.')
-ON CONFLICT (event_name) DO NOTHING;
-
 -- Insert tickets
 INSERT INTO tickets (ticket_id,username, event_name, ticket_type, selling_price, face_value, transferability, ticket_format, quantity, seller_name) VALUES
 (1,'johndoe@gmail.com', 'Tech Conference 2025', 'General Admission', 50.00, 40.00, TRUE, 'Digital', 10, 'John Doe'),
@@ -98,3 +91,20 @@ BEGIN
         CREATE INDEX "IDX_session_expire" ON "session" ("expire");
     END IF;
 END $$;
+
+-- Check if column 'image_url' exists before adding it
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'events' AND column_name = 'image_url') THEN
+        ALTER TABLE events ADD COLUMN image_url TEXT;
+    END IF;
+END $$;
+
+-- Insert data into the events table
+INSERT INTO events (username, event_type, event_date, event_time, event_name, event_location, event_bio, image_url) VALUES
+('user1@example.com', 'Concert', '2024-12-24', '19:00:00', 'Sunburn Music Festival', 'Mumbai, India', 'Experience the biggest music festival of the year with international artists and electrifying performances.', 'https://m.economictimes.com/thumb/msid-113568262,width-1200,height-900,resizemode-4,imgsize-1839857/coldplay-india-tour-2025.jpg'),
+('user2@example.com', 'Sports', '2025-01-30', '17:30:00', 'IPL Final Match', 'Chinnaswamy Stadium, Bengaluru, India', 'Witness the ultimate cricket battle as the top teams clash for the IPL title.', 'https://www.shutterstock.com/image-photo/blue-hole-white-paper-coming-600nw-660624601.jpg'),
+('user3@example.com', 'Theatre', '2025-02-15', '18:00:00', 'Hamlet - A Shakespeare Play', 'Prithvi Theatre, Mumbai, India', 'A gripping performance of Shakespeare\s classic tragedy brought to life by renowned actors.', 'https://www.shutterstock.com/image-photo/blue-hole-white-paper-coming-600nw-660624601.jpg'),
+('user4@example.com', 'Stand-Up Comedy', '2025-03-10', '20:00:00', 'Comedy Night with Zakir Khan', 'Auditorium, Delhi University, India', 'An evening filled with laughter and relatable humor by India\s top comedian Zakir Khan.', 'https://www.shutterstock.com/image-photo/blue-hole-white-paper-coming-600nw-660624601.jpg'),
+('user5@example.com', 'Exhibition', '2025-03-20', '10:00:00', 'Art and Culture Fest 2025', 'India Habitat Centre, New Delhi, India', 'Explore an extraordinary display of art, culture, and heritage from across the globe.', 'https://www.shutterstock.com/image-photo/blue-hole-white-paper-coming-600nw-660624601.jpg')
+ON CONFLICT (event_name) DO NOTHING;
