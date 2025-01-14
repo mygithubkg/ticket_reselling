@@ -149,19 +149,19 @@ db.connect().catch(error => {
 
 // Creating Tables
 
-// async function createTables() {
-//   const schemaPath = path.join(__dirname, "schema.sql"); // Save the SQL script above in a file named 'schema.sql'
-//   const schema = fs.readFileSync(schemaPath, "utf-8");
+async function createTables() {
+  const schemaPath = path.join(__dirname, "schema.sql"); // Save the SQL script above in a file named 'schema.sql'
+  const schema = fs.readFileSync(schemaPath, "utf-8");
 
-//   try {
-//     await db.query(schema);
-//     console.log("Database tables created successfully!");
-//   } catch (error) {
-//     console.error("Error creating database tables:", error);
-//   }
-// }
+  try {
+    await db.query(schema);
+    console.log("Database tables created successfully!");
+  } catch (error) {
+    console.error("Error creating database tables:", error);
+  }
+}
 
-// createTables();
+createTables();
 
 io.on("connection", (socket) => {
   console.log("A user connected");
@@ -336,16 +336,16 @@ app.post('/verify/otp', async (req, res) => {
 
 });
 app.post('/listing1', async (req,res)=>{
-  console.log(req.body);
+  // console.log(req.body);
   if (!req.isAuthenticated()){
-    return res.status(500).json({ success: false, message: "Login to Add Event" });
+    return res.status(500).json({ success: false, message: "Kindly Login to Add Events" });
   }
   else{ 
     try{
       const data = await db.query("SELECT username FROM users WHERE username = $1",[req.user.username]);
       if (data.rows.length >=1 ){
-        console.log(`data :`,data.rows[0].username);
-        console.log(req.user.username)
+        // console.log(`data :`,data.rows[0].username);
+        // console.log(req.user.username)
         if (data.rows[0].username === req.user.username){
           await db.query("INSERT INTO events (username, event_type, event_date, event_time, event_name, event_location, event_bio) VALUES ($1, $2,$3,$4,$5,$6,$7)",[req.user.username, req.body.event_type, req.body.event_date, req.body.event_time, req.body.event_name, req.body.event_location, req.body.event_bio]);
           res.status(200).json({success:true, message:"Event Details Added!!"});
@@ -366,7 +366,7 @@ app.post('/event/event_name', async(req,res)=>{
   try{
     const response = await db.query("SELECT event_name FROM events");
     const names = response.rows;
-    console.log(names);
+    // console.log(names);
     if (response.rows.length > 0){
       res.status(200).json({success:true, names});
     }
@@ -380,10 +380,10 @@ app.post('/event/event_name', async(req,res)=>{
 
 
 app.post('/listing2', async (req,res)=>{
-  console.log(req.body);
-  console.log(req.user);
+  // console.log(req.body);
+  // console.log(req.user);
   if (!req.isAuthenticated()){
-    return res.status(500).json({ success: false, message: "Technical error" });
+    return res.status(500).json({ success: false, message: "Kindly Log In to Add Tickets" });
   }
   else{
     try{
@@ -421,8 +421,8 @@ app.post('/listing2', async (req,res)=>{
   }
 })
 
-app.post('/eventdetails', async (req, res) => {
-  const id  = req.body.id;
+app.post('/eventdetails/:id', async (req, res) => {
+  const id = parseInt(req.params.id,10);
   console.log(id);
 
   if (!id) {
@@ -450,7 +450,7 @@ app.post('/eventdetail', async (req, res) => {
     const data = await db.query("SELECT * FROM events");
     if (data.rows.length > 0) {
       const event = data.rows;
-      console.log(event);
+      // console.log(event);
       res.status(200).json({ success: true, event });
     } else {
       res.status(404).json({ success: false, message: "No event found." });
@@ -490,7 +490,9 @@ app.post('/logout', function(req, res, next){
     if (err) {
        return next(err); 
       }
-    res.json({success:true});
+      const token = req.cookies.jwt_user_cookie;
+      res.cookie('jwt_user_cookie', '', { expires: new Date(0), httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "None" });
+      res.json({success:true});
   });
 });
 
@@ -566,7 +568,7 @@ app.post('/save',async (req,res)=>{
   const age = req.body.age;
   const bio = req.body.bio;
   const username = req.body.username;
-  console.log(req.body);
+  // console.log(req.body);
   try{
     await db.query('UPDATE details SET full_name = $1, want_to = $2, phone_number = $3, gender = $4, age = $5, bio = $6 WHERE username = $7',[full_name,want_to,phone_number,gender,age,bio,username
     ]);
