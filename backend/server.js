@@ -343,11 +343,12 @@ app.post('/listing1', async (req,res)=>{
   else{ 
     try{
       const data = await db.query("SELECT username FROM users WHERE username = $1",[req.user.username]);
+      const id = await db.query("SELECT COUNT(*) FROM events");
       if (data.rows.length >=1 ){
         // console.log(`data :`,data.rows[0].username);
         // console.log(req.user.username)
         if (data.rows[0].username === req.user.username){
-          await db.query("INSERT INTO events (username, event_type, event_date, event_time, event_name, event_location, event_bio) VALUES ($1, $2,$3,$4,$5,$6,$7)",[req.user.username, req.body.event_type, req.body.event_date, req.body.event_time, req.body.event_name, req.body.event_location, req.body.event_bio]);
+          await db.query("INSERT INTO events (username, event_type, event_date, event_time, event_name, event_location, event_bio,event_id) VALUES ($1, $2,$3,$4,$5,$6,$7,$8)",[req.user.username, req.body.event_type, req.body.event_date, req.body.event_time, req.body.event_name, req.body.event_location, req.body.event_bio,parseInt(id.rows[0].count) + 1]);
           res.status(200).json({success:true, message:"Event Details Added!!"});
         }else{
           res.status(500).json({success:false, message:"Problem adding Event Details"});
