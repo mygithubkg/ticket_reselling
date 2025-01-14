@@ -48,7 +48,7 @@ function TicketDetails(){
         face_value : "",
         ticket_format : "",
         quantity : "",
-        transferiability: "",
+        transferability: "",
     })
 
     const handleChange = (e)=>{
@@ -160,8 +160,8 @@ function TicketDetails(){
                         <label htmlFor="Transferbiality">Mode of Transfer</label>
                         <select id="moreinfo" name="transferability" placeholder="Online/Physical Delivery" value={userDetails.transferability} onChange={handleChange} required >
                             <option value="" disabled selected>Select your option</option>
-                            <option value="Online" name="online" >Online</option>
-                            <option value="Physical Delivery" name="delivery" >Physical Delivery</option>
+                            <option value="True" name="online" >Online</option>
+                            <option value="False" name="delivery" >Physical Delivery</option>
                         </select>
                     </div>
                     <div className="typess">
