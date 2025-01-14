@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS details (
 );
 
 CREATE TABLE IF NOT EXISTS events (
-    event_id PRIMARY KEY,
+    event_id INT PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
     event_type VARCHAR(100),
     event_date DATE,
@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS events (
     event_name VARCHAR(255) UNIQUE,
     event_location VARCHAR(255),
     event_bio TEXT,
+	image_url TEXT,
     FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE
 );
 
@@ -66,53 +67,54 @@ CREATE TABLE IF NOT EXISTS messages (
 INSERT INTO users (username, password) VALUES
 ('johndoe@gmail.com', 'hashedpassword1'),
 ('janedoe@gmail.com', 'hashedpassword2'),
-('alexsmith@gmail.com', 'hashedpassword3')
+('alexsmith@gmail.com', 'hashedpassword3'),
+('user@example.com', 'hashedpassword3')
 ON CONFLICT (username) DO NOTHING;
 
 -- Insert data into the events table
-INSERT INTO events (username, event_type, event_date, event_time, event_name, event_location, event_bio, image_url) VALUES
-('user1@example.com', 'Concert', '2024-12-24', '19:00:00', 'Sunburn Music Festival', 'Mumbai, India', 'Experience the biggest music festival of the year with international artists and electrifying performances.', 'https://m.economictimes.com/thumb/msid-113568262,width-1200,height-900,resizemode-4,imgsize-1839857/coldplay-india-tour-2025.jpg'),
-('user2@example.com', 'Sports', '2025-01-30', '17:30:00', 'IPL Final Match', 'Chinnaswamy Stadium, Bengaluru, India', 'Witness the ultimate cricket battle as the top teams clash for the IPL title.', 'https://www.shutterstock.com/image-photo/blue-hole-white-paper-coming-600nw-660624601.jpg'),
-('user3@example.com', 'Theatre', '2025-02-15', '18:00:00', 'Hamlet - A Shakespeare Play', 'Prithvi Theatre, Mumbai, India', 'A gripping performance of Shakespeare\s classic tragedy brought to life by renowned actors.', 'https://www.shutterstock.com/image-photo/blue-hole-white-paper-coming-600nw-660624601.jpg'),
-('user4@example.com', 'Stand-Up Comedy', '2025-03-10', '20:00:00', 'Comedy Night with Zakir Khan', 'Auditorium, Delhi University, India', 'An evening filled with laughter and relatable humor by India\s top comedian Zakir Khan.', 'https://www.shutterstock.com/image-photo/blue-hole-white-paper-coming-600nw-660624601.jpg'),
-('user5@example.com', 'Exhibition', '2025-03-20', '10:00:00', 'Art and Culture Fest 2025', 'India Habitat Centre, New Delhi, India', 'Explore an extraordinary display of art, culture, and heritage from across the globe.', 'https://www.shutterstock.com/image-photo/blue-hole-white-paper-coming-600nw-660624601.jpg')
+INSERT INTO events (username, event_type, event_date, event_time, event_name, event_location, event_bio, image_url,event_id) VALUES
+('johndoe@gmail.com', 'Concert', '2024-12-24', '19:00:00', 'Sunburn Music Festival', 'Mumbai, India', 'Experience the biggest music festival of the year with international artists and electrifying performances.', 'https://m.economictimes.com/thumb/msid-113568262,width-1200,height-900,resizemode-4,imgsize-1839857/coldplay-india-tour-2025.jpg',1),
+('janedoe@gmail.com', 'Sports', '2025-01-30', '17:30:00', 'IPL Final Match', 'Chinnaswamy Stadium, Bengaluru, India', 'Witness the ultimate cricket battle as the top teams clash for the IPL title.', 'https://www.shutterstock.com/image-photo/blue-hole-white-paper-coming-600nw-660624601.jpg',2),
+('janedoe@gmail.com', 'Theatre', '2025-02-15', '18:00:00', 'Hamlet - A Shakespeare Play', 'Prithvi Theatre, Mumbai, India', 'A gripping performance of Shakespeare\s classic tragedy brought to life by renowned actors.', 'https://www.shutterstock.com/image-photo/blue-hole-white-paper-coming-600nw-660624601.jpg',3),
+('janedoe@gmail.com', 'Stand-Up Comedy', '2025-03-10', '20:00:00', 'Comedy Night with Zakir Khan', 'Auditorium, Delhi University, India', 'An evening filled with laughter and relatable humor by India\s top comedian Zakir Khan.', 'https://www.shutterstock.com/image-photo/blue-hole-white-paper-coming-600nw-660624601.jpg',4),
+('johndoe@gmail.com', 'Exhibition', '2025-03-20', '10:00:00', 'Art and Culture Fest 2025', 'India Habitat Centre, New Delhi, India', 'Explore an extraordinary display of art, culture, and heritage from across the globe.', 'https://www.shutterstock.com/image-photo/blue-hole-white-paper-coming-600nw-660624601.jpg',5)
 ON CONFLICT (event_name) DO NOTHING;
 
 -- Insert tickets
 -- Insert tickets for Sunburn Music Festival
 INSERT INTO tickets (username, event_name, ticket_type, selling_price, face_value, transferability, ticket_format, quantity, seller_name) VALUES
-('user1@example.com', 'Sunburn Music Festival', 'General Admission', 50.00, 40.00, TRUE, 'Digital', 100, 'Sunburn Organizers'),
-('user1@example.com', 'Sunburn Music Festival', 'VIP', 200.00, 180.00, FALSE, 'Physical', 50, 'Sunburn Organizers'),
-('user1@example.com', 'Sunburn Music Festival', 'Backstage Pass', 500.00, 450.00, FALSE, 'Physical', 20, 'Sunburn Organizers'),
-('user1@example.com', 'Sunburn Music Festival', 'Early Bird', 40.00, 30.00, TRUE, 'Digital', 150, 'Sunburn Organizers');
+('user@example.com', 'Sunburn Music Festival', 'General Admission', 50.00, 40.00, TRUE, 'Digital', 100, 'Sunburn Organizers'),
+('user@example.com', 'Sunburn Music Festival', 'VIP', 200.00, 180.00, FALSE, 'Physical', 50, 'Sunburn Organizers'),
+('user@example.com', 'Sunburn Music Festival', 'Backstage Pass', 500.00, 450.00, FALSE, 'Physical', 20, 'Sunburn Organizers'),
+('user@example.com', 'Sunburn Music Festival', 'Early Bird', 40.00, 30.00, TRUE, 'Digital', 150, 'Sunburn Organizers');
 
 -- Insert tickets for IPL Final Match
 INSERT INTO tickets (username, event_name, ticket_type, selling_price, face_value, transferability, ticket_format, quantity, seller_name) VALUES
-('user2@example.com', 'IPL Final Match', 'General Admission', 100.00, 90.00, TRUE, 'Digital', 200, 'IPL Committee'),
-('user2@example.com', 'IPL Final Match', 'VIP', 500.00, 450.00, FALSE, 'Physical', 50, 'IPL Committee'),
-('user2@example.com', 'IPL Final Match', 'Corporate Box', 1500.00, 1400.00, FALSE, 'Physical', 10, 'IPL Committee'),
-('user2@example.com', 'IPL Final Match', 'Student Pass', 80.00, 70.00, TRUE, 'Digital', 100, 'IPL Committee');
+('user@example.com', 'IPL Final Match', 'General Admission', 100.00, 90.00, TRUE, 'Digital', 200, 'IPL Committee'),
+('user@example.com', 'IPL Final Match', 'VIP', 500.00, 450.00, FALSE, 'Physical', 50, 'IPL Committee'),
+('user@example.com', 'IPL Final Match', 'Corporate Box', 1500.00, 1400.00, FALSE, 'Physical', 10, 'IPL Committee'),
+('user@example.com', 'IPL Final Match', 'Student Pass', 80.00, 70.00, TRUE, 'Digital', 100, 'IPL Committee');
 
 -- Insert tickets for Hamlet - A Shakespeare Play
 INSERT INTO tickets (username, event_name, ticket_type, selling_price, face_value, transferability, ticket_format, quantity, seller_name) VALUES
-('user3@example.com', 'Hamlet - A Shakespeare Play', 'Balcony Seat', 20.00, 18.00, TRUE, 'Digital', 100, 'Prithvi Theatre'),
-('user3@example.com', 'Hamlet - A Shakespeare Play', 'Front Row Seat', 100.00, 90.00, FALSE, 'Physical', 50, 'Prithvi Theatre'),
-('user3@example.com', 'Hamlet - A Shakespeare Play', 'Season Pass', 500.00, 450.00, FALSE, 'Physical', 10, 'Prithvi Theatre'),
-('user3@example.com', 'Hamlet - A Shakespeare Play', 'Concession Pass', 15.00, 12.00, TRUE, 'Digital', 100, 'Prithvi Theatre');
+('user@example.com', 'Hamlet - A Shakespeare Play', 'Balcony Seat', 20.00, 18.00, TRUE, 'Digital', 100, 'Prithvi Theatre'),
+('user@example.com', 'Hamlet - A Shakespeare Play', 'Front Row Seat', 100.00, 90.00, FALSE, 'Physical', 50, 'Prithvi Theatre'),
+('user@example.com', 'Hamlet - A Shakespeare Play', 'Season Pass', 500.00, 450.00, FALSE, 'Physical', 10, 'Prithvi Theatre'),
+('user@example.com', 'Hamlet - A Shakespeare Play', 'Concession Pass', 15.00, 12.00, TRUE, 'Digital', 100, 'Prithvi Theatre');
 
 -- Insert tickets for Comedy Night with Zakir Khan
 INSERT INTO tickets (username, event_name, ticket_type, selling_price, face_value, transferability, ticket_format, quantity, seller_name) VALUES
-('user4@example.com', 'Comedy Night with Zakir Khan', 'Standard', 30.00, 25.00, TRUE, 'Digital', 150, 'Zakir Khan'),
-('user4@example.com', 'Comedy Night with Zakir Khan', 'VIP', 100.00, 90.00, FALSE, 'Physical', 50, 'Zakir Khan'),
-('user4@example.com', 'Comedy Night with Zakir Khan', 'Group Pass', 120.00, 100.00, TRUE, 'Digital', 50, 'Zakir Khan'),
-('user4@example.com', 'Comedy Night with Zakir Khan', 'Student Pass', 20.00, 15.00, TRUE, 'Digital', 100, 'Zakir Khan');
+('user@example.com', 'Comedy Night with Zakir Khan', 'Standard', 30.00, 25.00, TRUE, 'Digital', 150, 'Zakir Khan'),
+('user@example.com', 'Comedy Night with Zakir Khan', 'VIP', 100.00, 90.00, FALSE, 'Physical', 50, 'Zakir Khan'),
+('user@example.com', 'Comedy Night with Zakir Khan', 'Group Pass', 120.00, 100.00, TRUE, 'Digital', 50, 'Zakir Khan'),
+('user@example.com', 'Comedy Night with Zakir Khan', 'Student Pass', 20.00, 15.00, TRUE, 'Digital', 100, 'Zakir Khan');
 
 -- Insert tickets for Art and Culture Fest 2025
 INSERT INTO tickets (username, event_name, ticket_type, selling_price, face_value, transferability, ticket_format, quantity, seller_name) VALUES
-('user5@example.com', 'Art and Culture Fest 2025', 'General Admission', 10.00, 8.00, TRUE, 'Digital', 300, 'Culture Committee'),
-('user5@example.com', 'Art and Culture Fest 2025', 'VIP', 50.00, 45.00, FALSE, 'Physical', 20, 'Culture Committee'),
-('user5@example.com', 'Art and Culture Fest 2025', 'All-Access Pass', 100.00, 90.00, FALSE, 'Physical', 10, 'Culture Committee'),
-('user5@example.com', 'Art and Culture Fest 2025', 'Early Bird', 8.00, 6.00, TRUE, 'Digital', 100, 'Culture Committee');
+('user@example.com', 'Art and Culture Fest 2025', 'General Admission', 10.00, 8.00, TRUE, 'Digital', 300, 'Culture Committee'),
+('user@example.com', 'Art and Culture Fest 2025', 'VIP', 50.00, 45.00, FALSE, 'Physical', 20, 'Culture Committee'),
+('user@example.com', 'Art and Culture Fest 2025', 'All-Access Pass', 100.00, 90.00, FALSE, 'Physical', 10, 'Culture Committee'),
+('user@example.com', 'Art and Culture Fest 2025', 'Early Bird', 8.00, 6.00, TRUE, 'Digital', 100, 'Culture Committee');
 
 -- Reset the ticket_id sequence
 SELECT setval(pg_get_serial_sequence('tickets', 'ticket_id'), COALESCE(MAX(ticket_id), 0) + 1, false) FROM tickets;
@@ -148,5 +150,3 @@ BEGIN
         ALTER TABLE events ADD COLUMN image_url TEXT;
     END IF;
 END $$;
-
-
