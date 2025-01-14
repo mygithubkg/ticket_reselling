@@ -282,8 +282,11 @@ app.post('/verify/sendotp', async (req, res) => {
   if (!user_token) {
     return res.status(500).json({ success: false, message: "User not Authenticated" });
   }
-
-  const email = req.user.username;
+  jwt.verify(user_token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.json({ success: false });
+    }
+    const email = req.user.username;
   const recipients = [
     email,
   ];
@@ -305,6 +308,9 @@ app.post('/verify/sendotp', async (req, res) => {
     console.log(err);
     res.status(500).json({ success: false, message: "Server error" });
   }
+  });
+
+  
 });
 
 app.use((req, res, next) => {
@@ -342,43 +348,48 @@ app.post('/listing1', async (req,res)=>{
   if (!user_token) {
     return res.status(500).json({ success: false, message: "Kindly Log In to Add Event" });
   }
-  else{ 
-    try{
-      const data = await db.query("SELECT username FROM users WHERE username = $1",[req.user.username]);
-      const id = await db.query("SELECT COUNT(*) FROM events");
-      if (data.rows.length >=1 ){
-        // console.log(`data :`,data.rows[0].username);
-        // console.log(req.user.username)
-        if (data.rows[0].username === req.user.username){
-          await db.query("INSERT INTO events (username, event_type, event_date, event_time, event_name, event_location, event_bio,event_id) VALUES ($1, $2,$3,$4,$5,$6,$7,$8)",[req.user.username, req.body.event_type, req.body.event_date, req.body.event_time, req.body.event_name, req.body.event_location, req.body.event_bio,parseInt(id.rows[0].count) + 1]);
-          res.status(200).json({success:true, message:"Event Details Added!!"});
+  jwt.verify(user_token, process.env.JWT_SECRET, async (err, decoded) => {
+    if (err) {
+      return res.json({ success: false });
+    }
+    else{ 
+      try{
+        const data = await db.query("SELECT username FROM users WHERE username = $1",[req.user.username]);
+        const id = await db.query("SELECT COUNT(*) FROM events");
+        if (data.rows.length >=1 ){
+          // console.log(`data :`,data.rows[0].username);
+          // console.log(req.user.username)
+          if (data.rows[0].username === req.user.username){
+            await db.query("INSERT INTO events (username, event_type, event_date, event_time, event_name, event_location, event_bio,event_id) VALUES ($1, $2,$3,$4,$5,$6,$7,$8)",[req.user.username, req.body.event_type, req.body.event_date, req.body.event_time, req.body.event_name, req.body.event_location, req.body.event_bio,parseInt(id.rows[0].count) + 1]);
+            res.status(200).json({success:true, message:"Event Details Added!!"});
+          }else{
+            res.status(500).json({success:false, message:"Problem adding Event Details"});
+          }
         }else{
-          res.status(500).json({success:false, message:"Problem adding Event Details"});
+          res.status(500).json({success:false, message:"User not Authorized"});
         }
-      }else{
-        res.status(500).json({success:false, message:"User not Authorized"});
+      }catch(err){
+        console.log(err);
       }
+    }
+    })
+  });
+
+
+    app.post('/event/event_name', async(req,res)=>{
+    try{
+      const response = await db.query("SELECT event_name FROM events");
+      const names = response.rows;
+      // console.log(names);
+      if (response.rows.length > 0){
+        res.status(200).json({success:true, names});
+      }
+      else{
+        res.status(500).json({success:false,message: "Add event first"} )
+    }
     }catch(err){
       console.log(err);
-    }
-  }
-})
-
-
-app.post('/event/event_name', async(req,res)=>{
-  try{
-    const response = await db.query("SELECT event_name FROM events");
-    const names = response.rows;
-    // console.log(names);
-    if (response.rows.length > 0){
-      res.status(200).json({success:true, names});
-    }
-    else{
-      res.status(500).json({success:false,message: "Add event first"} )
-  }
-  }catch(err){
-    console.log(err);
-  }  
+    }  
 })
 
 
@@ -387,46 +398,50 @@ app.post('/listing2', async (req,res)=>{
   // console.log(req.user);
   const user_token = req.cookies.jwt_user_cookie;
   if (!user_token) {
-    return res.status(500).json({ success: false, message: "Kindly Log In to Add Tickets" });
+    return res.status(500).json({ success: false, message: "Kindly Log In to Add Event" });
   }
+  jwt.verify(user_token, process.env.JWT_SECRET, async (err, decoded) => {
+    if (err) {
+      return res.json({ success: false });
+    }
+    else{
+      try{
+        //Selecting username of user 
+        const data = await db.query("SELECT username FROM users WHERE username = $1",[req.user.username]);
+  
+  
+        if (data.rows.length >=1 ){
+          console.log(`data :`,data.rows[0].username);
+  
+          // Selecting Name of User
+  
+          const name_of_user = await db.query("SELECT full_name FROM details WHERE username = $1",[req.user.username]);
+  
+          if (name_of_user.rows.length > 0){
+            const name = name_of_user.rows[0].full_name;
+            
+            if (data.rows[0].username === req.user.username){
+              await db.query("INSERT INTO tickets (username, ticket_type, selling_price, face_value, transferability, ticket_format, quantity, seller_name) VALUES ($1, $2,$3,$4,$5,$6,$7,$8)",[req.user.username, req.body.ticket_type, req.body.selling_price, req.body.face_value, req.body.transferability, req.body.ticket_format, req.body.quantity,name]);
+              res.status(200).json({success:true, message:"Event Details Added!!"});
+            }else{
+              res.status(500).json({success:false, message:"Problem adding Event Details"});
+            }
+          }else{
+            res.status(500).json({success:false, message: "Kindly update your Profile first!"});
+          }
+        }else{
+          res.status(500).json({success:false, message:"User not Authorized"});
+        }
+      }catch(err){
+        console.log(err);
+      }
+    }
   // if (!req.isAuthenticated()){
   //   return res.status(500).json({ success: false, message: "Kindly Log In to Add Tickets" });
   // }
-  else{
-    try{
-      //Selecting username of user 
-      const data = await db.query("SELECT username FROM users WHERE username = $1",[req.user.username]);
 
-
-      if (data.rows.length >=1 ){
-        console.log(`data :`,data.rows[0].username);
-
-        // Selecting Name of User
-
-        const name_of_user = await db.query("SELECT full_name FROM details WHERE username = $1",[req.user.username]);
-
-        if (name_of_user.rows.length > 0){
-          const name = name_of_user.rows[0].full_name;
-          
-          // rechecking Existence of user
-
-          if (data.rows[0].username === req.user.username){
-            await db.query("INSERT INTO tickets (username, ticket_type, selling_price, face_value, transferability, ticket_format, quantity, seller_name) VALUES ($1, $2,$3,$4,$5,$6,$7,$8)",[req.user.username, req.body.ticket_type, req.body.selling_price, req.body.face_value, req.body.transferability, req.body.ticket_format, req.body.quantity,name]);
-            res.status(200).json({success:true, message:"Event Details Added!!"});
-          }else{
-            res.status(500).json({success:false, message:"Problem adding Event Details"});
-          }
-        }else{
-          res.status(500).json({success:false, message: "Kindly update your Profile first!"});
-        }
-      }else{
-        res.status(500).json({success:false, message:"User not Authorized"});
-      }
-    }catch(err){
-      console.log(err);
-    }
-  }
 })
+});
 
 app.post('/eventdetails/:id', async (req, res) => {
   const id = parseInt(req.params.id,10);
