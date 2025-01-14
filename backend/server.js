@@ -278,8 +278,9 @@ app.get('*', (req, res) => {
 let OTP = 0;
 
 app.post('/verify/sendotp', async (req, res) => {
-  if (!req.isAuthenticated()) {
-      return res.status(401).json({ success: false, message: "User not authenticated" });
+  const user_token = req.cookies.jwt_user_cookie;
+  if (!user_token) {
+    return res.status(500).json({ success: false, message: "User not Authenticated" });
   }
 
   const email = req.user.username;
@@ -337,8 +338,9 @@ app.post('/verify/otp', async (req, res) => {
 });
 app.post('/listing1', async (req,res)=>{
   // console.log(req.body);
-  if (!req.isAuthenticated()){
-    return res.status(500).json({ success: false, message: "Kindly Login to Add Events" });
+  const user_token = req.cookies.jwt_user_cookie;
+  if (!user_token) {
+    return res.status(500).json({ success: false, message: "Kindly Log In to Add Event" });
   }
   else{ 
     try{
@@ -383,9 +385,13 @@ app.post('/event/event_name', async(req,res)=>{
 app.post('/listing2', async (req,res)=>{
   // console.log(req.body);
   // console.log(req.user);
-  if (!req.isAuthenticated()){
+  const user_token = req.cookies.jwt_user_cookie;
+  if (!user_token) {
     return res.status(500).json({ success: false, message: "Kindly Log In to Add Tickets" });
   }
+  // if (!req.isAuthenticated()){
+  //   return res.status(500).json({ success: false, message: "Kindly Log In to Add Tickets" });
+  // }
   else{
     try{
       //Selecting username of user 
@@ -584,8 +590,9 @@ app.post('/save',async (req,res)=>{
 
 
 app.post('/usersinfo', async (req, res) => {
-  if (!req.isAuthenticated()) {
-      return res.status(401).json({ success: false, message: "User not authenticated" });
+  const user_token = req.cookies.jwt_user_cookie;
+  if (!user_token) {
+    return res.status(500).json({ success: false, message: "Try Again after Some Time" });
   }
   try {
       const info = await db.query('SELECT * FROM details WHERE username = $1', [req.user.username]);
@@ -624,13 +631,14 @@ app.post("/register", (req, res)=> {
                 const result = await db.query("INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *",[email,hash]);
                 await db.query("INSERT INTO details (username) VALUES ($1)",[email]);
                 const user = result.rows[0];
+                const token = generateToken(user);
                 req.login(user, (err)=> {
                   console.log(err);
-                  const token = generateToken(user);
                   res.cookie('jwt_user_cookie', token, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "None" });
-                  res.status(200).json({success: true, message: `Registration Success`});
+                  res.status(200).json({success: true, message: `Registration Success, Login if Required`});
                 })
               }
+
               catch (err){
                 res.status(500).json({success: false, message: `Try After Some Time! `});
               }
