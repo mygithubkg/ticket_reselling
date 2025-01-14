@@ -279,9 +279,6 @@ let OTP = 0;
 
 app.post('/verify/sendotp', async (req, res) => {
   const user_token = req.cookies.jwt_user_cookie;
-  if (!user_token) {
-    return res.status(500).json({ success: false, message: "User not Authenticated" });
-  }
   jwt.verify(user_token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
       return res.json({ success: false });
@@ -345,9 +342,6 @@ app.post('/verify/otp', async (req, res) => {
 app.post('/listing1', async (req,res)=>{
   // console.log(req.body);
   const user_token = req.cookies.jwt_user_cookie;
-  if (!user_token) {
-    return res.status(500).json({ success: false, message: "Kindly Log In to Add Event" });
-  }
   jwt.verify(user_token, process.env.JWT_SECRET, async (err, decoded) => {
     if (err) {
       return res.json({ success: false });
@@ -397,9 +391,6 @@ app.post('/listing2', async (req,res)=>{
   // console.log(req.body);
   // console.log(req.user);
   const user_token = req.cookies.jwt_user_cookie;
-  if (!user_token) {
-    return res.status(500).json({ success: false, message: "Kindly Log In to Add Event" });
-  }
   jwt.verify(user_token, process.env.JWT_SECRET, async (err, decoded) => {
     if (err) {
       return res.json({ success: false });
