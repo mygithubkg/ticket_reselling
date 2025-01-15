@@ -600,6 +600,7 @@ app.post('/usersinfo', async (req, res) => {
   const user_token = req.cookies.jwt_user_cookie;
   jwt.verify(user_token, process.env.JWT_SECRET, async (err, decoded) => {
     if (err) {
+      console.error('JWT verification error:', err);
       return res.status(500).json({ success: false, message: "Try Again after Some Time" });
     }else{
       try {
