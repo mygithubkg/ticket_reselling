@@ -347,6 +347,7 @@ app.post('/listing1', async (req,res)=>{
       return res.json({ success: false });
     }
     else{ 
+      req.user = decoded;
       try{
         const data = await db.query("SELECT username FROM users WHERE username = $1",[req.user.username]);
         const id = await db.query("SELECT COUNT(*) FROM events");
@@ -397,6 +398,7 @@ app.post('/listing2', async (req,res)=>{
       return res.json({ success: false });
     }
     else{
+      req.user = decoded;
       try{
         //Selecting username of user 
         const data = await db.query("SELECT username FROM users WHERE username = $1",[req.user.username]);
@@ -603,6 +605,7 @@ app.post('/usersinfo', async (req, res) => {
       console.error('JWT verification error:', err);
       return res.status(500).json({ success: false, message: "Try Again after Some Time" });
     }else{
+      req.user = decoded;
       try {
           const info = await db.query('SELECT * FROM details WHERE username = $1', [req.user.username]);
           if (info.rows.length > 0) {
