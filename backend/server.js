@@ -598,20 +598,23 @@ app.post('/save',async (req,res)=>{
 
 app.post('/usersinfo', async (req, res) => {
   const user_token = req.cookies.jwt_user_cookie;
-  if (!user_token) {
-    return res.status(500).json({ success: false, message: "Try Again after Some Time" });
-  }
-  try {
-      const info = await db.query('SELECT * FROM details WHERE username = $1', [req.user.username]);
-      if (info.rows.length > 0) {
-          return res.status(200).json(info.rows[0]);
-      } else {
-          return res.status(404).json({ success: false, message: "User details not found" });
+  jwt.verify(user_token, process.env.JWT_SECRET, async (err, decoded) => {
+    if (err) {
+      return res.status(500).json({ success: false, message: "Try Again after Some Time" });
+    }else{
+      try {
+          const info = await db.query('SELECT * FROM details WHERE username = $1', [req.user.username]);
+          if (info.rows.length > 0) {
+              return res.status(200).json(info.rows[0]);
+          } else {
+              return res.status(404).json({ success: false, message: "User details not found" });
+          }
+      } catch (err) {
+          console.error(err);
+          res.status(500).json({ success: false, message: "Server error" });
       }
-  } catch (err) {
-      console.error(err);
-      res.status(500).json({ success: false, message: "Server error" });
-  }
+    }
+  });
 });
 
 

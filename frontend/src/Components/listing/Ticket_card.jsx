@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import "../../styles/Event_Page.css"; // Ensure the CSS file is updated accordingly
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 
 function Ticket_card({ event }) {
     const [tickets, setTickets] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
+    const handlenavigate = () => {
+        navigate('/Seller1');
+    };
     useEffect(() => {
         const fetchTickets = async () => {
             const event_name = event.event_name;
@@ -59,8 +63,8 @@ function Ticket_card({ event }) {
                         <p><strong>Face Value:</strong> ₹{ticket.face_value}</p>
                     </div>
                     <div className='buttons'>
-                        <button className='btn-sell'>
-                            <Link to="/listing/step3_ticketdetails" className="btn-link">Sell</Link>
+                        <button className='btn-sell' onClick={handlenavigate}>
+                            Sell
                         </button>
                         <button className='btn-buy'>Buy</button>
                     </div>

@@ -102,7 +102,7 @@ function TicketDetails(){
 
         if (result.success){
             alert("Submitted");
-            navigate('/listing');
+            navigate('/');
         }else{
             alert(result.message);
         }
