@@ -82,40 +82,46 @@ ON CONFLICT (event_name) DO NOTHING;
 
 -- Insert tickets
 -- Insert tickets for Sunburn Music Festival
+-- Insert tickets for Sunburn Music Festival
 INSERT INTO tickets (username, event_name, ticket_type, selling_price, face_value, transferability, ticket_format, quantity, seller_name) VALUES
 ('user@example.com', 'Sunburn Music Festival', 'General Admission', 50.00, 40.00, TRUE, 'Digital', 100, 'Sunburn Organizers'),
 ('user@example.com', 'Sunburn Music Festival', 'VIP', 200.00, 180.00, FALSE, 'Physical', 50, 'Organizers'),
 ('user@example.com', 'Sunburn Music Festival', 'Backstage Pass', 500.00, 450.00, FALSE, 'Physical', 20, 'Sunburns'),
-('user@example.com', 'Sunburn Music Festival', 'Early Bird', 40.00, 30.00, TRUE, 'Digital', 150, 'Akash Entertainment');
+('user@example.com', 'Sunburn Music Festival', 'Early Bird', 40.00, 30.00, TRUE, 'Digital', 150, 'Akash Entertainment')
 ON CONFLICT (seller_name) DO NOTHING;
+
 -- Insert tickets for IPL Final Match
 INSERT INTO tickets (username, event_name, ticket_type, selling_price, face_value, transferability, ticket_format, quantity, seller_name) VALUES
 ('user@example.com', 'IPL Final Match', 'General Admission', 100.00, 90.00, TRUE, 'Digital', 200, 'IPL Committee'),
 ('user@example.com', 'IPL Final Match', 'VIP', 500.00, 450.00, FALSE, 'Physical', 50, 'Committee'),
 ('user@example.com', 'IPL Final Match', 'Corporate Box', 1500.00, 1400.00, FALSE, 'Physical', 10, 'Committee'),
-('user@example.com', 'IPL Final Match', 'Student Pass', 80.00, 70.00, TRUE, 'Digital', 100, 'IPL ');
+('user@example.com', 'IPL Final Match', 'Student Pass', 80.00, 70.00, TRUE, 'Digital', 100, 'IPL')
 ON CONFLICT (seller_name) DO NOTHING;
+
 -- Insert tickets for Hamlet - A Shakespeare Play
 INSERT INTO tickets (username, event_name, ticket_type, selling_price, face_value, transferability, ticket_format, quantity, seller_name) VALUES
-('user@example.com', 'Hamlet - A Shakespeare Play', 'Balcony Seat', 20.00, 18.00, TRUE, 'Digital', 100, 'Prithvi '),
-('user@example.com', 'Hamlet - A Shakespeare Play', 'Front Row Seat', 100.00, 90.00, FALSE, 'Physical', 50, ' Theatre'),
+('user@example.com', 'Hamlet - A Shakespeare Play', 'Balcony Seat', 20.00, 18.00, TRUE, 'Digital', 100, 'Prithvi'),
+('user@example.com', 'Hamlet - A Shakespeare Play', 'Front Row Seat', 100.00, 90.00, FALSE, 'Physical', 50, 'Theatre'),
 ('user@example.com', 'Hamlet - A Shakespeare Play', 'Season Pass', 500.00, 450.00, FALSE, 'Physical', 10, 'Prithvi Sharma'),
-('user@example.com', 'Hamlet - A Shakespeare Play', 'Concession Pass', 15.00, 12.00, TRUE, 'Digital', 100, 'Prithvi ');
+('user@example.com', 'Hamlet - A Shakespeare Play', 'Concession Pass', 15.00, 12.00, TRUE, 'Digital', 100, 'Prithvi')
 ON CONFLICT (seller_name) DO NOTHING;
+
 -- Insert tickets for Comedy Night with Zakir Khan
 INSERT INTO tickets (username, event_name, ticket_type, selling_price, face_value, transferability, ticket_format, quantity, seller_name) VALUES
 ('user@example.com', 'Comedy Night with Zakir Khan', 'Standard', 30.00, 25.00, TRUE, 'Digital', 150, 'Zakir Khan'),
 ('user@example.com', 'Comedy Night with Zakir Khan', 'VIP', 100.00, 90.00, FALSE, 'Physical', 50, 'Zakir'),
 ('user@example.com', 'Comedy Night with Zakir Khan', 'Group Pass', 120.00, 100.00, TRUE, 'Digital', 50, 'Khan Entertainment'),
-('user@example.com', 'Comedy Night with Zakir Khan', 'Student Pass', 20.00, 15.00, TRUE, 'Digital', 100, 'Zakir Entertainment');
+('user@example.com', 'Comedy Night with Zakir Khan', 'Student Pass', 20.00, 15.00, TRUE, 'Digital', 100, 'Zakir Entertainment')
 ON CONFLICT (seller_name) DO NOTHING;
+
 -- Insert tickets for Art and Culture Fest 2025
 INSERT INTO tickets (username, event_name, ticket_type, selling_price, face_value, transferability, ticket_format, quantity, seller_name) VALUES
-('user@example.com', 'Art and Culture Fest 2025', 'General Admission', 10.00, 8.00, TRUE, 'Digital', 300, ' Committee'),
-('user@example.com', 'Art and Culture Fest 2025', 'VIP', 50.00, 45.00, FALSE, 'Physical', 20, 'Culture '),
+('user@example.com', 'Art and Culture Fest 2025', 'General Admission', 10.00, 8.00, TRUE, 'Digital', 300, 'Committee'),
+('user@example.com', 'Art and Culture Fest 2025', 'VIP', 50.00, 45.00, FALSE, 'Physical', 20, 'Culture'),
 ('user@example.com', 'Art and Culture Fest 2025', 'All-Access Pass', 100.00, 90.00, FALSE, 'Physical', 10, 'Committee'),
-('user@example.com', 'Art and Culture Fest 2025', 'Early Bird', 8.00, 6.00, TRUE, 'Digital', 100, 'Culture Committee');
+('user@example.com', 'Art and Culture Fest 2025', 'Early Bird', 8.00, 6.00, TRUE, 'Digital', 100, 'Culture Committee')
 ON CONFLICT (seller_name) DO NOTHING;
+
 -- Reset the ticket_id sequence
 SELECT setval(pg_get_serial_sequence('tickets', 'ticket_id'), COALESCE(MAX(ticket_id), 0) + 1, false) FROM tickets;
 
