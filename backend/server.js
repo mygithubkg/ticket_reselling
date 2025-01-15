@@ -390,6 +390,7 @@ app.post('/listing1', async (req,res)=>{
 app.post('/listing2', async (req,res)=>{
   // console.log(req.body);
   // console.log(req.user);
+  console.log(req.body.event_name);
   const user_token = req.cookies.jwt_user_cookie;
   jwt.verify(user_token, process.env.JWT_SECRET, async (err, decoded) => {
     if (err) {
@@ -412,7 +413,7 @@ app.post('/listing2', async (req,res)=>{
             const name = name_of_user.rows[0].full_name;
             
             if (data.rows[0].username === req.user.username){
-              await db.query("INSERT INTO tickets (username, ticket_type, selling_price, face_value, transferability, ticket_format, quantity, seller_name) VALUES ($1, $2,$3,$4,$5,$6,$7,$8)",[req.user.username, req.body.ticket_type, req.body.selling_price, req.body.face_value, req.body.transferability, req.body.ticket_format, req.body.quantity,name]);
+              await db.query("INSERT INTO tickets (username, ticket_type, selling_price, face_value, transferability, ticket_format, quantity, seller_name,event_name) VALUES ($1, $2,$3,$4,$5,$6,$7,$8,$9)",[req.user.username, req.body.ticket_type, req.body.selling_price, req.body.face_value, req.body.transferability, req.body.ticket_format, req.body.quantity,name, req.body.event_name]);
               res.status(200).json({success:true, message:"Event Details Added!!"});
             }else{
               res.status(500).json({success:false, message:"Problem adding Event Details"});
