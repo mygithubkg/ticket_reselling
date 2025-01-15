@@ -36,21 +36,27 @@ function Category(){
         const event_time = userDetails.event_time;
         const event_name = userDetails.event_name;
         console.log(event_time);
-        const response = await fetch(`${API_BASE_URL}/listing1`,{
-            method : 'POST',
-            headers : { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body : JSON.stringify({event_bio, event_date, event_location, event_name, event_time, event_type }
-            )
-        })
-
-        const result = await response.json();
-
-        if (result.success){
-            navigate('/Seller1');
-        }else{
-            alert(result.message);
-        }
+        try{
+            const response = await fetch(`${API_BASE_URL}/listing1`,{
+                method : 'POST',
+                headers : { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body : JSON.stringify({event_bio, event_date, event_location, event_name, event_time, event_type }
+                )
+            })
+    
+            const result = await response.json();
+    
+            if (result.success){
+                navigate('/Seller1');
+            }else{
+                alert(result.message);
+            }
+        }catch(err){
+            alert("An unexpected error occurred. Please try again later.");
+            console.error(err);
+        }   
+        
     }
 
     // let currentStep= 0
