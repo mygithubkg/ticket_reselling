@@ -19,15 +19,14 @@ function Profile() {
         const fetchData = async () => {
             try {
                 const response = await fetch(`${API_BASE_URL}/usersinfo`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    method: 'GET',
                     credentials: 'include',
                 });
-
-                if (!response.ok) {
-                    throw new Error("Failed to fetch user data");
-                }
                 const data = await response.json();
+                if (!response.ok) {
+                    throw new Error("Failed to fetch user data: ", data.message);
+                }
+                
                 if (data) {
                     setUserDetails({
                         fullName: data.full_name || "",
