@@ -47,7 +47,7 @@ function Category(){
         const result = await response.json();
 
         if (result.success){
-            navigate('/listing/step2_eventdetails');
+            navigate('/Seller1');
         }else{
             alert(result.message);
         }

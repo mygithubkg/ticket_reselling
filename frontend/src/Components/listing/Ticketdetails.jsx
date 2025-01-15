@@ -49,6 +49,7 @@ function TicketDetails(){
         ticket_format : "",
         quantity : "",
         transferability: "",
+        event_na : "",
     })
 
     const handleChange = (e)=>{
@@ -88,10 +89,13 @@ function TicketDetails(){
         const ticket_format = userDetails.ticket_format;
         const quantity = userDetails.quantity;
         const transferability = userDetails.transferability;
+        const event_name = userDetails.event_na;
+        console.log(event_name);
         const response = await fetch(`${API_BASE_URL}/listing2`,{
             method : 'POST',
             headers : { 'Content-Type': 'application/json' },
-            body : JSON.stringify({ticket_type, selling_price, face_value, ticket_format, quantity, transferability})
+            body : JSON.stringify({ticket_type, selling_price, face_value, ticket_format, quantity, transferability,event_name}),
+            credentials: 'include',
         })
 
         const result = await response.json();
@@ -132,10 +136,10 @@ function TicketDetails(){
                 <h1 id="h1">Ticket Details</h1>
                     <div className="typess">
                         <label htmlFor="Event Name">Event Name</label>
-                        <select id="texting"  required >
+                        <select name="event_na" onChange={handleChange} value= {userDetails.event_na} id="texting"  required >
                         <option value="" disabled selected>Select Event Name</option>
                         {name.map((names, index) => (
-                            <option key={index} value={names.event_name}>{names.event_name}</option>
+                            <option key={index}  value={names.event_name}>{names.event_name}</option>
                         ))}
                         </select>
                         <p style={{ color: "red", fontWeight: "bold", fontSize: "16px", textAlign: "center" }}>If event does not exist kindly add event first</p>
