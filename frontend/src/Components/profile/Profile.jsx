@@ -20,8 +20,10 @@ function Profile() {
             try {
                 const response = await fetch(`${API_BASE_URL}/usersinfo`, {
                     method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
                     credentials: 'include',
                 });
+
                 if (!response.ok) {
                     throw new Error("Failed to fetch user data");
                 }
@@ -43,7 +45,7 @@ function Profile() {
             }
         };
         fetchData();
-    }, []);
+    }, [API_BASE_URL]);
     
 
     const handleChange = (e) => {
