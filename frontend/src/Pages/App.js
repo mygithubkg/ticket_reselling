@@ -28,7 +28,8 @@ import Progress from '../Components/listing/Listing';
 import Category from '../Components/listing/Categorization';
 import EventDetails from '../Components/listing/Eventdetails';
 import TicketDetails from '../Components/listing/Ticketdetails';
-import { motion, useScroll } from 'framer-motion'
+import { motion, useScroll } from 'framer-motion';
+import Profile1 from "../Components/profile/profile1";
 
 import { delay, easeIn} from 'framer-motion';
 
@@ -71,6 +72,7 @@ function App() {
           <Route path="/Event/:id" element={<Event_Page />} />
           <Route path ="/ContactUs" element= {<ContactUs/>}/>
           <Route path="/profile" element={<Profile />} />
+          <Route path="/profile1" element={<Profile1 />} />
           <Route path="/profile/dashboard" element={<Dashboard />} />
           <Route path='/profile/orders' element={<Orders />} />
           {/* <Route path='/profile/wallet' element={<Wallet />} /> */}

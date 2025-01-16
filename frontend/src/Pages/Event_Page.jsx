@@ -55,8 +55,10 @@ export default function Event_Page() {
 
 
   return (
-    <div className="event-page">
-      <div className="background-image"><img src={event.photo}  /></div>
+    <div className='event-page-container'>
+   
+   <div className="event-page">
+      <div className="background-image"><img src={event.image_url} /></div>
       <div className="event-header">
      
       <div className='above-image'>
@@ -72,7 +74,7 @@ export default function Event_Page() {
         </div>
       </div>
       <Ticket_card event={event} />
-    </div>
+    </div></div>
 
   );
 }

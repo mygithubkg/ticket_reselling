@@ -5,160 +5,174 @@
 .commoncontainer {
     display: flex;
     flex-direction: row;
-    background: linear-gradient(to right, #4ca3f4, #72d4f9);
-    height: 83vh;
+    background: white;
+    height: auto;
+   
     margin-top: 4%;
     font-family: "Baloo Paaji 2", sans-serif;
     text-align: center;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgb(0 0 0 20%);
-    overflow: hidden;
+    box-shadow: rgb(50 50 93 / 25%) 0 6px 12px -2px, rgb(0 0 0 / 30%) 0 3px 7px -3px;
+    
 }
 
-.commoncontainer .contain {
+/* Redesigned Container for Content */
+.contain {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
-    margin: 0 auto;
-    margin-top: 2%;
-    height: 10vh;
-    width: 50%;
+    margin: 2% auto;
+    width: 60%;
     padding: 2rem;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgb(0 0 0  20%);
-    font-size: 1.2rem;
+    background-color: #ffffff;
+   
+    font-size: 1.1rem;
+    transition: all 0.3s ease-in-out;
 }
 
+/* Title and Subtitle Styling */
 .manage-title {
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: #333;
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #1a1a1a;
     margin-bottom: 0.5rem;
 }
 
 .manage-subtitle {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 400;
-    color: #666;
-    margin-bottom: 1rem;
+    color: #555;
+    margin-bottom: 1.2rem;
 }
 
+/* Profile Header */
 .profile-header {
-    font-size: 2rem;
-    font-weight: 900;
-    color: #2e95da;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #0077cc;
     margin-bottom: 1.5rem;
 }
 
+/* Profile Details */
 .profile-detail {
     font-size: 1rem;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 0.5rem;
-    line-height: 1.5;
+    font-weight: 500;
+    color: #444;
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
 }
 
 .profile-detail span {
     font-weight: 400;
-    color: #666;
+    color: #777;
 }
 
+/* Button Containers */
 .profile-button-container {
     margin-top: 2rem;
     display: flex;
     justify-content: center;
-    gap: 1rem;
-    overflow-y: scroll;
+    gap: 1.2rem;
+    flex-wrap: wrap;
 }
 
-
+/* Buttons */
 .edit-button, .save-button {
-    background-color: #4ca3f4;
-    color: white;
+    background-color: #007bff;
+    color: #fff;
     font-weight: 600;
-    padding: 0.8rem 1.5rem;
+    padding: 0.8rem 2rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
     font-size: 1rem;
-}
-
-.edit-button:hover, .save-button:hover {
-    background-color: #2e95da;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
 }
 
 .edit-button {
-    background-color: #fc0;
-    color: black;
+    background-color: #ffc107;
+    color: #333;
 }
 
-.edit-button:hover {
-    background-color: #ffb700;
+.edit-button:hover, .save-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
+/* Form Styling */
 .form-group-profile {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    font-family: Inter, sans-serif;
-    margin-bottom: 1rem;
     width: 100%;
+    margin-bottom: 1rem;
 }
 
 .form-labels {
     font-weight: 600;
-    margin-bottom: 0.5rem;
     font-size: 1rem;
-    width: 30%;
+    width: 35%;
     text-align: right;
     padding-right: 1rem;
+    color: #333;
 }
 
 .form-inputs, .form-select, .form-text {
-    width: 65%;
-    padding: 0.8rem;
+    width: 60%;
+    padding: 0.9rem;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 1rem;
-    font-family: Inter, sans-serif;
 }
 
 .form-text {
     resize: none;
-    height: 100px;
+    height: 80px;
 }
 
-.save-button {
-    background-color: #4ca3f4;
-    color: white;
-    font-weight: 600;
+/* Logout Button */
+.logout button {
     padding: 0.8rem 1.5rem;
+    font-size: 1rem;
     border: none;
-    border-radius: 5px;
+    background-color: #ff4d4d;
+    color: white;
+    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    font-size: 1rem;
 }
 
-.save-button:hover {
-    background-color: #2e95da;
+.logout button:hover {
+    background-color: #e60000;
 }
 
-/* For responsiveness */
+/* Profile Details Section */
+.profile-details, .profile-form {
+    width: 100%;
+    background-color: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
 
-@media (width <= 768px) {
-    .commoncontainer {
-        flex-direction: column;
-        height: auto;
-        margin-top: 2%;
-    }
 
+.back {
+    color:black;
+    text-decoration: underline #1a1a1a;
+    margin-left: 20px;
+    display: none;
+    
+    font-size: 1.5rem;
+}
+
+
+
+/* Responsiveness */
+@media (max-width: 768px) {
     .contain {
         width: 90%;
+        padding: 1.5rem;
     }
 
     .form-group-profile {
@@ -166,100 +180,31 @@
         align-items: flex-start;
     }
 
-    .form-label {
-        text-align: left;
+    .form-labels, .form-inputs, .form-select, .form-text {
         width: 100%;
+        text-align: left;
         padding-right: 0;
     }
 
-    .form-input, .form-select, .form-text {
-        width: 100%;
+    .profile-button-container {
+        flex-direction: column;
+    }
+    .back{
+        display: inline;
+        position: absolute;
+    }
+}
+
+@media (max-width: 480px) {
+    .manage-title {
+        font-size: 2rem;
     }
 
-}
+    .manage-subtitle {
+        font-size: 1rem;
+    }
 
-.logout {
-    position: relative;
-    margin-top: 10%;
-}
-
-.logout button{
-    padding: 20%;
-    font-size: 1rem;
-    width: 200%;
-    border: 0;
-    background-color: white;
-    font-family: "Baloo Paaji 2", sans-serif;
-    box-shadow: 0.2rem black;
-}
-
-.logout button:hover {
-    cursor: pointer;
-    background-color: #2e95da;
-    transition: 0.3s ease-in;
-}
-
-.logout button:active {
-    background-color: #2e95da;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
-}
-
-
-.form-text {
-    resize: none;
-    height: 60px;
-}
-
-.save-button {
-    background-color: #4ca3f4;
-    color: white;
-    font-weight: 600;
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.save-button:hover {
-    background-color: #2e95da;
-}
-
-.edit-button {
-    background-color: #fc0;
-    color: black;
-    font-weight: 600;
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.edit-button:hover {
-    background-color: #ffb700;
-}
-
-
-.detaile_in_details{
-    font-family: "Baloo Paaji 2", sans-serif;
-    font-size: 1.5rem;
-    text-align: left;
-}
-
-.profile-details{
-    position: relative;
-    margin-top: 25%;
-}
-
-.profile-form {
-    position: relative;
-    margin-top: 25%;
-    max-height: 40vh; /* Adjust the maximum height as needed */
-    overflow-y: auto; /* Enable vertical scrolling */
-    padding: 1rem;
-    border: 1px solid #ccc; /* Optional: Add a border for better distinction */
-    border-radius: 5px; /* Optional: Add rounded corners */
-    background-color: white; /* Ensure a consistent background */
+    .profile-header {
+        font-size: 1.5rem;
+    }
 }

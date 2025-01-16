@@ -5,25 +5,116 @@
 
 .profile_container{
     width: 26%;
-    height: 78vh;
+    height: auto;
     display: flex;
     flex-direction: column;
-    border-radius: 10%;
+    border-radius: 40px;
     justify-content: center;
     text-decoration: none;
     font-family: "Baloo Paaji 2", sans-serif;
     color: #333;
     padding: 1%;
+    
 }
 
-.profile_container button{
-    font-size: 1.5rem;
-    font-family: "Baloo Paaji 2", sans-serif;
-    margin-left: 0%;
+/* Redesigned Sidebar Buttons for a Professional Look */
+
+.profile_container button {
+    font-size: 1.1rem;
+    font-family: 'Inter', sans-serif;
+    margin: 10px 0;
     color: #333;
-    background-color: #f4f7fc;
-    padding: 6%;
-    text-decoration: wavy;
+    background-color: #ffffff;
+    padding: 12px 20px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    border-radius: 8px;
+    box-shadow: rgb(50 50 93 / 25%) 0 6px 12px -2px, rgb(0 0 0 / 30%) 0 3px 7px -3px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.profile_container1 button {
+    font-size: 1.1rem;
+    font-family: 'Inter', sans-serif;
+    margin: 10px 0;
+    color: #333;
+    background-color: #ffffff;
+    padding: 12px 20px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    border-radius: 8px;
+    box-shadow: rgb(50 50 93 / 25%) 0 6px 12px -2px, rgb(0 0 0 / 30%) 0 3px 7px -3px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+/* Icon styling if added */
+.profile_container button i {
+    font-size: 1.3rem;
+    color: #4ca3f4;
+}
+
+/* Hover effect */
+.profile_container button:hover {
+    background-color: #4ca3f4;
+    color: #fff;
+    transform: translateX(5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.profile_container1 button:hover {
+    background-color: #4ca3f4;
+    color: #fff;
+    transform: translateX(5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+
+/* Active state */
+.profile_container button:active {
+    background-color: #2e95da;
+    transform: translateY(2px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+.profile_container1 button:active {
+    background-color: #2e95da;
+    transform: translateY(2px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile_container button {
+        font-size: 1rem;
+        padding: 10px 15px;
+    }
+    .profile_container1 button {
+        font-size: 1rem;
+        padding: 10px 15px;
+    }
+    .profile_container{display: none;}
+}
+
+
+
+
+@media (max-width: 480px) {
+    .profile_container button {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
 }
 
 .profile:hover {
@@ -36,4 +127,59 @@
   background-color: #2e95da;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
+}
+@media (max-width: 480px) {
+    .profile_container1 button {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+}
+
+
+
+
+
+.abc{
+    background-color: #fff;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    width:auto;
+    box-shadow: rgb(50 50 93 / 25%) 0 6px 12px -2px, rgb(0 0 0 / 30%) 0 3px 7px -3px;
+   
+  
+}
+
+.profile_container1{
+    width: 26%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 40px;
+    justify-content: center;
+    text-decoration: none;
+    font-family: "Baloo Paaji 2", sans-serif;
+    color: #333;
+    padding: 1%;
+    
+}
+
+
+.profile_container1 button {
+    font-size: 1.1rem;
+    font-family: 'Inter', sans-serif;
+    margin: 10px 0;
+    color: #333;
+    background-color: #ffffff;
+    padding: 12px 20px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    border-radius: 8px;
+    box-shadow: rgb(50 50 93 / 25%) 0 6px 12px -2px, rgb(0 0 0 / 30%) 0 3px 7px -3px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }

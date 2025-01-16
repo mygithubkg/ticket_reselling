@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ProfileBox from "./ProfileBox";
 import "../../styles/profile/common.css";
+import { Link } from "react-router-dom";
 
 function Profile() {
     const [isEditing, setIsEditing] = useState(false);
@@ -88,7 +89,10 @@ function Profile() {
     return (
         <div>
             <div className="commoncontainer">
+            
+              <Link to="/profile1"><div className="back">Back</div></Link>
                 <ProfileBox />
+                
                 <div className="contain">
                     <div>
                         <h1 className="main-heading">Profile Details</h1>
