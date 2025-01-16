@@ -111,19 +111,24 @@ app.use((req, res, next) => {
 
 
 // Setting up email sending 
-const TOKEN = process.env.MailTrapToken;
-
-const transport = Nodemailer.createTransport(
-  MailtrapTransport({
-    token: TOKEN,
-    testInboxId: 3358452,
-  })
+const transporter = Nodemailer.createTransport(
+  {
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure:  false,
+    auth: {
+      user: process.env.MAIL,
+      pass: process.env.PASSWORD,
+    },
+  }
 );
-
-const sender = {
-  address: "hello@example.com",
-  name: "Mailtrap Test",
-};
+transporter.verify((error, success) => {
+  if (error) {
+    console.error("Error connecting to mail server:", error);
+  } else {
+    console.log("Mail server is ready to take our messages");
+  }
+});
 
 
 
@@ -280,27 +285,34 @@ let OTP = 0;
 app.post('/verify/sendotp', async (req, res) => {
   const user_token = req.cookies.jwt_user_cookie;
   jwt.verify(user_token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) {
-      return res.json({ success: false });
-    }
-    const email = req.user.username;
-  const recipients = [
-    email,
-  ];
+  if (err) {
+    return res.status(500).json({ success: false });
+  }
+  const otp = Math.floor(100000 + Math.random() * 900000);
+  OTP = otp;
+  req.user = decoded;
+  const email = req.user.username;
+  var mailOptions = {
+    from: process.env.EMAIL,
+    to: email,
+    subject: 'Use this OTP to verify your account',
+    html: `<h1>Welcome User!</h1>
+    <br>
+    <p>We're excited to have you on board. Verify yourself and become an exciting member of Trademyticket</p>
+    <br>
+    <p> Your OTP is </p> <br>
+    <h2>${otp}</h2>
+    <p>only valid for 10 minutes.</p>`, 
+  };
   try{
-    const otp = Math.floor(100000 + Math.random() * 900000);
-    OTP = otp;
-    transport
-      .sendMail({
-        from: sender,
-        to: recipients,
-        subject: "TrademyTicket!! Verify your account",
-        text: `Your OTP is ${otp}, Use this to verify your account`,
-        category: "Account Verification",
-        sandbox: true
-      })
-      .then(console.log, console.error);
-    res.status(200).json({ success: true, message: "OTP sent successfully" });
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+        res.status(200).json({ success: true, message: "OTP sent successfully" });
+      }
+    });
   }catch(err){
     console.log(err);
     res.status(500).json({ success: false, message: "Server error" });
@@ -309,34 +321,63 @@ app.post('/verify/sendotp', async (req, res) => {
 
   
 });
+app.post('/verify/account', async(req,res)=>{
+  const user_token = req.cookies.jwt_user_cookie;
+  jwt.verify(user_token, process.env.JWT_SECRET, async (err, decoded) => {
+  if (err) {
+    return res.status(500).json({ success: false });
+  }
+  req.user = decoded;
+  try{
+    const verify = await db.query("SELECT verified FROM users")
+    if (verify){
+      res.status(200).json({success:true})
+    }
+    else{
+      res.status(200).json({success:false})
+    }
+  }
+  catch(err){
+    console.log(err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+  
 
+})
+})
 app.use((req, res, next) => {
   console.log("Authenticated:", req.isAuthenticated());
   next();
 });
 
 app.post('/verify/otp', async (req, res) => {
-  if (!req.isAuthenticated()) {
-      return res.status(401).json({ success: false, message: "User not authenticated" });
-  }
-  const code = req.body.otp;
-  const email = req.user.username;
-  if (code == OTP){
-    try {
-        const result = await db.query("SELECT * FROM users WHERE username = $1", [email]);
-        if (result.rows.length === 0) {
-            return res.status(404).json({ success: false, message: "User not found" });
-        } else{
-            await db.query("UPDATE users SET verified = true WHERE username = $1", [email]);
-            return res.status(200).json({ success: true, message: "Account verified successfully" });
-        }
-    } catch (err) {
-        console.error(err);
-        return res.status(500).json({ success: false, message: "Server error" });
+  const user_token = req.cookies.jwt_user_cookie;
+  jwt.verify(user_token, process.env.JWT_SECRET, async (err, decoded) => {
+    if (err) {
+      return res.status(500).json({ success: false });
     }
-  } else {
-    return res.status(400).json({ success: false, message: "Invalid OTP" });
-  }
+    req.user = decoded;
+    const code = req.body.otp;
+    const email = req.user.username;
+    console.log("otp is:",OTP);
+    console.log(code);
+    if (code == OTP){
+      try {
+          const result = await db.query("SELECT * FROM users WHERE username = $1", [email]);
+          if (result.rows.length === 0) {
+              return res.status(404).json({ success: false, message: "User not found" });
+          } else{
+              await db.query("UPDATE users SET verified = true WHERE username = $1", [email]);
+              return res.status(200).json({ success: true, message: "Account verified successfully" });
+          }
+      } catch (err) {
+          console.error(err);
+          return res.status(500).json({ success: false, message: "Server error" });
+      }
+    } else {
+      return res.status(400).json({ success: false, message: "Invalid OTP" });
+    }
+  });
 
 });
 app.post('/listing1', async (req,res)=>{
