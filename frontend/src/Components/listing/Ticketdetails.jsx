@@ -124,7 +124,7 @@ function TicketDetails(){
     return (
         <div className="align_centre_column">
             <div className="event-card2" >
-      <img src={event.image_url} alt={event.event_name} className="event-image" />
+      <img src={event.image_url} alt={event.event_name} className="event-image1" />
       <div className="event-details2">
         <h3 className="event-name2">{event.event_name}</h3>
         <p className="event-location2">📍 {event.event_location}</p>
