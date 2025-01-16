@@ -2,16 +2,22 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
+.event-page-container{
+  display: flex;
+  justify-content: center;
+}
+
 .event-page {
-  padding: 20px;
+  
   max-width: 1200px;
-  margin: auto;
-  margin: 0;
+
   font-family: "Baloo Paaji 2", sans-serif;
-  background: linear-gradient(135deg, #f0f4ff, #dfe7ff);
+  background:white;
+  box-shadow: rgb(50 50 93 / 25%) 0 6px 12px -2px, rgb(0 0 0 / 30%) 0 3px 7px -3px;
   color: #333;
   text-align: center;
-  margin-left: 15%;
+ 
+  border-radius: 40px;
 }
 
 .event-page h1{
@@ -199,5 +205,151 @@
   }
 }
 
+
+
+/* Styling for the Event Image */
+.above-image {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.event-image {
+  width: 80%;
+  max-width: 600px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease-in-out;
+}
+
+.event-image:hover {
+  transform: scale(1.05);
+}
+
+/* Event Name Styling */
+.event-name h2 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Introductory Line */
+.Intro-line {
+  font-size: 1.2rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 0 10%;
+  line-height: 1.6;
+}
+
+/* Event Metadata Styling */
+.event-meta {
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.event-meta p {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: #333;
+  line-height: 1.6;
+}
+
+.event-meta strong {
+  color: #0056b3;
+  font-weight: 600;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .event-image {
+    width: 90%;
+  }
+
+  .event-name h2 {
+    font-size: 2.2rem;
+  }
+
+  .Intro-line {
+    font-size: 1rem;
+    padding: 0 5%;
+  }
+
+  .event-meta {
+    padding: 20px;
+  }
+
+  .event-meta p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .event-image {
+    width: 100%;
+  }
+
+  .event-name h2 {
+    font-size: 1.8rem;
+  }
+
+  .Intro-line {
+    font-size: 0.9rem;
+    padding: 0 3%;
+  }
+
+  .event-meta {
+    padding: 15px;
+  }
+
+  .event-meta p {
+    font-size: 0.9rem;
+  }
+}
+
+
+.background-image img {
+  object-fit: fill;
+  width: 100%;
+  height: 100%;
+  border-radius: 40px 40px 0 0;
+}
+
+
+.background-image {
+  position: relative;
+  width: 100%;
+  height: 40vh;
+  filter: blur(4px);
+  overflow: hidden;
+}
+
+
+.event-image {
+  margin-top: -25vh;
+  width: 29vw;
+
+
+  height: 20vw;
+ 
+  object-fit: cover;
+  border-radius: 107px;
+  z-index: 10;
+  align-self: center;
+}
+
+
+.above-image {
+  display: flex;
+  justify-content: center;
+}
 
 

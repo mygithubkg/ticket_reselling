@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ProfileBox from "./ProfileBox";
 import Footer from "../Footer";
 import "../../styles/profile/common.css";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
     const [showOtpInput, setShowOtpInput] = useState(false);
@@ -87,7 +88,10 @@ function Dashboard() {
     return (
         <div>
             <div className="commoncontainer">
+            
+              <Link to="/profile1"><div className="back">Back</div></Link>
                 <ProfileBox />
+                
                 <div className="contain">
                     <div>
                         <h1 className="main-heading">Verify Yourself</h1>
