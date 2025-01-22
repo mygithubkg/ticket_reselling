@@ -9,9 +9,7 @@ import env from "dotenv";
 import session from "express-session";
 import passport from "passport";
 import { Strategy } from "passport-local";
-import fs from "fs";
 import Nodemailer from "nodemailer";
-import { MailtrapTransport } from "mailtrap";
 import GoogleStrategy from "passport-google-oauth2";
 import pgSession from "connect-pg-simple";
 import jwt from "jsonwebtoken";
@@ -20,10 +18,14 @@ import cookieParser from "cookie-parser";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import cors from "cors";
+import adminRoutes from "./controllers/admin.js";
+import db from "./db.js";
+import { sendOTP } from "./mail.js";
 
 // to find directory of file
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const router = express.Router();
 env.config();
 
 // Declaring Const 
@@ -56,6 +58,8 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 app.use(cookieParser());
 
+app.use('/admin', adminRoutes);
+
 // General Error Handler
 app.use((err, req, res, next) => {
   console.error(err.stack); // log the error
@@ -84,6 +88,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+router.post('/verify/sendotp',sendOTP);
 
 
 
@@ -110,63 +115,30 @@ app.use((req, res, next) => {
 
 
 
-// Setting up email sending 
-const transporter = Nodemailer.createTransport(
-  {
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure:  false,
-    auth: {
-      user: process.env.MAIL,
-      pass: process.env.PASSWORD,
-    },
-  }
-);
-transporter.verify((error, success) => {
-  if (error) {
-    console.error("Error connecting to mail server:", error);
-  } else {
-    console.log("Mail server is ready to take our messages");
-  }
-});
 
 
-
-// Connecting to database
-// const db = new pg.Client({
-//   user: process.env.DATABASE_USER,
-//   host: process.env.DATABASE_HOST,
-//   database: process.env.DATABASE_DB,
-//   password: process.env.DATABASE_PASS,
-//   port: process.env.DATABASE_PORT,
-// });
-
-const db = new pg.Client({
-  connectionString: process.env.DATABASE_URL, // Contains all connection details
-  ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: true } : false,
-});
-
-db.connect().catch(error => {
-  console.error('Error connecting to the database:', error);
-});
+// Use db.query instead of creating a new pg.Client instance
+db.query('SELECT NOW()', [])
+  .then(res => console.log('Database connected:', res.rows[0]))
+  .catch(error => console.error('Error connecting to the database:', error));
 
 
 
 // Creating Tables
 
-async function createTables() {
-  const schemaPath = path.join(__dirname, "schema.sql"); // Save the SQL script above in a file named 'schema.sql'
-  const schema = fs.readFileSync(schemaPath, "utf-8");
+// async function createTables() {
+//   const schemaPath = path.join(__dirname, "schema.sql"); // Save the SQL script above in a file named 'schema.sql'
+//   const schema = fs.readFileSync(schemaPath, "utf-8");
 
-  try {
-    await db.query(schema);
-    console.log("Database tables created successfully!");
-  } catch (error) {
-    console.error("Error creating database tables:", error);
-  }
-}
+//   try {
+//     await db.query(schema);
+//     console.log("Database tables created successfully!");
+//   } catch (error) {
+//     console.error("Error creating database tables:", error);
+//   }
+// }
 
-createTables();
+// createTables();
 
 io.on("connection", (socket) => {
   console.log("A user connected");
@@ -280,47 +252,14 @@ app.get('*', (req, res) => {
 
 
 
-let OTP = 0;
 
-app.post('/verify/sendotp', async (req, res) => {
-  const user_token = req.cookies.jwt_user_cookie;
-  jwt.verify(user_token, process.env.JWT_SECRET, (err, decoded) => {
-  if (err) {
-    return res.status(500).json({ success: false });
-  }
-  const otp = Math.floor(100000 + Math.random() * 900000);
-  OTP = otp;
-  req.user = decoded;
-  const email = req.user.username;
-  var mailOptions = {
-    from: process.env.EMAIL,
-    to: email,
-    subject: 'Use this OTP to verify your account',
-    html: `<h1>Welcome User!</h1>
-    <br>
-    <p>We're excited to have you on board. Verify yourself and become an exciting member of Trademyticket</p>
-    <br>
-    <p> Your OTP is </p> <br>
-    <h2>${otp}</h2>
-    <p>only valid for 10 minutes.</p>`, 
-  };
-  try{
-    transporter.sendMail(mailOptions, function(error, info){
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Email sent: ' + info.response);
-        res.status(200).json({ success: true, message: "OTP sent successfully" });
-      }
-    });
-  }catch(err){
-    console.log(err);
-    res.status(500).json({ success: false, message: "Server error" });
-  }
-  });
 
-  
+
+app.use((req, res, next) => {
+  console.log("Authenticated:", req.isAuthenticated());
+  next();
 });
+
 app.post('/verify/account', async(req,res)=>{
   const user_token = req.cookies.jwt_user_cookie;
   jwt.verify(user_token, process.env.JWT_SECRET, async (err, decoded) => {
@@ -341,17 +280,12 @@ app.post('/verify/account', async(req,res)=>{
     console.log(err);
     res.status(500).json({ success: false, message: "Server error" });
   }
-  
-
 })
 })
-app.use((req, res, next) => {
-  console.log("Authenticated:", req.isAuthenticated());
-  next();
-});
 
 app.post('/verify/otp', async (req, res) => {
   const user_token = req.cookies.jwt_user_cookie;
+  const OTP = req.body.otp;
   jwt.verify(user_token, process.env.JWT_SECRET, async (err, decoded) => {
     if (err) {
       return res.status(500).json({ success: false });
@@ -704,24 +638,7 @@ app.post("/register", (req, res)=> {
     }
   });
 });
-
-// app.post("/login", (req, res, next) => {
-//   passport.authenticate('local', (err, user, info) => {
-//     if (err) {
-//       return res.status(500).json({ success: false, message: "Technical error" });
-//     }
-//     if (!user) {
-//       return res.status(401).json({ success: false, message: info.message });
-//     }
-//     req.logIn(user, (err) => {
-//       if (err) {
-//         return res.status(500).json({ success: false, message: "Login failed" });
-//       }
-//       console.log(req.session);
-//       return res.status(200).json({ success: true, message: "Login successful" });
-//     });
-//   })(req, res, next);
-// });
+ 
 
 const generateToken = (user) => {
   return jwt.sign({ username: user.username }, process.env.JWT_SECRET, { expiresIn: '1h' });
