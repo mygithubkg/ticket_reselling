@@ -2,6 +2,10 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400;600;800&display=swap');
 
+.primary-accent-colour{
+    background-color: #f54502;
+}
+
 .commoncontainer {
     display: flex;
     flex-direction: row;

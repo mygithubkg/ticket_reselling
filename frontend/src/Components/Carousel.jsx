@@ -46,7 +46,6 @@ function Carousel() {
             <img className="slider-image" src={Trademyticket_images[curr_state]} alt={`Image ${curr_state}`} />
             <button className="nav-button right" onClick={next_state}>&#10095;</button>
             <div id="test"><p>askwdwjdwwhwddddddd</p></div>
-          
         </motion.div>
     );
 }

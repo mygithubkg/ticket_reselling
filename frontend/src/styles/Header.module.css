@@ -2,18 +2,33 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-.header {
+ .upperHeader {
     height: 9vh;
     display: flex;
     min-width: 80vw;
     place-content: center space-between;
     margin: 30px 0 30px 0px;
     border-radius: 20px;
-    background-color: white;
     z-index: -2;
-    
-    
+    /* position: fixed; */
 }
+
+
+.header {
+    height: 9vh;
+    display: flex;
+    min-width: 80vw;
+    place-content: center space-between;
+    margin: 30px 0 30px 0;
+    border-radius: 20px;
+    background-color: white;
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    width: 90%;
+    transition: transform 0.2s ease-in-out, opacity 0.2s;
+}
+
 
 .my {
     color: #DB5500;
@@ -235,7 +250,7 @@
 }
 
 .menuItem:hover {
-    color: #DB5500;
+    color: #f54502;
     cursor: pointer;
 }
 
