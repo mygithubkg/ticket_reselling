@@ -195,7 +195,21 @@
         font-size: 1.8rem;
     }
 
-   
+    .upperHeader {
+        height: 9vh;
+        display: flex;
+        min-width: 80vw;
+        place-content: center space-between;
+        margin: 30px 0 30px 0px;
+        border-radius: 20px;
+        z-index: -2;
+        margin-left: 4px;
+        /* position: fixed; */
+    }
+
+    .header{
+        width: 94%;
+    }
    
     .header_space2 {
         display: none;
