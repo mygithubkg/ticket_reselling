@@ -131,8 +131,10 @@
 
 @media (max-width:768px){
     .statement1, .statement2 {
-        font-size: 2rem;
+        font-size: 1.4rem;
         margin: 20px 10px;
+        border: 2px solid black;
+        display: flex;
     }
 
 
@@ -148,7 +150,7 @@
     }
 
     .statement1, .statement2 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         margin: 10px 5px;
     }
 
