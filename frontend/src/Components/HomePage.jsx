@@ -6,6 +6,7 @@ import EventBoxes from "../Components/EventBoxes";
 import SearchBox from "./SearchBox";
 import Searched_content from "./Searchedcontent";
 import Features from "./Features";
+import Menu from "./Mobile_devices_hamburger";
 import "../styles/homepage.css";
 import { tickets } from "../data";
 import { useParams } from "react-router-dom";
@@ -57,6 +58,7 @@ function HomePage() {
 
   return (
     <>
+    <Menu/>
       <div style={{ position: "relative" }}>
         <Carousel />
         <div className="statement">

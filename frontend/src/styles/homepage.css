@@ -15,15 +15,6 @@
     font-family: "Baloo Paaji 2", sans-serif;
     font-weight: bolder;}
    
-    
-    
-    
-
-
-
-    
-
-
 
 
 .effort{
@@ -75,7 +66,7 @@
 
 
 @media screen  and (width <=700px) {
-    .statement{font-size: 1.6rem;}
+    .statement{font-size: 1.3rem;}
     
 }
 
@@ -91,11 +82,9 @@
 
 
 @media screen  and (max-width:480px) {
-  .statement{font-size: 2.2rem;
+  .statement{font-size: 1.9rem;
     display: flex; position: static; color: black;
     margin-top: 30px;
-   
-
  }
  .search-box-conatiner-hp{
   width: 100%;

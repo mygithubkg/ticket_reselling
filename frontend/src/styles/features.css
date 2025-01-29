@@ -36,12 +36,12 @@
 }
 
 .statement1 span {
-    color: red;
+    color: #f54502;
     font-weight: bolder;
 }
 
 .statement2 span {
-    color: green;
+    color: #f54502;
     font-weight: bolder;
 }
 
@@ -131,14 +131,11 @@
 
 @media (max-width:768px){
     .statement1, .statement2 {
-        font-size: 2rem;
+        font-size: 1.4rem;
         margin: 20px 10px;
+        display: flex;
     }
-
-
 }
-
-
 
 @media (max-width: 450px){
 
@@ -148,7 +145,7 @@
     }
 
     .statement1, .statement2 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         margin: 10px 5px;
     }
 

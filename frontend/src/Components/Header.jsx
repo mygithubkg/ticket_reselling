@@ -201,14 +201,14 @@ function Header() {
                 </button>
               )}
             </span>
-            <div onClick={handleMenu} className={styles.menu_icon}>
+            {/* <div onClick={handleMenu} className={styles.menu_icon}>
               |||
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
       {/* Conditional rendering of the menu */}
-      {show && (
+      {/* {show && (
         <div className={styles.menu}>
           <div className={styles.menu_container}>
             <Link
@@ -268,7 +268,7 @@ function Header() {
             )}
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 }
