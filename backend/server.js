@@ -18,14 +18,15 @@ import cookieParser from "cookie-parser";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import cors from "cors";
-import adminRoutes from "./controllers/admin.js";
+import router_admin from "./controllers/admin.js";
 import db from "./db.js";
-import { sendOTP } from "./mail.js";
+import router_mail from "./managemail.js";  
+import router_chatbot from "./routes/chatbot.js";
 
 // to find directory of file
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const router = express.Router();
+
 env.config();
 
 // Declaring Const 
@@ -38,27 +39,22 @@ const { hash } = bcrypt;
 let users = {};
 let sockets = {};
 
-// creating server for socket.io
-const server = createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: process.env.CLIENT_URL || "http://localhost:3000", // Replace with your Render client URL
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type"],
-    credentials: true, // Allow credentials (cookies)
-  },
-});
-
-
-
 // Using Middlewares
+app.use(cors({
+  origin: process.env.CLIENT_URL || 'https://ticket-reselling-frontend.onrender.com' || "http://localhost:3000",
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204
+}));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 app.use(cookieParser());
 
-app.use('/admin', adminRoutes);
+app.use('/admin', router_admin);
+app.use('/user', router_mail);
+app.use('/chatbot', router_chatbot);
 
 // General Error Handler
 app.use((err, req, res, next) => {
@@ -88,18 +84,22 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-router.post('/verify/sendotp',sendOTP);
 
 
 
+// creating server for socket.io
+const server = createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: process.env.CLIENT_URL || "http://localhost:3000", // Replace with your Render client URL
+    methods: ["GET", "POST","DELETE","PUT","PATCH"],
+    allowedHeaders: ["Content-Type"],
+    credentials: true, // Allow credentials (cookies)
+  },
+});
 
-// Cors Middleware
-app.use(cors({
-  origin:  process.env.CLIENT_URL || 'https://ticket-reselling-frontend.onrender.com',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-  optionsSuccessStatus: 204
-}));
+console.log('CORS Origin:', process.env.CLIENT_URL || 'https://ticket-reselling-frontend.onrender.com' || 'http://localhost:3000');
+app.options('*', cors());
 
 app.use((req, res, next) => {
   req.headers["socket-id"] = req.get("Socket-ID");
@@ -111,7 +111,6 @@ app.use((req, res, next) => {
   req.headers["socket-id"] = req.get("Socket-ID");
   next();
 });
-
 
 
 
@@ -249,7 +248,6 @@ app.get('/verify', (req, res) => {
 app.get('*', (req, res) => {
   res.status(404).send('Incorrect URL');
 });
-
 
 
 
@@ -482,7 +480,7 @@ app.post('/logout', function(req, res, next){
        return next(err); 
       }
       const token = req.cookies.jwt_user_cookie;
-      res.cookie('jwt_user_cookie', '', { expires: new Date(0), httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "None" });
+      res.cookie('jwt_user_cookie', '', { expires: new Date(0), httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "strict" });
       res.json({success:true});
   });
 });
@@ -623,7 +621,7 @@ app.post("/register", (req, res)=> {
                 const token = generateToken(user);
                 req.login(user, (err)=> {
                   console.log(err);
-                  res.cookie('jwt_user_cookie', token, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "None" });
+                  res.cookie('jwt_user_cookie', token, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "strict" });
                   res.status(200).json({success: true, message: `Registration Success, Login if Required`});
                 })
               }
@@ -657,7 +655,7 @@ app.post("/login", (req, res, next) => {
         return res.status(500).json({ success: false, message: "Login failed" });
       }
       const token = generateToken(user);
-      res.cookie('jwt_user_cookie', token, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "None" });
+      res.cookie('jwt_user_cookie', token, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "strict" });
       return res.status(200).json({ success: true, message: "Login successful" ,token_1: token});
     });
   })(req, res, next);

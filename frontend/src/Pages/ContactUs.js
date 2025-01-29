@@ -17,11 +17,26 @@ export default function ContactUs() {
       [name]: value,
     });
   };
-
-  const handleSubmit = (e) => {
+  const API_URL = process.env.REACT_APP_API_BASE_URL;  
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    setSubmitted(true);
+    const { name, email, message } = formData;  
+    const response = await fetch (`${API_URL}/user/sendmail`, {   
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({name,email,message}),
+      credentials: "include",
+      withcredentials: true,
+    });
+    
+    console.log(response);
+    const result = await response.json();
+    if (result.success) {
+      console.log("Email sent successfully");
+      setSubmitted(true);
+    } else {
+      console.log("Email not sent");
+    }
   };
 
   return (
@@ -42,7 +57,7 @@ export default function ContactUs() {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email">Your Email:</label>
             <input
               type="email"
               id="email"
