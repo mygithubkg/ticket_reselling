@@ -88,7 +88,6 @@ export default function Features() {
         Find Tickets You Will&nbsp;<span>Love</span>
       </motion.div>
 
-
       <motion.div ref={container} className="box-container">
         {features_buyer.map((feature, index) => (
 
@@ -117,7 +116,7 @@ export default function Features() {
         }}
         viewport={{ once: true, amount: 0.3 }}
         className="statement2">
-          Turn Extra Tickets into&nbsp;<span>Cash</span>
+          Turn Extra Tickets into &nbsp;<span>Cash</span>
         </motion.div>
 
         <motion.div

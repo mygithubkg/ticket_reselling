@@ -5,7 +5,8 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useNavigate } from 'react-router-dom';
 const Trademyticket_images = [
-    "https://media-hosting.imagekit.io//83a53cd2a7554622/pexels-photo-8261823.webp?Expires=1735834334&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=lNztvpi5ykSur2DLKmH1m2XvQP4kAnBTMmk5D~XEa8hCFPk2srYeWUq-Gjs2oCYd7MU7AsOLzocS4gR7jwuZCItV4Rob6yhe9-DHD1~Tz-47kTvrP~CUZqhy52jdhfmrZhKr06x5woYIXO~N~fik2klEKwE-~KJOFie5F4dX535beX~A7SomDb2fG6EnvNkqZkYbzG1hvtpCZlsiLjarWmPcat0QnaPcZhzVaJmHRdS6OREKpt5PPL7oBbJDxUiZ2e2xyRoUQMf5hD~~YCClVpZ~~bkiI4D7osfsaozH3fJWQ53FKrnXDe2ENjHIkcRO0Qx~KVdTWpiFEx7fHnktog__",
+    "https://media-hosting.imagekit.io//93d3b59285a74fb4/pixelcut-export.png?Expires=1831635334&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=VuR6reIH3yUaZ84Rua0zFK-fckqq~UUKaRYwlAaDPeu8j98OrD2Md~Xd~i8j~1FaIIuz8-Vys-anSOF9J~Yy-g9M1SjKi-DARJPPBCM3LBnlhRJfdBnMbCxOB39zcjyaH8GiwznCnTHUL8yol7nmxf4j7gwQwR211d8YM1CrakQBR2rSOXh6OYrVO5~2pCqf-PGNjwRMn11xYM~Zzs-8W35PyYR2PtSRiAKtUvx5u0JBpNtJQCRnd4dbHI~5Xx5IRJo2m9erlUaNHNdhOONW0nXwXzj7g5zgL7q~bza5x8gtC8i6Xzk8hSbMSpivHDdMjEr8hvOI6k8qXN3GCgjSXQ__"
+    
 
 ];
 
@@ -45,7 +46,6 @@ function Carousel() {
             <img className="slider-image" src={Trademyticket_images[curr_state]} alt={`Image ${curr_state}`} />
             <button className="nav-button right" onClick={next_state}>&#10095;</button>
             <div id="test"><p>askwdwjdwwhwddddddd</p></div>
-          
         </motion.div>
     );
 }

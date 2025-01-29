@@ -32,6 +32,7 @@ import { motion, useScroll } from 'framer-motion';
 import Profile1 from "../Components/profile/profile1";
 
 import { delay, easeIn} from 'framer-motion';
+import Menu from '../Components/Mobile_devices_hamburger';
 
 const tickets = [
   { id: 1, name: "Diljit", price: 10000, details: "fffhewjfkjfbeiuwfkjewfgffiu", image: "image_url" },
@@ -45,6 +46,7 @@ function App() {
  
   return (
     <BrowserRouter>
+    <Menu/>
       <div className="App">
         <motion.div style={{transformOrigin: "top",
          

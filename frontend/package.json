@@ -21,6 +21,7 @@
     "react-hook-form": "^7.54.1",
     "react-router-dom": "^7.0.2",
     "react-scripts": "^5.0.1",
+    "react-use": "^17.6.0",
     "read-scripts": "^1.1.0",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",

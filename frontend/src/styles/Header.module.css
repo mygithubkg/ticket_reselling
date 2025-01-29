@@ -1,247 +1,270 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+.upperHeader {
+  height: 9vh;
+  display: flex;
+  min-width: 80vw;
+  place-content: center space-between;
+  margin: 30px 0 30px 0px;
+  border-radius: 20px;
+  z-index: -2;
+  /* position: fixed; */
+}
 
 .header {
+  height: 9vh;
+  display: flex;
+  min-width: 80vw;
+  place-content: center space-between;
+  margin: 30px 0 30px 0;
+  border-radius: 20px;
+  background-color: white;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  width: 90%;
+  transition: transform 0.2s ease-in-out, opacity 0.2s;
+}
+
+.my {
+  color: #db5500;
+}
+
+.logoLink {
+  text-decoration: none;
+  color: inherit;
+  margin-top: 2%;
+  padding-left: 20px;
+  font-size: 3vw;
+}
+
+.logoLink1 {
+  text-decoration: none;
+  color: inherit;
+}
+
+#logo {
+  text-decoration: none;
+  font-family: "Baloo Paaji 2", sans-serif;
+  color: #008fdb;
+  display: flex;
+  align-items: center;
+  place-content: center center;
+  font-size: 2rem;
+}
+
+.header_space1,
+.header_space2,
+.header_space3 {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+}
+
+.header_space3 {
+  display: flex;
+  align-items: center;
+  place-content: center center;
+}
+
+.header_space2 p {
+  display: flex;
+  align-items: center;
+  place-content: center center;
+  font-family: Inter, sans-serif;
+  font-size: 1.3vw;
+}
+
+.header_space3 span {
+  display: flex;
+  align-items: center;
+  place-content: center center;
+  padding-right: 2vh;
+  font-family: Inter, sans-serif;
+  font-size: 1.2vw;
+}
+
+.header_space3 span {
+  margin-top: 2%;
+}
+
+.menu_icon {
+  display: none;
+  margin-right: 4vw;
+  font-size: 1.3rem;
+  cursor: pointer;
+  background-color: white;
+}
+
+.button_sign {
+  text-decoration: none;
+  font-size: 1rem;
+  border: 0;
+  background-color: white;
+}
+
+.button_sign:hover {
+  cursor: pointer;
+  color: red;
+}
+
+.header_space3 span button:hover {
+  cursor: pointer;
+  color: #db5500;
+}
+
+.sell_button {
+  font-size: 1.5rem;
+  background-color: #db5500;
+  padding: 8px 3vw;
+  height: 50%;
+  margin-right: 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: white;
+  font-family: Inter, sans-serif;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.header_space2 p {
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
+  width: fit-content;
+  margin: 0 0.5vw;
+  padding: 0 1vw;
+}
+
+.header_space2 p:hover {
+  color: white;
+}
+
+.header_space2 p::after {
+  content: "";
+  background-color: #db5500;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 100%;
+  transition: all ease 0.7s;
+  border-radius: 107px;
+  z-index: -1;
+}
+
+.header_space2 p:hover::after {
+  top: 0%;
+}
+
+.header_space1 {
+  transition: transform 0.3s ease;
+}
+
+.header_space1:hover {
+  transform: scale(1.05);
+}
+
+/* .divider {
+    margin: 0 0.5vw;
+    width: 1.5px;
+    height: 45px;
+    background-color: #ccc;
+} */
+
+@media screen and (width <= 900px) {
+  #logo {
+    font-size: 1.8rem;
+  }
+
+  .button_sign {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    margin-left: 13px;
+    color: #333;
+    text-decoration: none;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .upperHeader {
     height: 9vh;
     display: flex;
     min-width: 80vw;
     place-content: center space-between;
     margin: 30px 0 30px 0px;
     border-radius: 20px;
-    background-color: white;
     z-index: -2;
-    
-    
-}
+    margin-left: 4px;
+    /* position: fixed; */
+  }
 
-.my {
-    color: #DB5500;
-}
+  .header {
+    width: 94%;
+  }
 
-.logoLink {
-    text-decoration: none;
-    color: inherit;
-    margin-top: 2%;
-    padding-left: 20px;
-    font-size: 3vw;
-}
-
-.logoLink1 {
-    text-decoration: none;
-    color: inherit;
-}
-
-#logo {
-    text-decoration: none;
-    font-family: "Baloo Paaji 2", sans-serif;
-    color: #008FDB;
-    display: flex;
-    align-items: center;
-    place-content: center center;
-    font-size: 2rem;
-}
-
-.header_space1, .header_space2, .header_space3 {
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-    align-items: center;
-}
-
-.header_space3 {
-    display: flex;
-    align-items: center;
-    place-content: center center;
-}
-
-.header_space2 p  {
-    display: flex;
-    align-items: center;
-    place-content: center center;
-    font-family: Inter, sans-serif;
-    font-size: 1.3vw;
-}
-
-.header_space3 span{
-    display: flex;
-    align-items: center;
-    place-content: center center;
-    padding-right: 2vh;
-    font-family: Inter, sans-serif;
-    font-size: 1.2vw;
-}
-
-
-
-.header_space3 span {
-    margin-top: 2%;
-}
-
-.menu_icon {
+  .header_space2 {
     display: none;
-    margin-right: 4vw;
-    font-size: 1.3rem;    
-    cursor: pointer;
-    background-color: white;
-}
+  }
 
-.button_sign {
-    text-decoration: none;
-    font-size: 1rem;
-    border: 0;
-    background-color: white;
-}
+  .menu_icon {
+    display: inline;
+  }
 
-.button_sign:hover{
-    cursor: pointer;
-    color: red;
+  .header_space3 span {
+    display: none;
+  }
 
-}
-
-.header_space3 span button:hover {
-    cursor: pointer;
-    color: #DB5500;
-}
-
-.sell_button {
-    font-size: 1.5rem;
-    background-color: #DB5500;
-    padding: 8px 3vw;
-    height: 50%;
-    border-radius: 20px;
-    text-decoration: none;
-    color: white;
-    font-family: Inter, sans-serif;
-}
-
-.link {
-    text-decoration: none;
-    color: black;
-}
-
-.header_space2 p{
-    position: relative;
-    overflow: hidden;
-    z-index:10;
-    width: fit-content;
-    margin: 0 0.5vw;
-    padding: 0 1vw;
-   
-
-  
-}
-
-.header_space2 p:hover {
-    color:white;
-  
-}
-
-.header_space2 p::after{
-    content: "";
-    background-color: #DB5500;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top:100%;
-    transition: all ease 0.7s;
-    border-radius: 107px;
-    z-index: -1;
-    
-    
-}
-
-.header_space2 p:hover::after{
-    top:0%;
-   
-}
-
-
-
-
-.header_space1 {
-    transition: transform 0.3s ease;
-}
-
-.header_space1:hover {
-    transform: scale(1.05);
-}
-
-
-.divider {
-    margin: 0 0.5vw;
-    width: 1.5px;
-    height: 45px;
-    background-color: #ccc;
-}
-
-@media screen and (width <= 900px) {
-    #logo{
-        font-size: 1.8rem;
-    }
-
-   
-   
-    .header_space2 {
-        display: none;
-    }
-
-    .menu_icon {
-        display: inline;;
-    }
-
-    .header_space3 span {
-        display: none;
-    }
-
-    .divider {
+  /* .divider {
         margin: 0 3vw;
-    }
+    } */
 
-    .button_sign{
-        font-size: 1.2rem;
-        border-bottom: 1px solid #ccc;
-        font-family: "Baloo Paaji 2", sans-serif;
-        text-align: left;
-        padding: 10px 0;
-    }
+  .button_sign {
+    font-size: 1.2rem;
+    border-bottom: 1px solid #ccc;
+    font-family: "Baloo Paaji 2", sans-serif;
+    text-align: left;
+    padding: 10px 0;
+  }
 }
 
 .menu_container {
-    height: 50vh;
-    width: 50vw;
-    background-color: white;
-    position: absolute;
-    top: 95px;
-    right: 0;
-    z-index: 20;
-    box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    visibility: visible;    }
-
-
+  height: 50vh;
+  width: 50vw;
+  background-color: white;
+  position: absolute;
+  top: 95px;
+  right: 0;
+  z-index: 20;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  visibility: visible;
+}
 
 /* Menu Item Styling */
 .menuItem {
-    font-size: 1.2rem;
-    margin: 10px 0;
-    color: #333;
-    text-decoration: none;
-    padding: 10px 0;
-    border-bottom: 1px solid #ccc;
+  font-size: 1.2rem;
+  margin: 10px 0;
+  color: #333;
+  text-decoration: none;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
 }
 
 .menuItem:hover {
-    color: #DB5500;
-    cursor: pointer;
+  color: #f54502;
+  cursor: pointer;
 }
 
-
-.menu_container{
-    display: flex;
-    flex-direction: column;
+.menu_container {
+  display: flex;
+  flex-direction: column;
 }
-
