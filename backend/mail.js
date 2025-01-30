@@ -1,7 +1,9 @@
 import express from 'express';
 import nodemailer from 'nodemailer';
 import jwt from 'jsonwebtoken';
-    ``
+import env from 'dotenv';
+env.config();
+
 // Setting up email sending 
 const transporter = nodemailer.createTransport(
   {

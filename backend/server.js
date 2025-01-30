@@ -480,7 +480,7 @@ app.post('/logout', function(req, res, next){
        return next(err); 
       }
       const token = req.cookies.jwt_user_cookie;
-      res.cookie('jwt_user_cookie', '', { expires: new Date(0), httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "strict" });
+      res.cookie('jwt_user_cookie', '', { expires: new Date(0), httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "None" });
       res.json({success:true});
   });
 });
@@ -621,7 +621,7 @@ app.post("/register", (req, res)=> {
                 const token = generateToken(user);
                 req.login(user, (err)=> {
                   console.log(err);
-                  res.cookie('jwt_user_cookie', token, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "strict" });
+                  res.cookie('jwt_user_cookie', token, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "None" });
                   res.status(200).json({success: true, message: `Registration Success, Login if Required`});
                 })
               }
@@ -655,7 +655,7 @@ app.post("/login", (req, res, next) => {
         return res.status(500).json({ success: false, message: "Login failed" });
       }
       const token = generateToken(user);
-      res.cookie('jwt_user_cookie', token, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "strict" });
+      res.cookie('jwt_user_cookie', token, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "None" });
       return res.status(200).json({ success: true, message: "Login successful" ,token_1: token});
     });
   })(req, res, next);
