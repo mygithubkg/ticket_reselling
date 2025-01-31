@@ -4,9 +4,8 @@ import EventCard from "./Event_Card";
 import { useNavigate, useParams } from "react-router-dom";
 import { tickets } from "../data";
 
-export default function Searchedcontent({search, condition, EventType = "", date, price}) {
+export default function Searchedcontent({search, condition, EventType = "", date, price,setSearchBoxResults,id,setId}) {
   const navigate = useNavigate();
-  const [id, setId] = useState(null);
   function handleonclick(id) {
     navigate(`/Event/${id}`);
     setId(id);
@@ -61,6 +60,20 @@ export default function Searchedcontent({search, condition, EventType = "", date
     }
     return 0;
   });
+
+  // if(filteredData){
+  //   setSearchBoxResults(filteredData);
+  // }
+
+  useEffect(() => {
+    // console.log("filtered Data: ");
+    // console.log(filteredData);
+    setSearchBoxResults(filteredData);
+  }, [search]);
+
+  // console.log("render content ");
+  
+  
 
   return (
     <div>
