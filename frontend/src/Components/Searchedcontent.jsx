@@ -45,7 +45,7 @@ export default function Searchedcontent({search, condition, EventType = "", date
 
   let arr;
   event ? (arr = event): (arr=tickets);
-    console.log(arr);
+    // console.log(arr);
   let filteredData = arr.filter(
     (e) =>
       e.event_name.toLowerCase().includes(search.toLowerCase()) &&
