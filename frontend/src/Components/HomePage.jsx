@@ -12,6 +12,8 @@ import { tickets } from "../data";
 import { useParams } from "react-router-dom";
 
 function HomePage() {
+  const [eventId, setId] = useState(null);
+  const [searchBoxResults, setSearchBoxResults] = useState([{}]);
   const [search, setSearch] = useState("");
   const { id } = useParams();
   const [event, setEvent] = useState(null);
@@ -58,7 +60,7 @@ function HomePage() {
 
   return (
     <>
-    <Menu/>
+      <Menu />
       <div style={{ position: "relative" }}>
         <Carousel />
         <div className="statement">
@@ -70,16 +72,18 @@ function HomePage() {
           style={{ width: "100%", display: "flex", justifyContent: "center" }}
         >
           <div className="search-box-conatiner-hp">
-            <SearchBox search={search} setSearch={setSearch} />
+            <SearchBox search={search} setSearch={setSearch} searchBoxResults={searchBoxResults} id={eventId} setId={setId}/>
           </div>
         </div>
         <Searched_content
           condition={true}
           search={search}
           setSearch={setSearch}
+          setSearchBoxResults={setSearchBoxResults}
+          id={eventId}
+          setId={setId}
         />
       </div>
-
 
       <SubHeading info="Trending Events" />
       {event ? <EventBoxes data={event} /> : "No event available"}
