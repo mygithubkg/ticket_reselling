@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Faq from "../Components/Faq_section";
 import { faqDat } from "../data";
 import SearchBox from '../Components/SearchBox';
@@ -15,6 +15,8 @@ export default function Seller1() {
     { user: "Alice", text: "Hi there!" },
     { user: "Bob", text: "Hello!" },
   ]);
+  const [searchBoxResults,setSearchBoxResults] = useState([{}]);
+  const [id, setId] = useState(null);
 
   const handleSendMessage = (newMessage) => {
     setMessages((prevMessages) => [...prevMessages, { user: "Me", text: newMessage }]);
@@ -25,7 +27,7 @@ export default function Seller1() {
       <div className="container-main">
         {/* Search and Searched Content */}
         <div className="search-container">
-          <SearchBox search={search} setSearch={setSearch} />
+          <SearchBox search={search} setSearch={setSearch} searchBoxResults={searchBoxResults} id={id} setId={setId}/>
         
         <div style={{"display": "flex"
 ,
@@ -39,7 +41,7 @@ export default function Seller1() {
           </Link></div>
         </div>
         <div className="container-serached">
-        <EventList search={search}/>
+        <EventList search={search} setSearchBoxResults={setSearchBoxResults}/>
 
           
         </div>

@@ -66,6 +66,7 @@ export default function Searchedcontent({search, condition, EventType = "", date
     // console.log(filteredData);
     setSearchBoxResults(filteredData);
   }, [search]);
+  
 
   // console.log("render content ");
   
