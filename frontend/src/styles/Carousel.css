@@ -1,85 +1,83 @@
 /* Responsive Slider Container */
 .slider-container {
-    position: relative;
-    width: 100%;
-    height: 60vh;
-    margin: 0 auto;
-    overflow: hidden;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 40px;
-    background: black;
-    mask: radial-gradient(var(--r) at var(--r), #0000 calc(100% - 1px), #000) calc(-1 * var(--r));
-    --r: 50px; /* cut size */
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  margin: 0 auto;
+  overflow: hidden;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 40px;
+  background: black;
+  mask: radial-gradient(var(--r) at var(--r), #0000 calc(100% - 1px), #000)
+    calc(-1 * var(--r));
+  --r: 50px; /* cut size */
 }
 
 .slider-image {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-    transition: transform 0.5s ease;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.5s ease;
 }
 
 .nav-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 24px;
-    border-radius: 50%;
-    user-select: none;
-    opacity: 0.7;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  border-radius: 50%;
+  user-select: none;
+  opacity: 0.7;
 }
 
 .nav-button.left {
-    left: 10px;
+  left: 10px;
 }
 
 .nav-button.right {
-    right: 10px;
+  right: 10px;
 }
 
 .nav-button:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-    opacity: 1;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 1;
 }
 
-
-.explore_btn{
-    color: white;
-   font-size: 1.5rem;
-    border-radius: 20px;
-    padding: 8px 3vw;
-    border-color: white;
-   
-    background-color: transparent;;
-   cursor: pointer;
-    
-
-   
-    
+.explore_btn {
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 20px;
+  padding: 8px 3vw;
+  border-color: white;
+  background-color: transparent;
+  cursor: pointer;
 }
-.explore_btn_container{
-    position: relative;
-    top:75%;
-    display: flex;
-    justify-content: center;
+.explore_btn_container {
+  position: relative;
+  top: 75%;
+  display: flex;
+  justify-content: center;
 }
 
 @media (max-width: 480px) {
-    .slider-container {
-        height: 40vh;
-        border-radius: 40px;
-        --r: 0px;
+  .slider-container {
+    height: 30vh;
+    border-radius: 40px;
+    --r: 30px;
+  }
 
-    }
-    
-
-   
+  .explore_btn_container {
+    position: relative;
+    top: 70%;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 /* @media (max-width: 480px) {
@@ -92,4 +90,4 @@
         padding: 6px;
         font-size: 18px;
     }
-} */ 
+} */

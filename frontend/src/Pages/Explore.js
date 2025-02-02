@@ -23,7 +23,6 @@ function Explore(){
      
     return (
         <div>
-           
             <Carousel />
             <Menu/>
             <div  className="heading" style={{margin:"25px 0px 0 0", alignContent:"center"}}> Discover your Next&nbsp;<span>Event</span></div>
@@ -31,8 +30,6 @@ function Explore(){
             <div className="search-box-conatiner-hp"><SearchBox search={search} setSearch={setSearch} searchBoxResults={searchBoxResults} id={id} setId={setId}/></div></div>
             <Filters  setEventType={setEventType} setdate={setdate} setprice={setprice}  />
             <Searchedcontent condition={false} search={search} setSearch={setSearch}  EventType={EventType} date={date} price={price} setSearchBoxResults={setSearchBoxResults} id={id} setId={setId}/>
-         
-            
         </div>
     );
 }
