@@ -64,6 +64,7 @@
     color: #444;
     margin-bottom: 0.8rem;
     line-height: 1.6;
+
 }
 
 .profile-detail span {
@@ -210,5 +211,9 @@
 
     .profile-header {
         font-size: 1.5rem;
+    }
+
+    .profile-details , .profile-form {
+        padding: 1.5rem 0px;
     }
 }

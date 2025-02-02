@@ -1,6 +1,6 @@
 import React from "react";
 import "../../styles/profile/Profilebox.css";
-import { Link, useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 function Profile1(){
     const Navigate = useNavigate();

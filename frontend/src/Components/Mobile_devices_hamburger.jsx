@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import "../styles/Mobile_devices_hamburger.css";
 import { Link,useNavigate } from "react-router-dom";
 import styles from "../styles/Header.module.css";
 
 const Menu = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const menuRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState(false);
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "";
@@ -13,6 +14,20 @@ const Menu = () => {
     setIsOpen(!isOpen);
     navigate("/SignIn"); // Navigate to login page
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+        if (menuRef.current && !menuRef.current.contains(event.target)) {
+            setIsOpen(false);
+        }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+    };
+}, []);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -53,7 +68,7 @@ const Menu = () => {
     }, []);
 
   return (
-    <nav className="menu">
+    <nav className="menu" ref={menuRef}>
       <div className="menu-icon" onClick={toggleMenu}>
         ☰
       </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Searched_content.css";
 import EventCard from "./Event_Card";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { tickets } from "../data";
 
 export default function Searchedcontent({search, condition, EventType = "", date, price,setSearchBoxResults,id,setId}) {
@@ -41,7 +41,7 @@ export default function Searchedcontent({search, condition, EventType = "", date
       }
     };
     fetchEvent();
-  }, []);
+  }, [API_BASE_URL]);
 
   let arr;
   event ? (arr = event): (arr=tickets);
@@ -60,10 +60,6 @@ export default function Searchedcontent({search, condition, EventType = "", date
     }
     return 0;
   });
-
-  // if(filteredData){
-  //   setSearchBoxResults(filteredData);
-  // }
 
   useEffect(() => {
     // console.log("filtered Data: ");

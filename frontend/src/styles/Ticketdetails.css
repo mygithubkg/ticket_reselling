@@ -144,6 +144,9 @@
   @media screen and (width <= 1090px) {
     .categorycontainer3, .event-card2{
         width: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .align_centre_column{
         display: flex

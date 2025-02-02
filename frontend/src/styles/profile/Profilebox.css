@@ -132,6 +132,8 @@
     .profile_container1 button {
         font-size: 0.9rem;
         padding: 8px 12px;
+        width: 150px;
+        text-align: center;
     }
 }
 
@@ -161,7 +163,7 @@
     font-family: "Baloo Paaji 2", sans-serif;
     color: #333;
     padding: 1%;
-    
+    align-items: center;
 }
 
 
@@ -172,7 +174,7 @@
     color: #333;
     background-color: #ffffff;
     padding: 12px 20px;
-    width: 100%;
+    width: 150px;
     text-align: left;
     border: none;
     border-radius: 8px;
@@ -180,6 +182,7 @@
     transition: all 0.3s ease;
     cursor: pointer;
     display: flex;
-    align-items: center;
+    justify-content: center;
     gap: 10px;
+    text-align: center;
 }
