@@ -5,7 +5,7 @@ import "../styles/EventList.css";
 import { tickets } from "../data";
 import { useState, useEffect } from "react";
 
-export default function EventList({search}) {
+export default function EventList({search,setSearchBoxResults}) {
   const navigate = useNavigate();
 
   const handleEventClick = (id) => {
@@ -52,6 +52,12 @@ export default function EventList({search}) {
   var events = arr.filter((e) =>
     (e.event_name.toLowerCase().includes(search.toLowerCase()) )
   );
+
+  useEffect(() => {
+      // console.log("filtered Data: ");
+      // console.log(filteredData);
+      setSearchBoxResults(events);
+    }, [search]);
 
 
 
