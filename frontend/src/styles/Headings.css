@@ -18,8 +18,8 @@
     color: black;
     display: flex;
     justify-content: center;
-
-
+    text-align: center;
+    white-space: nowrap;
 }
 
 .heading span{
