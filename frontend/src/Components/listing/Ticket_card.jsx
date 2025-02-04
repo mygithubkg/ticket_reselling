@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "../../styles/Event_Page.css"; // Ensure the CSS file is updated accordingly
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Mychatbot from '../chatbot';
 
 function Ticket_card({ event }) {
     const [tickets, setTickets] = useState([]);
@@ -9,9 +10,20 @@ function Ticket_card({ event }) {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
+    const [showchat, setchat] = useState(false);
+    const [user, setuser] = useState('');
+    const [ticketing, setTicketing] = useState(null);
     const handlenavigate = () => {
         navigate('/Seller1');
     };
+
+    const handle_buy = ()=>{
+        setchat(!showchat);
+    }
+
+
+
+
     useEffect(() => {
         const fetchTickets = async () => {
             const event_name = event.event_name;
@@ -51,7 +63,7 @@ function Ticket_card({ event }) {
         return <p>No Tickets Available Now!</p>;
     }
 
-    return (
+    return (<>
         <div className='tickettt'>
             <p className='tickett-heading'>Available Tickets</p>
          <div className='tickets-container'>
@@ -66,7 +78,7 @@ function Ticket_card({ event }) {
                         <button className='btn-sell' onClick={handlenavigate}>
                             Sell
                         </button>
-                        <button className='btn-buy'>Buy</button>
+                        <button className='btn-buy' onClick={()=> {handle_buy();setuser(ticket.username); setTicketing(ticket.ticket_id)}}> Buy </button>
                     </div>
                     <div className='seller-details'>
                         <h3>Seller Details</h3>
@@ -82,7 +94,10 @@ function Ticket_card({ event }) {
             ))}
         </div>
         </div>
-       
+            <div>
+                {showchat ? (<Mychatbot username = {user} id = {ticketing} />) : null}
+            </div>
+       </>
     );
 }
 

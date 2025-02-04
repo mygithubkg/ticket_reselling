@@ -129,6 +129,7 @@ function Profile() {
                                         name="email"
                                         value={userDetails.email}
                                         onChange={handleChange}
+                                        disabled = {true}
                                     />
                                 </div>
                                 <div className="form-group-profile">

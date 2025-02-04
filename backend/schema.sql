@@ -54,15 +54,39 @@ CREATE TABLE IF NOT EXISTS tickets (
     FOREIGN KEY (event_name) REFERENCES events(event_name) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS messages (
-    message_id SERIAL PRIMARY KEY,
-    sender_id INT NOT NULL,
-    recipient_id INT NOT NULL,
-    message TEXT NOT NULL,
+-- CREATE TABLE IF NOT EXISTS messages (
+--     message_id SERIAL PRIMARY KEY,
+--     sender_id INT NOT NULL,
+--     recipient_id INT NOT NULL,
+--     message TEXT NOT NULL,
+--     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+--     FOREIGN KEY (sender_id) REFERENCES users(customer_id) ON DELETE CASCADE,
+--     FOREIGN KEY (recipient_id) REFERENCES users(customer_id) ON DELETE CASCADE
+-- );
+
+CREATE TABLE IF NOT EXISTS notifications (
+    notification_id SERIAL PRIMARY KEY,
+    sender_username VARCHAR(255) NOT NULL,
+    recipient_username VARCHAR(255) NOT NULL,
+    message_text TEXT NOT NULL,
+    seen BOOLEAN DEFAULT false,
+    active BOOLEAN DEFAULT true,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (sender_id) REFERENCES users(customer_id) ON DELETE CASCADE,
-    FOREIGN KEY (recipient_id) REFERENCES users(customer_id) ON DELETE CASCADE
-);
+    FOREIGN KEY (sender_username) REFERENCES users(username) ON DELETE CASCADE,
+)
+
+CREATE TABLE IF NOT EXISTS negotiatedAmount(
+    negotiate_amount_id SERIAL PRIMARY KEY,
+    ticket_owner VARCHAR(255) NOT NULL,
+    ticket_buyer VARCHAR(255) NOT NULL,
+    ticket_id INT NOT NULL,
+    message TEXT NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    status BOOLEAN DEFAULT false,
+    FOREIGN KEY (ticket_owner) REFERENCES users(username) ON DELETE CASCADE,
+    FOREIGN KEY (ticket_buyer) REFERENCES users(username) ON DELETE CASCADE,
+    FOREIGN KEY (ticket_id) REFERENCES tickets(ticket_id) ON DELETE CASCADE
+)
 
 -- Insert users
 INSERT INTO users (username, password) VALUES

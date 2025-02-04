@@ -21,7 +21,7 @@ import cors from "cors";
 import router_admin from "./controllers/admin.js";
 import db from "./db.js";
 import router_mail from "./managemail.js";  
-import router_chatbot from "./routes/chatbot.js";
+import chat_router from "./routes/chatbot.js";
 
 // to find directory of file
 const __filename = fileURLToPath(import.meta.url);
@@ -54,7 +54,7 @@ app.use(cookieParser());
 
 app.use('/admin', router_admin);
 app.use('/user', router_mail);
-app.use('/chatbot', router_chatbot);
+app.use('/chat', chat_router);
 
 // General Error Handler
 app.use((err, req, res, next) => {
@@ -480,7 +480,7 @@ app.post('/logout', function(req, res, next){
        return next(err); 
       }
       const token = req.cookies.jwt_user_cookie;
-      res.cookie('jwt_user_cookie', '', { expires: new Date(0), httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "None" });
+      res.cookie('jwt_user_cookie', '', { expires: new Date(0), httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "strict" });
       res.json({success:true});
   });
 });
@@ -619,9 +619,10 @@ app.post("/register", (req, res)=> {
                 await db.query("INSERT INTO details (username) VALUES ($1)",[email]);
                 const user = result.rows[0];
                 const token = generateToken(user);
+                const update_profile = await db.query("UPDATE details SET username = $1 WHERE username = $2",[email,email]);
                 req.login(user, (err)=> {
                   console.log(err);
-                  res.cookie('jwt_user_cookie', token, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "None" });
+                  res.cookie('jwt_user_cookie', token, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "strict" });
                   res.status(200).json({success: true, message: `Registration Success, Login if Required`});
                 })
               }
@@ -655,7 +656,7 @@ app.post("/login", (req, res, next) => {
         return res.status(500).json({ success: false, message: "Login failed" });
       }
       const token = generateToken(user);
-      res.cookie('jwt_user_cookie', token, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "None" });
+      res.cookie('jwt_user_cookie', token, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "strict" });
       return res.status(200).json({ success: true, message: "Login successful" ,token_1: token});
     });
   })(req, res, next);

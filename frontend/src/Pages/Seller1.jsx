@@ -7,6 +7,7 @@ import Featuresseller from "../Components/Features_seller";
 import "../styles/Seller1.css";
 import { Link } from "react-router-dom";
 import EventList from "../Components/EventList"
+import Mychatbot from '../Components/chatbot';
 // import MessageDropdown from '../Components/chat';
 
 export default function Seller1() {
@@ -52,7 +53,9 @@ export default function Seller1() {
         <div className="container-faqs">
           <Faq faqData={faqDat} />
         </div>
-
+        <div>
+          <Mychatbot />
+        </div>
         
       </div>
     </>
