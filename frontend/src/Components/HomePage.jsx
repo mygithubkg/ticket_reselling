@@ -72,7 +72,7 @@ function HomePage() {
           style={{ width: "100%", display: "flex", justifyContent: "center" }}
         >
           <div className="search-box-conatiner-hp">
-            <SearchBox search={search} setSearch={setSearch} searchBoxResults={searchBoxResults} id={eventId} setId={setId}/>
+            <SearchBox search={search} setSearch={setSearch} searchBoxResults={searchBoxResults} id={eventId} setId={setId} sellerpage={false}/>
           </div>
         </div>
         <Searched_content

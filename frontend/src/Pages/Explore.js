@@ -27,7 +27,7 @@ function Explore(){
             <Menu/>
             <div  className="heading" style={{margin:"25px 0px 0 0", alignContent:"center"}}> Discover your Next&nbsp;<span>Event</span></div>
             <div style={{ width: "100%", display: 'flex', justifyContent: "center" }}>
-            <div className="search-box-conatiner-hp"><SearchBox search={search} setSearch={setSearch} searchBoxResults={searchBoxResults} id={id} setId={setId}/></div></div>
+            <div className="search-box-conatiner-hp"><SearchBox search={search} setSearch={setSearch} searchBoxResults={searchBoxResults} id={id} setId={setId} sellerpage={false}/></div></div>
             <Filters  setEventType={setEventType} setdate={setdate} setprice={setprice}  />
             <Searchedcontent condition={false} search={search} setSearch={setSearch}  EventType={EventType} date={date} price={price} setSearchBoxResults={setSearchBoxResults} id={id} setId={setId}/>
         </div>

@@ -51,6 +51,7 @@
 
 .explore_btn {
   color: white;
+  position: absolute;
   font-size: 1.5rem;
   border-radius: 20px;
   padding: 8px 3vw;
@@ -77,6 +78,10 @@
     top: 70%;
     display: flex;
     justify-content: center;
+  }
+
+  .nav-button {
+    opacity: 0;
   }
 }
 
