@@ -27,7 +27,7 @@ export default function Seller1() {
       <div className="container-main">
         {/* Search and Searched Content */}
         <div className="search-container">
-          <SearchBox search={search} setSearch={setSearch} searchBoxResults={searchBoxResults} id={id} setId={setId}/>
+          <SearchBox search={search} setSearch={setSearch} searchBoxResults={searchBoxResults} id={id} setId={setId} sellerpage={true}/>
         
         <div style={{"display": "flex"
 ,
