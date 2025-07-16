@@ -144,4 +144,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ---
 
-<p align="center"><b>⭐️ If you like this project, give it a star on GitHub! ⭐️</b></p>
+<p align="center"><b>⭐️ If you like this project, give it a star on GitHub! It will be completed soon adn updated time to time. ⭐️</b></p>
