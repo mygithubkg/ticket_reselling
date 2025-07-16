@@ -708,16 +708,40 @@ passport.use("local",new Strategy(
   }
 ))
 
-passport.use("google",new GoogleStrategy({
+passport.use("google", new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "/auth/google",
+  callbackURL: "/auth/google/callback",
   passReqToCallback: true
-}, async(req, accessToken, refreshToken, profile, cb) => {
-  
+}, async (req, accessToken, refreshToken, profile, cb) => {
+  try {
+    const email = profile.emails[0].value;
+    const check_user = await db.query("SELECT * FROM users WHERE username = $1", [email]);
+    if (check_user.rows.length === 0) {
+      const result = await db.query("INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *", [email, null]);
+      await db.query("INSERT INTO details (username) VALUES ($1)", [email]);
+      const user = result.rows[0];
+      return cb(null, user);
+    } else {
+      return cb(null, check_user.rows[0]);
+    }
+  } catch (err) {
+    return cb(err);
+  }
 }));
 
+app.get('/auth/google', passport.authenticate('google', {
+  scope: ['profile', 'email']
+}));
 
+app.get('/auth/google/callback', passport.authenticate('google', {
+  failureRedirect: '/login',
+  session: false
+}), (req, res) => {
+  const token = generateToken(req.user);
+  res.cookie('jwt_user_cookie', token, { httpOnly: true, secure: process.env.NODE_ENV === "production", sameSite: "strict" });
+  res.redirect(process.env.CLIENT_URL || 'http://localhost:3000');
+});
 
 passport.serializeUser((user,cb) =>{
   cb(null,user);

@@ -55,9 +55,6 @@ export default function Seller1() {
         <div className="container-faqs">
           <Faq faqData={faqDat} />
         </div>
-        <div>
-          <Mychatbot />
-        </div>
         
       </div>
     </>
