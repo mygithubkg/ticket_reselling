@@ -136,4 +136,4 @@ For major changes, please open an issue first to discuss what you would like to 
 
 ---
 
-<p align="center"><b>⭐️ If you like this project, give it a star on GitHub! It will be completed soon adn updated time to time. ⭐️</b></p>
+<p align="center"><b>⭐️ If you like this project, give it a star on GitHub! It will be completed soon and updated time to time. ⭐️</b></p>
