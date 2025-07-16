@@ -3,7 +3,7 @@
 
 ![Node.js](https://img.shields.io/badge/Node.js-14%2B-brightgreen?logo=node.js)
 ![React](https://img.shields.io/badge/React-18%2B-blue?logo=react)
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 
 > A modern, full-stack web application for buying and selling event tickets, featuring a robust backend, a sleek frontend, and a seamless user experience.
 
@@ -13,11 +13,10 @@
 
 - **User Registration & Authentication**: Secure sign-up, login, and session management.
 - **Event Listing & Ticket Management**: Create, browse, and manage events and tickets.
-- **Admin Dashboard**: Powerful tools for administrators to manage users, events, and sales.
-- **Chatbot Support**: Integrated chatbot for instant user assistance.
+- **Admin Dashboard**:(Future Scope) Powerful tools for administrators to manage users, events, and sales.
+- **Chatbot Support**:(Future Scope) Integrated chatbot for instant user assistance.
 - **Responsive Design**: Mobile-friendly and accessible on all devices.
 - **Real-time Chat**: Communicate instantly with buyers and sellers.
-- **Secure Payments**: (Planned) Integration with payment gateways for safe transactions.
 
 ---
 
@@ -49,7 +48,7 @@ ticketreselling/
 
 - [Node.js](https://nodejs.org/) (v14 or higher recommended)
 - [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
-- SQL database (e.g., MySQL, PostgreSQL, SQLite)
+- SQL database (e.g., MySQL, PostgreSQL)
 
 ### Backend Setup
 
@@ -130,16 +129,9 @@ For major changes, please open an issue first to discuss what you would like to 
 
 ---
 
-## 📄 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
 
 ## 🙋‍♂️ Contact & Support
 
-- **Author:** [Your Name](https://github.com/mygithubkg)
-- **Email:** your.email@example.com
 - **Issues:** [GitHub Issues](https://github.com/mygithubkg/ticket_reselling/issues)
 
 ---
